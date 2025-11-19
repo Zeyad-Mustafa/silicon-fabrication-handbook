@@ -94,7 +94,7 @@ Click the "Fork" button on GitHub to create your own copy.
 ### 2. Clone Your Fork
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/silicon-fabrication-handbook.git
+git clone https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook.git
 cd silicon-fabrication-handbook
 ```
 
