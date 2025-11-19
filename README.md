@@ -5,11 +5,11 @@
 
 > A comprehensive, open-source guide to semiconductor and MEMS fabrication processes, from wafer to packaged device.
 
-## 📚 About This Project
+##  About This Project
 
 This handbook provides in-depth documentation of modern silicon fabrication techniques, covering both **CMOS integrated circuits** and **MEMS (Microelectromechanical Systems)** manufacturing. Whether you're a student, researcher, or industry professional, you'll find detailed process flows, simulation examples, and practical design guidelines.
 
-## 🎯 What's Inside
+##  What's Inside
 
 ### Documentation Modules
 
@@ -31,7 +31,7 @@ This handbook provides in-depth documentation of modern silicon fabrication tech
 - **[Equipment Reference](resources/fab-equipment-list.md)** - Common tools and specifications
 - **[Design Rules](resources/design-rules-examples.md)** - Typical foundry design constraints
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### For Learners
 
