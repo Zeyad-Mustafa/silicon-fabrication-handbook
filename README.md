@@ -120,7 +120,7 @@ If you use this handbook in your research or teaching, please cite:
   author={Contributors},
   year={2025},
   publisher={GitHub},
-  url={https://github.com/yourusername/silicon-fabrication-handbook}
+  url={https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook}
 }
 ```
 
