@@ -1,0 +1,47 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Python virtual environments
+venv/
+env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS files
+.DS_Store
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Simulation raw data (optional, large files)
+simulation-examples/output/
+simulation-examples/data/
+
+# Diagrams source files (you may want to version images but ignore editable sources)
+diagrams/*.drawio.backup
+diagrams/*.bak
+
+# Miscellaneous
+*.aux
+*.out
+*.toc
+
+# Ignore local environment variables
+.env
+
