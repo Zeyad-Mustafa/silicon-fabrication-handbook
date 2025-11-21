@@ -2,7 +2,7 @@
 
 This document provides a comprehensive overview of the repository structure and all files.
 
-## 📁 Repository Structure
+##  Repository Structure
 
 ```
 silicon-fabrication-handbook/
@@ -22,14 +22,14 @@ silicon-fabrication-handbook/
 ├── docs/                             # Main documentation
 │   │
 │   ├── 01-introduction/
-│   │   ├── overview.md               # ✅ CREATED - Wafer basics, cleanroom, fab overview
-│   │   ├── cleanroom-protocols.md
-│   │   ├── wafer-fundamentals.md
-│   │   └── safety-guidelines.md
+│   │   ├── overview.md               #  CREATED - Wafer basics, cleanroom, fab overview
+│   │   ├── cleanroom-protocols.md               #  NEW -  created 21/11/2025
+│   │   ├── wafer-fundamentals.md               #  NEW -  created. 21/11/2025
+│   │   └── safety-guidelines.md               #  NEW -  created. 21/11/2025
 │   │
 │   ├── 02-cmos-feol/
-│   │   ├── transistor-fabrication.md # ✅ CREATED - Complete FEOL process flow
-│   │   ├── oxidation.md
+│   │   ├── transistor-fabrication.md #  CREATED - Complete FEOL process flow
+│   │   ├── oxidation.md               
 │   │   ├── lithography.md
 │   │   ├── ion-implantation.md
 │   │   ├── gate-stack.md
@@ -105,8 +105,8 @@ silicon-fabrication-handbook/
 ├── simulation-examples/              # Computational models
 │   │
 │   ├── python/
-│   │   ├── requirements.txt          # ✅ CREATED - Python dependencies
-│   │   ├── mems_spring_mass.py       # ✅ CREATED - MEMS accelerometer model
+│   │   ├── requirements.txt          #  CREATED - Python dependencies
+│   │   ├── mems_spring_mass.py       #  CREATED - MEMS accelerometer model
 │   │   ├── mems_spring_mass.ipynb    # Jupyter notebook version
 │   │   ├── capacitive_sensor.py
 │   │   ├── thermal_actuator_sim.py
@@ -118,7 +118,7 @@ silicon-fabrication-handbook/
 │   │
 │   ├── matlab/
 │   │   ├── accelerometer_resonance.m
-│   │   ├── capacitor_model.m         # ✅ CREATED - Capacitive sensor analysis
+│   │   ├── capacitor_model.m         #  CREATED - Capacitive sensor analysis
 │   │   ├── spring_design.m
 │   │   ├── thermal_analysis.m
 │   │   ├── squeeze_film_damping.m
@@ -132,8 +132,8 @@ silicon-fabrication-handbook/
 │       └── README.md
 │
 ├── resources/                        # Reference materials
-│   ├── research-papers.md            # ✅ CREATED - Curated paper database (37 papers)
-│   ├── fab-equipment-list.md         # ✅ CREATED - Equipment specifications
+│   ├── research-papers.md            # CREATED - Curated paper database (37 papers)
+│   ├── fab-equipment-list.md         #  CREATED - Equipment specifications
 │   ├── industry-standards.md
 │   ├── design-rules-examples.md
 │   ├── material-properties.md
@@ -166,9 +166,9 @@ silicon-fabrication-handbook/
     └── build_docs.sh                 # Build documentation website
 ```
 
-## 📊 Current Status
+##  Current Status
 
-### ✅ Completed Files (High Priority)
+###  Completed Files (High Priority)
 
 1. **README.md** - Professional overview with badges, quick start, roadmap
 2. **docs/01-introduction/overview.md** - Complete introduction covering:
@@ -202,7 +202,7 @@ silicon-fabrication-handbook/
 8. **LICENSE** - MIT for code, CC BY 4.0 for documentation
 9. **CONTRIBUTING.md** - Comprehensive contribution guide
 
-### 📝 Suggested Next Files to Create
+###  Suggested Next Files to Create
 
 #### High Priority
 1. **docs/03-cmos-beol/metallization.md** - Backend processes
@@ -223,47 +223,13 @@ silicon-fabrication-handbook/
 12. Case studies
 13. Video animations (if possible)
 
-## 🎯 Content Coverage
+##  Content Coverage
 
-### Documentation Completeness
-
-| Chapter | Status | Estimated Pages |
-|---------|--------|----------------|
-| 01 - Introduction | ✅ 90% | 15-20 |
-| 02 - CMOS FEOL | ✅ 80% | 25-30 |
-| 03 - CMOS BEOL | ⚠️ 20% | 20-25 |
-| 04 - MEMS Surface | ⚠️ 10% | 15-20 |
-| 05 - MEMS Bulk | ⚠️ 10% | 15-20 |
-| 06 - Packaging | ⚠️ 10% | 12-15 |
-| 07 - Testing & Yield | ⚠️ 10% | 12-15 |
-| 08 - Integrated | ⚠️ 5% | 10-12 |
-
-**Legend**: ✅ >70% complete, ⚠️ <50% complete
-
-### Code Examples
-
-| Type | Completed | Planned | Total |
-|------|-----------|---------|-------|
-| Python | 1 | 6 | 7 |
-| MATLAB | 1 | 6 | 7 |
-| Jupyter Notebooks | 0 | 4 | 4 |
-
-### Resources
-
-| Type | Status |
-|------|--------|
-| Research Papers | ✅ 37 papers |
-| Equipment List | ✅ Complete |
-| Material Properties | ⚠️ Needed |
-| Design Rules | ⚠️ Needed |
-| Process Recipes | ⚠️ Needed |
-
-## 🚀 Quick Start for Contributors
 
 ### 1. Clone and Setup
 
 ```bash
-git clone https://github.com/yourusername/silicon-fabrication-handbook.git
+git clone https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook.git
 cd silicon-fabrication-handbook
 pip install -r simulation-examples/python/requirements.txt
 ```
@@ -284,7 +250,7 @@ matlab -r "run('capacitor_model.m')"
 
 Start with `docs/01-introduction/overview.md` and proceed sequentially.
 
-## 📚 Key Features
+##  Key Features
 
 ### What Makes This Handbook Unique
 
@@ -305,7 +271,7 @@ Start with `docs/01-introduction/overview.md` and proceed sequentially.
 - **Characterization**: Measurement techniques and specifications
 - **Optimization**: Design space exploration and tradeoffs
 
-## 📈 Metrics
+##  Metrics
 
 ### Repository Statistics
 
@@ -332,7 +298,7 @@ Students who complete this handbook will be able to:
 5. Understand equipment capabilities and limitations
 6. Navigate research literature effectively
 
-## 🔧 Technical Implementation
+##  Technical Implementation
 
 ### Technologies Used
 
@@ -353,7 +319,7 @@ Students who complete this handbook will be able to:
 - **CAD**: `.step` (ISO 10303)
 - **Data**: `.csv`, `.json`
 
-## 🎓 Usage Scenarios
+##  Usage Scenarios
 
 ### For University Courses
 
@@ -391,7 +357,7 @@ Students who complete this handbook will be able to:
 - Design rule examples
 - Simulation validation
 
-## 📞 Contact and Community
+##  Contact and Community
 
 ### Getting Help
 
@@ -407,7 +373,7 @@ Students who complete this handbook will be able to:
 - University adoption at 5+ institutions
 - Industry references
 
-## 📝 Changelog
+## Changelog
 
 ### Version 0.1.0 (Current)
 
@@ -422,45 +388,21 @@ Students who complete this handbook will be able to:
 - LICENSE and CONTRIBUTING files
 
 **Status**: Alpha release - core framework established
+### Version 0.2.0 (Current)
+silicon-fabrication-handbook/
+└── docs/
+    └── 01-introduction/
+        ├── overview.md                 #  Previously created
+        ├── cleanroom-protocols.md      #  NEW -  created 21/11/2025
+        ├── wafer-fundamentals.md       #  NEW -  created 21/11/2025
+        └── safety-guidelines.md        #  NEW -  created 21/11/2025
 
-### Planned Version 0.2.0
 
-**Target**:
-- Complete BEOL documentation
-- MEMS surface micromachining chapter
-- 5+ simulation examples
-- Interactive Jupyter notebooks
-- Design rule examples
 
-## 🎯 Long-Term Vision
 
-### 1-Year Goals
 
-- Complete all 8 documentation chapters
-- 15+ working simulation examples
-- 100+ cited research papers
-- Video lecture series (YouTube)
-- Interactive web-based simulators
 
-### 3-Year Goals
-
-- Multi-language support (Chinese, Japanese, German)
-- Virtual cleanroom tour (VR/360°)
-- Comprehensive problem set bank (200+ problems)
-- Integration with VLSI CAD tools
-- Foundry partnership for real tapeout opportunities
-
-### 5-Year Goals
-
-- Standard reference for 50+ universities
-- 1000+ GitHub stars
-- Community-contributed case studies
-- AI-powered process optimization tools
-- Industry certification program
-
----
-
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 This project builds upon decades of semiconductor and MEMS research. We acknowledge:
 
@@ -472,7 +414,7 @@ This project builds upon decades of semiconductor and MEMS research. We acknowle
 ---
 
 **Last Updated**: November 2025  
-**Version**: 0.1.0-alpha  
+**Version**: 0.2.0-alpha  
 **License**: MIT (code) + CC BY 4.0 (documentation)  
 **Maintainers**: Silicon Fabrication Handbook Team
 
