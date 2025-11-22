@@ -29,8 +29,8 @@ silicon-fabrication-handbook/
 │   │
 │   ├── 02-cmos-feol/
 │   │   ├── transistor-fabrication.md #  Done 18/11/2015 - Complete FEOL process flow
-│   │   ├── oxidation.md               
-│   │   ├── lithography.md
+│   │   ├── oxidation.md         # Done 21/11/2025          
+│   │   ├── lithography.md.     # Done 22/11/2025
 │   │   ├── ion-implantation.md
 │   │   ├── gate-stack.md
 │   │   └── advanced-topics.md        # FinFET, strain engineering, HKMG
