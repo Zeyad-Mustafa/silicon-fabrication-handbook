@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing to the Silicon Fabrication Handbook! This guide will help you get started.
 
-## 📋 Table of Contents
+##  Table of Contents
 
 1. [Code of Conduct](#code-of-conduct)
 2. [How Can I Contribute?](#how-can-i-contribute)
@@ -25,7 +25,7 @@ This project follows a Code of Conduct to ensure a welcoming environment for all
 
 ## How Can I Contribute?
 
-### 🐛 Reporting Bugs
+###  Reporting Bugs
 
 Found an error in the documentation or code? Please open an issue with:
 
@@ -47,7 +47,7 @@ Expected: B/A term
 Actual: B*A term
 ```
 
-### 💡 Suggesting Enhancements
+###  Suggesting Enhancements
 
 Have an idea to improve the handbook? Open an issue with:
 
@@ -55,7 +55,7 @@ Have an idea to improve the handbook? Open an issue with:
 - **Motivation**: Why this would be valuable
 - **Implementation ideas**: How it might be done (optional)
 
-### 📝 Improving Documentation
+###  Improving Documentation
 
 Documentation improvements are always welcome! This includes:
 
@@ -65,7 +65,7 @@ Documentation improvements are always welcome! This includes:
 - Updating outdated information
 - Translating content (future feature)
 
-### 💻 Contributing Code
+###  Contributing Code
 
 We welcome simulation code contributions:
 
@@ -74,7 +74,7 @@ We welcome simulation code contributions:
 - Jupyter notebooks with interactive examples
 - Visualization tools
 
-### 🎨 Creating Diagrams
+###  Creating Diagrams
 
 Visual aids greatly enhance learning:
 
