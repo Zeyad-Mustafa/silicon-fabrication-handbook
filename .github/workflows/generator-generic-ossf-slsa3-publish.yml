@@ -63,4 +63,8 @@ jobs:
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.4.0
     with:
       base64-subjects: "${{ needs.build.outputs.digests }}"
+<<<<<<< HEAD
       upload-assets: true # Optional: Upload to a new release
+=======
+      upload-assets: true # Optional: Upload to a new release
+>>>>>>> 280a79d3ad1f7e09e8bdcff3163d45b0e09e4ec3
