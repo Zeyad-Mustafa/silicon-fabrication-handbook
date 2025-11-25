@@ -10,6 +10,10 @@
 
 This handbook provides in-depth documentation of modern silicon fabrication techniques, covering both **CMOS integrated circuits** and **MEMS (Microelectromechanical Systems)** manufacturing. Whether you're a student, researcher, or industry professional, you'll find detailed process flows, simulation examples, and practical design guidelines.
 
+##  Project Structure (very important to see )
+
+For a detailed overview of the project organization, see [project_structure.md](project_structure.md).
+
 ##  What's Inside
 
 ### Documentation Modules
