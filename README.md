@@ -12,7 +12,7 @@ This handbook provides in-depth documentation of modern silicon fabrication tech
 
 ##  Project Structure (very important to see )
 
-For a detailed overview of the project organization, see [project_structure.md](project_structure.md).
+For a detailed overview of the project organization, see [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
 
 ##  What's Inside
 
