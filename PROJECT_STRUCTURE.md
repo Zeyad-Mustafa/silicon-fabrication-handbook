@@ -33,7 +33,7 @@ silicon-fabrication-handbook/
 │   │   ├── lithography.md.     # Done 22/11/2025
 │   │   ├── ion-implantation.md.  # done 23/11/2025
 │   │   ├── gate-stack.md.     # done 24/11/2025, updated 25/11/2025
-│   │   └── advanced-topics.md        # FinFET, strain engineering, HKMG
+│   │   └── advanced-topics.md        # FinFET, strain engineering, HKMG Update 26,11,2025 
 │   │
 │   ├── 03-cmos-beol/
 │   │   ├── metallization.md
