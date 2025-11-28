@@ -36,7 +36,7 @@ silicon-fabrication-handbook/
 │   │   └── advanced-topics.md        # FinFET, strain engineering, HKMG Update 26,11,2025 
 │   │
 │   ├── 03-cmos-beol/
-│   │   ├── metallization.md
+│   │   ├── metallization.md  # Done 27/11/2025
 │   │   ├── damascene-process.md
 │   │   ├── low-k-dielectrics.md
 │   │   ├── cmp-process.md
