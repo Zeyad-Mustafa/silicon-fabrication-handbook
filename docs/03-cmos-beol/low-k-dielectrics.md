@@ -7,7 +7,7 @@
 - [Low-k Material Classes](#low-k-material-classes)
 - [Deposition Techniques](#deposition-techniques)
 - [Integration Challenges](#integration-challenges)
-- [Material Properties and Characterization](#material-properties-and-characterization)
+
 
 ---
 
