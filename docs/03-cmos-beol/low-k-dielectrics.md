@@ -2557,19 +2557,3 @@ For low-cost chips: May stay with denser low-k (k~2.7)
 **Chapter:** 3.3 - CMOS BEOL low k dielectrics
 ---
 
-## Navigation
-
-**[← Previous: Damascene Process](./damascene-process.md)** | **[Next: CMP Process →](./cmp-process.md)**
-
----
-
-### Chapter Overview
-You are currently reading: **Low-k Dielectrics** (Chapter 3.3 - CMOS BEOL)
-
-- **Previous**: [Damascene Process](./damascene-process.md) - Copper integration and dual damascene techniques
-- **Next**: [CMP Process](./cmp-process.md) - Chemical mechanical planarization for multi-level interconnects
-- **See also**: [Metallization](./metallization.md) - Backend metallization overview
-
----
-
-**[Back to CMOS BEOL](./README.md)** | **[Handbook Home](../../README.md)** | **[ All Chapters](../../README.md#documentation-structure)**
