@@ -38,7 +38,7 @@ silicon-fabrication-handbook/
 │   ├── 03-cmos-beol/
 │   │   ├── metallization.md  # Done 27/11/2025
 │   │   ├── damascene-process.md # Done 28/11/2025 Updated with Python simulation
-│   │   ├── low-k-dielectrics.md
+│   │   ├── low-k-dielectrics.md  # Done 30/11/2025
 │   │   ├── cmp-process.md
 │   │   └── interconnect-scaling.md
 │   │
