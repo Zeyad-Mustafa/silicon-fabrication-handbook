@@ -43,7 +43,7 @@ silicon-fabrication-handbook/
 │   │   └── interconnect-scaling.md # Done 4/11/2025
 │   │
 │   ├── 04-mems-surface-micromachining/
-│   │   ├── polysilicon-processes.md #this part is under process
+│   │   ├── polysilicon-processes.md  #will be done soon 
 │   │   ├── sacrificial-layers.md
 │   │   ├── release-techniques.md
 │   │   ├── stiction-prevention.md
