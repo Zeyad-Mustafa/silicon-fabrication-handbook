@@ -40,7 +40,7 @@ silicon-fabrication-handbook/
 │   │   ├── damascene-process.md # Done 28/11/2025 Updated with Python simulation
 │   │   ├── low-k-dielectrics.md  # Done 30/11/2025
 │   │   ├── cmp-process.md.    #Done 2/11/2025 
-│   │   └── interconnect-scaling.md
+│   │   └── interconnect-scaling.md # Done 4/11/2025
 │   │
 │   ├── 04-mems-surface-micromachining/
 │   │   ├── polysilicon-processes.md
