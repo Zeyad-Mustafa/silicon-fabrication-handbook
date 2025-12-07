@@ -44,7 +44,7 @@ silicon-fabrication-handbook/
 │   │
 │   ├── 04-mems-surface-micromachining/
 │   │   ├── polysilicon-processes.md  # Done 06 /12/2025
-│   │   ├── sacrificial-layers.md
+│   │   ├── sacrificial-layers.md.   #Done 07/12/2025
 │   │   ├── release-techniques.md
 │   │   ├── stiction-prevention.md
 │   │   └── device-examples.md        # Accelerometers, gyroscopes, resonators
