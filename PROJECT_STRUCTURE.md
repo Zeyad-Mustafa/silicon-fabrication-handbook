@@ -48,7 +48,8 @@ silicon-fabrication-handbook/
 │   │   ├── release-techniques.md   #Done 08/12/2025
 │   │   ├── stiction-prevention.md  #Done 09/12/2025
 │   │   └── device-examples.md        # Accelerometers, gyroscopes, resonators #Done 10/12/2015
-│   │
+│   │   └── mems_surface_micromachining_sim.py    #Done 10/12/2015
+│   │  
 │   ├── 05-mems-bulk-micromachining/
 │   │   ├── deep-rie.md               # Bosch process, cryogenic etch
 │   │   ├── wet-etching.md            # KOH, TMAH, anisotropic etching
