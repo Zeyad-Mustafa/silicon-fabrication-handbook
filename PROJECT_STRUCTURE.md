@@ -53,7 +53,7 @@ silicon-fabrication-handbook/
 │   ├── 05-mems-bulk-micromachining/
 │   │   ├── deep-rie.md               # Bosch process, cryogenic etch # Done 11/12/2025
 │   │   ├── wet-etching.md            # KOH, TMAH, anisotropic etching #Done 12/12/2025
-│   │   ├── soi-processes.md
+│   │   ├── soi-processes.md           #Done 13/12/2025
 │   │   ├── wafer-bonding.md          # Anodic, fusion, eutectic
 │   │   └── pressure-sensors.md
 │   │
