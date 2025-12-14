@@ -54,7 +54,7 @@ silicon-fabrication-handbook/
 │   │   ├── deep-rie.md               # Bosch process, cryogenic etch # Done 11/12/2025
 │   │   ├── wet-etching.md            # KOH, TMAH, anisotropic etching #Done 12/12/2025
 │   │   ├── soi-processes.md           #Done 13/12/2025
-│   │   ├── wafer-bonding.md          # Anodic, fusion, eutectic
+│   │   ├── wafer-bonding.md          # Anodic, fusion, eutectic # Done 14/12/2025
 │   │   └── pressure-sensors.md
 │   │
 │   ├── 06-packaging/
