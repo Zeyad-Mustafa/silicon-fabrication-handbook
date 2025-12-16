@@ -58,7 +58,7 @@ silicon-fabrication-handbook/
 │   │   └── pressure-sensors.md       #Done 15/12/2025
 │   │
 │   ├── 06-packaging/
-│   │   ├── die-preparation.md
+│   │   ├── die-preparation.md         #Done 16/12/2025
 │   │   ├── wire-bonding.md
 │   │   ├── flip-chip.md
 │   │   ├── wafer-level-packaging.md
