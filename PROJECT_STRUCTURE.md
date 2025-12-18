@@ -60,7 +60,7 @@ silicon-fabrication-handbook/
 │   ├── 06-packaging/
 │   │   ├── die-preparation.md         #Done 16/12/2025
 │   │   ├── wire-bonding.md            #Done 17/12/2025
-│   │   ├── flip-chip.md
+│   │   ├── flip-chip.md               #Done 18/12/2025
 │   │   ├── wafer-level-packaging.md
 │   │   ├── hermetic-sealing.md
 │   │   └── thermal-management.md
