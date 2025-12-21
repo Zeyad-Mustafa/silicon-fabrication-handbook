@@ -1049,3 +1049,61 @@ Not needed:
 ✗ Sharp corners (stress concentration)
 ✗ Mismatched CTEs without stress relief
 ✗ Overly complex seal geometries
+```
+
+### Material Selection Matrix
+
+**Choose sealing method based on:**
+
+```
+Temperature capability needed:
+- <200°C: Polymer (non-hermetic)
+- 200-300°C: Solder seal (SAC305, Au-Sn)
+- 300-500°C: Glass frit, anodic bonding
+- >500°C: Welding (resistance, laser)
+
+Hermeticity required:
+- <10⁻⁶: Plastic acceptable
+- 10⁻⁸ to 10⁻⁹: Solder, glass frit
+- <10⁻⁹: Welding, anodic
+- <10⁻¹⁰: Resistance welding, eutectic
+
+Cost constraints:
+- Low ($1-3): Solder seal ceramic
+- Medium ($5-10): Glass frit, laser weld
+- High ($10-30): AlN ceramic, resistance weld
+
+Volume:
+- Low (<1000/year): Manual welding
+- Medium (1K-100K): Automated solder/frit
+- High (>100K/year): High-speed welding
+```
+
+## References
+
+1. Gilleo, K. (2005). *MEMS/MOEM Packaging: Concepts, Designs, Materials, and Processes*. McGraw-Hill.
+
+2. Tummala, R. R. (2001). *Fundamentals of Microsystems Packaging*. McGraw-Hill.
+
+3. MIL-STD-883, Method 1014. (2016). *Seal*. Department of Defense Test Method Standard.
+
+4. Cheng, Y. T., Lin, L., & Najafi, K. (2000). Localized silicon fusion and eutectic bonding for MEMS fabrication and packaging. *Journal of Microelectromechanical Systems*, 9(1), 3-8.
+
+5. Wallis, G., & Pomerantz, D. I. (1969). Field assisted glass‐metal sealing. *Journal of Applied Physics*, 40(10), 3946-3949.
+
+---
+
+**Document Information:**
+- **Created:** December 17, 2025
+- **Version:** 1.0
+- **Status:** Complete
+- **Part of:** Silicon Fabrication Handbook
+- **Next Chapter:** [Thermal Management](thermal-management.md)
+- **Previous Chapter:** [Wafer-Level Packaging](wafer-level-packaging.md)
+
+**License:** CC BY 4.0 - Free to use with attribution
+
+---
+
+*For questions, corrections, or contributions, please visit:*
+https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook
