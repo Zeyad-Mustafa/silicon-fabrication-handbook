@@ -63,7 +63,7 @@ silicon-fabrication-handbook/
 │   │   ├── flip-chip.md               #Done 18/12/2025
 │   │   ├── wafer-level-packaging.md.  #Done 19/12/2025
 │   │   ├── hermetic-sealing.md        #Done 21/12/2025
-│   │   └── thermal-management.md
+│   │   └── thermal-management.md      #Done 22/12/2025
 │   │
 │   ├── 07-testing-yield/
 │   │   ├── parametric-testing.md
