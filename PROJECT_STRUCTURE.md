@@ -66,7 +66,7 @@ silicon-fabrication-handbook/
 │   │   └── thermal-management.md      #Done 22/12/2025
 │   │
 │   ├── 07-testing-yield/
-│   │   ├── parametric-testing.md
+│   │   ├── parametric-testing.md      #Done 23/12/2025
 │   │   ├── functional-testing.md
 │   │   ├── reliability-testing.md
 │   │   ├── failure-analysis.md
