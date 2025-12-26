@@ -68,7 +68,7 @@ silicon-fabrication-handbook/
 │   ├── 07-testing-yield/
 │   │   ├── parametric-testing.md      #Done 23/12/2025
 │   │   ├── functional-testing.md      #Done 24/12/2025 
-│   │   ├── reliability-testing.md
+│   │   ├── reliability-testing.md.    #Done 25/12/2025
 │   │   ├── failure-analysis.md
 │   │   ├── statistical-process-control.md
 │   │   └── yield-modeling.md
