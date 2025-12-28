@@ -436,4 +436,86 @@ First lot: Y = 60%
 Learning rate: 80%
 
 After 10 lots (log₂(10) = 3.32 doublings):
-Y = 60% × 10^(log
+Y = 60% × 10^(log₂(0.8))
+Y = 60% × 10^(-0.322)
+Y = 60% × 0.476 = 28.6%... wait, that's wrong!
+
+Correct:
+b = log₂(0.8) = -0.322
+Y_10 = 60% × 10^(-0.322)
+Y_10 = 60% × 0.476
+
+Actually, use:
+Y_n = Y_1 × (1 + (n-1) × r)
+
+Where r = learning rate per unit
+
+More practical model:
+Y_n = Y_∞ - (Y_∞ - Y_1) × exp(-k × n)
+
+Where:
+Y_∞ = ultimate yield (asymptote)
+k = learning rate constant
+
+Example:
+Y_1 = 60%, Y_∞ = 95%, k = 0.1
+
+Y_10 = 95% - (95% - 60%) × exp(-0.1 × 10)
+Y_10 = 95% - 35% × 0.368
+Y_10 = 82.1%
+```
+
+## Yield Prediction
+
+### Yield Forecasting
+
+**Based on Historical Data:**
+
+```
+Methods:
+1. Trend analysis (linear, exponential)
+2. Moving average
+3. Time series (ARIMA)
+4. Machine learning (if sufficient data)
+
+Simple exponential smoothing:
+F_t+1 = α × Y_t + (1 - α) × F_t
+
+Where:
+F_t+1 = forecast for next period
+Y_t = actual yield in period t
+F_t = forecast for period t
+α = smoothing constant (0.1-0.3 typical)
+```
+
+**Example:**
+
+```
+Month | Actual | Forecast (α=0.2)
+------|--------|------------------
+Jan   | 82%    | 80% (given)
+Feb   | 85%    | 80.4% = 0.2×82 + 0.8×80
+Mar   | 84%    | 81.3% = 0.2×85 + 0.8×80.4
+Apr   | 87%    | 81.8% = 0.2×84 + 0.8×81.3
+May   | ?      | 82.8% = 0.2×87 + 0.8×81.8
+
+Prediction: May yield ≈ 83%
+```
+
+### Die Per Wafer (DPW)
+
+**Wafer Utilization:**
+
+```
+Gross DPW (rectangular approximation):
+DPW = (Wafer_area - Edge_exclusion) / Die_area
+
+More accurate (accounting for die positioning):
+DPW = π × [(D/2 - E)² - (D/2 - E) × √2 × d] / A
+
+Where:
+D = wafer diameter
+E = edge exclusion
+d = die edge length
+A = die area
+
