@@ -519,3 +519,237 @@ E = edge exclusion
 d = die edge length
 A = die area
 
+For 200 mm wafer, 5×5 mm die, 3 mm exclusion:
+Area available: π × 9.7² = 296 cm²
+Die area: 0.25 cm²
+Gross: 296 / 0.25 = 1184 die
+
+Actual (accounting for packing): ~1050 die
+Packing efficiency: 89%
+```
+
+**Good Die Per Wafer (GDPW):**
+
+```
+GDPW = DPW × Y_fab
+
+Example:
+DPW = 1050
+Y_fab = 85%
+
+GDPW = 1050 × 0.85 = 893 die
+
+For cost calculation:
+Wafer cost = $500
+Die cost = $500 / 893 = $0.56 per die
+
+If yield improves to 90%:
+GDPW = 945 die
+Die cost = $0.53 (6% reduction)
+```
+
+### Yield Sensitivity Analysis
+
+**Impact of Variables:**
+
+```
+Sensitivity = ∂Y / ∂x
+
+For Poisson model:
+Y = exp(-D₀ × A)
+
+∂Y/∂D₀ = -A × exp(-D₀ × A) = -A × Y
+∂Y/∂A = -D₀ × exp(-D₀ × A) = -D₀ × Y
+
+Relative sensitivity:
+(∂Y/Y) / (∂D₀/D₀) = -D₀ × A
+
+Example:
+D₀ = 0.5, A = 0.25
+Relative sensitivity = -0.5 × 0.25 = -0.125
+
+Interpretation:
+10% reduction in D₀ → 1.25% increase in Y
+10% reduction in A → 1.25% increase in Y
+```
+
+## Yield Improvement
+
+### Pareto Analysis
+
+**80/20 Rule:**
+
+```
+Identify top loss mechanisms:
+
+Loss Mode         | DPPM  | % of Total
+-----------------|-------|------------
+Particles        | 5000  | 50%
+Lithography CD   | 2000  | 20%
+Etch uniformity  | 1500  | 15%
+Wire bond        | 800   | 8%
+Other            | 700   | 7%
+-----------------|-------|------------
+Total            | 10000 | 100%
+
+Focus on top 3 (85% of losses)
+Potential: 85% reduction in defects
+
+Action priority:
+1. Particle reduction program
+2. CD control improvement
+3. Etch uniformity optimization
+```
+
+### Defect Reduction Strategies
+
+**Systematic Approach:**
+
+```
+1. Measure baseline
+   - Defect density by type
+   - Pareto by source
+   - Spatial distribution
+
+2. Root cause analysis
+   - Top defect types
+   - 5-Why, fishbone
+   - Equipment correlation
+
+3. Implement countermeasures
+   - Process optimization
+   - Equipment PM
+   - Handling improvements
+
+4. Verify effectiveness
+   - Monitor D₀ reduction
+   - Track yield improvement
+   - Cost-benefit analysis
+
+5. Sustain improvements
+   - SPC on critical parameters
+   - Standard procedures
+   - Training and audits
+```
+
+**Typical Improvement Trajectory:**
+
+```
+Starting point: Y = 60%, D₀ = 2.0
+
+Quarter 1 (low-hanging fruit):
+- Improve handling: D₀ → 1.5
+- Y = exp(-1.5 × 0.25) = 69%
+- 9% absolute improvement
+
+Quarter 2 (process optimization):
+- Chamber cleaning: D₀ → 1.0
+- Y = exp(-1.0 × 0.25) = 78%
+- 18% total improvement
+
+Quarter 3 (advanced process):
+- Recipe refinement: D₀ → 0.7
+- Y = exp(-0.7 × 0.25) = 84%
+- 24% total improvement
+
+Quarter 4 (continuous improvement):
+- Automated inspection: D₀ → 0.5
+- Y = exp(-0.5 × 0.25) = 88%
+- 28% total improvement
+
+Diminishing returns observed
+Cost-benefit analysis critical
+```
+
+### Cost-Yield Optimization
+
+**Economic Model:**
+
+```
+Total cost per good die:
+
+C_die = (C_wafer + C_process) / (DPW × Y)
+
+Where:
+C_wafer = wafer material cost
+C_process = processing cost per wafer
+DPW = die per wafer
+Y = yield
+
+Example:
+C_wafer = $100
+C_process = $400
+DPW = 1000
+Y = 80%
+
+C_die = ($100 + $400) / (1000 × 0.8)
+C_die = $500 / 800 = $0.625
+
+If yield improvement project:
+Investment: $50K
+Expected Y: 80% → 85%
+
+New cost: $500 / 850 = $0.588
+Savings: $0.037 per die
+
+Break-even: $50K / $0.037 = 1.35M die
+At 10K die/month: ROI in 11.3 months
+```
+
+### Benchmark Comparison
+
+**Industry Standards:**
+
+| Product Type | Die Size | Typical Yield | Best-in-Class |
+|--------------|----------|---------------|---------------|
+| MEMS sensor (consumer) | 2-5 mm² | 85-90% | >95% |
+| MEMS sensor (automotive) | 3-8 mm² | 90-95% | >98% |
+| MEMS actuator | 5-15 mm² | 75-85% | >90% |
+| Analog IC | 5-20 mm² | 85-92% | >95% |
+| Digital logic | 100-500 mm² | 60-80% | >85% |
+
+**Yield Maturity:**
+
+```
+Development phase:
+- Year 0-1: 30-50% (learning)
+- Year 1-2: 50-70% (optimization)
+- Year 2-3: 70-85% (mature)
+- Year 3+: 85-95% (best-in-class)
+
+Factors:
+- Process complexity
+- Design maturity
+- Equipment capability
+- Fab experience
+```
+
+## Advanced Topics
+
+### Inline Yield Prediction
+
+**Early Warning:**
+
+```
+Predict final yield from:
+- Inline inspection (defects)
+- Parametric measurements
+- Equipment sensors
+
+Model:
+Y_predicted = f(defect_count, CD, thickness, ...)
+
+Machine learning approach:
+1. Collect historical data
+   - Inline measurements
+   - Final yield results
+
+2. Train model
+   - Random forest
+   - Neural network
+   - Gradient boosting
+
+3. Deploy for prediction
+   - Real-time inline data
+   - Predict final yield
+   - Alert if low yield exp
