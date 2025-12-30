@@ -74,7 +74,7 @@ silicon-fabrication-handbook/
 │   │   └── yield-modeling.md
 │   │
 │   └── 08-integrated-mems-cmos/
-│       ├── integration-strategies.md
+│       ├── integration-strategies.md     #Done 30/12/2025
 │       ├── monolithic-integration.md
 │       ├── multi-chip-modules.md
 │       ├── interface-circuits.md
