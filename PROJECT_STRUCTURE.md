@@ -76,7 +76,7 @@ silicon-fabrication-handbook/
 │   └── 08-integrated-mems-cmos/
 │       ├── integration-strategies.md     #Done 30/12/2025
 │       ├── monolithic-integration.md     #Done 31/12/2025
-│       ├── multi-chip-modules.md
+│       ├── multi-chip-modules.md         #Done 1/01/2026
 │       ├── interface-circuits.md
 │       └── case-studies.md           # IMUs, tire pressure sensors, microphones
 │
