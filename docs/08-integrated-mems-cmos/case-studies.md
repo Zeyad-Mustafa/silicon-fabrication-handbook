@@ -8,3 +8,10 @@
 5. [Consumer Smartwatch IMU](#consumer-smartwatch-imu)
 
 ---
+### Application Overview
+
+**Product**: 6-axis Inertial Measurement Unit for Electronic Stability Control (ESC)  
+**Manufacturer**: Bosch (SMI230 family)  
+**Integration**: Monolithic (MEMS + ASIC in single package)
+
+### System Requirements
