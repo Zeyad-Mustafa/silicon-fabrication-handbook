@@ -78,7 +78,7 @@ silicon-fabrication-handbook/
 │       ├── monolithic-integration.md     #Done 31/12/2025
 │       ├── multi-chip-modules.md         #Done 1/01/2026
 │       ├── interface-circuits.md         #Done 02/01/2026
-│       └── case-studies.md           # IMUs, tire pressure sensors, microphones
+│       └── case-studies.md           # IMUs, tire pressure sensors, microphones #Done 03/01/2026
 │
 ├── diagrams/                         # Visual aids and illustrations
 │   ├── fabrication-flow.drawio       # Editable process flow diagram
