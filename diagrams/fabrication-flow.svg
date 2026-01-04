@@ -1,0 +1,258 @@
+<svg viewBox="0 0 1200 1600" xmlns="http://www.w3.org/2000/svg">
+  <!-- <svg viewBox="0 0 1200 1600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-size="32" font-weight="bold" fill="#1a1a1a">
+    Silicon Fabrication Flow
+  </text>
+  <text x="600" y="70" text-anchor="middle" font-size="18" fill="#666">
+    CMOS Front-End-of-Line (FEOL) + MEMS Integration
+  </text>
+  
+  <!-- CMOS FEOL Section -->
+  <rect x="50" y="100" width="500" height="1400" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" rx="10"/>
+  <text x="300" y="130" text-anchor="middle" font-size="24" font-weight="bold" fill="#1976d2">
+    CMOS FEOL Process
+  </text>
+  
+  <!-- Step 1: Wafer -->
+  <g id="step1">
+    <rect x="80" y="160" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="190" font-size="18" font-weight="bold" fill="#1976d2">1. Silicon Wafer</text>
+    <rect x="200" y="210" width="200" height="40" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="300" y="235" text-anchor="middle" font-size="14" fill="white">Si Substrate (p-type)</text>
+    <text x="100" y="270" font-size="12" fill="#666">• 300mm wafer • &lt;100&gt; orientation • ρ = 10 Ω·cm</text>
+  </g>
+  
+  <!-- Step 2: STI -->
+  <g id="step2">
+    <rect x="80" y="295" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="325" font-size="18" font-weight="bold" fill="#1976d2">2. Shallow Trench Isolation</text>
+    <rect x="150" y="345" width="80" height="30" fill="#4fc3f7" stroke="#333" stroke-width="2"/>
+    <rect x="160" y="335" width="60" height="10" fill="#8b7355" stroke="#333" stroke-width="1"/>
+    <rect x="240" y="345" width="80" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <rect x="330" y="345" width="80" height="30" fill="#4fc3f7" stroke="#333" stroke-width="2"/>
+    <rect x="340" y="335" width="60" height="10" fill="#8b7355" stroke="#333" stroke-width="1"/>
+    <text x="100" y="405" font-size="12" fill="#666">• DRIE etch 300nm • SiO₂ fill • CMP planarization</text>
+  </g>
+  
+  <!-- Step 3: Wells -->
+  <g id="step3">
+    <rect x="80" y="430" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="460" font-size="18" font-weight="bold" fill="#1976d2">3. Well Formation</text>
+    <rect x="150" y="480" width="100" height="40" fill="#ffb74d" stroke="#333" stroke-width="2"/>
+    <rect x="270" y="480" width="100" height="40" fill="#81c784" stroke="#333" stroke-width="2"/>
+    <rect x="150" y="520" width="220" height="10" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="200" y="505" text-anchor="middle" font-size="12" fill="#333">n-well</text>
+    <text x="320" y="505" text-anchor="middle" font-size="12" fill="#333">p-well</text>
+    <text x="100" y="545" font-size="12" fill="#666">• Ion implantation: P (n-well), B (p-well) • Anneal 1000°C</text>
+  </g>
+  
+  <!-- Step 4: Gate Oxide -->
+  <g id="step4">
+    <rect x="80" y="565" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="595" font-size="18" font-weight="bold" fill="#1976d2">4. Gate Oxide Growth</text>
+    <rect x="200" y="615" width="200" height="8" fill="#64b5f6" stroke="#333" stroke-width="1"/>
+    <rect x="200" y="623" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="300" y="611" text-anchor="middle" font-size="10" fill="#333">SiO₂ (2nm)</text>
+    <text x="100" y="675" font-size="12" fill="#666">• Thermal oxidation 900°C • High-k dielectric (HfO₂) option</text>
+  </g>
+  
+  <!-- Step 5: Poly Gate -->
+  <g id="step5">
+    <rect x="80" y="700" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="730" font-size="18" font-weight="bold" fill="#1976d2">5. Polysilicon Gate</text>
+    <rect x="250" y="750" width="100" height="15" fill="#b0bec5" stroke="#333" stroke-width="2"/>
+    <rect x="200" y="765" width="200" height="5" fill="#64b5f6" stroke="#333" stroke-width="1"/>
+    <rect x="200" y="770" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="300" y="760" text-anchor="middle" font-size="10" fill="#333">Poly-Si</text>
+    <text x="100" y="810" font-size="12" fill="#666">• LPCVD poly-Si 100nm • Patterning • Doping (POCl₃)</text>
+  </g>
+  
+  <!-- Step 6: LDD -->
+  <g id="step6">
+    <rect x="80" y="835" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="865" font-size="18" font-weight="bold" fill="#1976d2">6. LDD Implantation</text>
+    <rect x="250" y="885" width="100" height="15" fill="#b0bec5" stroke="#333" stroke-width="2"/>
+    <rect x="230" y="900" width="20" height="15" fill="#ffcc80" stroke="#333" stroke-width="1"/>
+    <rect x="350" y="900" width="20" height="15" fill="#ffcc80" stroke="#333" stroke-width="1"/>
+    <rect x="200" y="915" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="100" y="955" font-size="12" fill="#666">• Light dose implant • Short channel effect control</text>
+  </g>
+  
+  <!-- Step 7: Spacers -->
+  <g id="step7">
+    <rect x="80" y="970" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="1000" font-size="18" font-weight="bold" fill="#1976d2">7. Sidewall Spacers</text>
+    <rect x="250" y="1020" width="100" height="15" fill="#b0bec5" stroke="#333" stroke-width="2"/>
+    <rect x="235" y="1020" width="15" height="25" fill="#4fc3f7" stroke="#333" stroke-width="1"/>
+    <rect x="350" y="1020" width="15" height="25" fill="#4fc3f7" stroke="#333" stroke-width="1"/>
+    <rect x="200" y="1045" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="100" y="1085" font-size="12" fill="#666">• Si₃N₄ deposition • Anisotropic etch • ~50nm width</text>
+  </g>
+  
+  <!-- Step 8: S/D -->
+  <g id="step8">
+    <rect x="80" y="1105" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="1135" font-size="18" font-weight="bold" fill="#1976d2">8. Source/Drain Implant</text>
+    <rect x="250" y="1155" width="100" height="15" fill="#b0bec5" stroke="#333" stroke-width="2"/>
+    <rect x="235" y="1155" width="15" height="25" fill="#4fc3f7" stroke="#333" stroke-width="1"/>
+    <rect x="350" y="1155" width="15" height="25" fill="#4fc3f7" stroke="#333" stroke-width="1"/>
+    <rect x="210" y="1170" width="25" height="25" fill="#ff5252" stroke="#333" stroke-width="2"/>
+    <rect x="365" y="1170" width="25" height="25" fill="#ff5252" stroke="#333" stroke-width="2"/>
+    <rect x="200" y="1195" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="100" y="1220" font-size="12" fill="#666">• High dose As/P (n+) or B (p+) • RTA 1050°C</text>
+  </g>
+  
+  <!-- Step 9: Silicide -->
+  <g id="step9">
+    <rect x="80" y="1240" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="1270" font-size="18" font-weight="bold" fill="#1976d2">9. Silicide Formation</text>
+    <rect x="215" y="1290" width="20" height="8" fill="#757575" stroke="#333" stroke-width="1"/>
+    <rect x="250" y="1290" width="100" height="8" fill="#757575" stroke="#333" stroke-width="1"/>
+    <rect x="365" y="1290" width="20" height="8" fill="#757575" stroke="#333" stroke-width="1"/>
+    <rect x="250" y="1298" width="100" height="15" fill="#b0bec5" stroke="#333" stroke-width="2"/>
+    <rect x="200" y="1313" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="100" y="1355" font-size="12" fill="#666">• TiSi₂ or NiSi • Reduces contact resistance</text>
+  </g>
+  
+  <!-- Step 10: BEOL Start -->
+  <g id="step10">
+    <rect x="80" y="1375" width="440" height="110" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="100" y="1405" font-size="18" font-weight="bold" fill="#1976d2">10. BEOL: ILD &amp; Contacts</text>
+    <rect x="220" y="1425" width="10" height="20" fill="#ffd54f" stroke="#333" stroke-width="1"/>
+    <rect x="300" y="1425" width="10" height="20" fill="#ffd54f" stroke="#333" stroke-width="1"/>
+    <rect x="370" y="1425" width="10" height="20" fill="#ffd54f" stroke="#333" stroke-width="1"/>
+    <rect x="200" y="1445" width="200" height="30" fill="#90caf9" stroke="#333" stroke-width="2"/>
+    <text x="300" y="1462" text-anchor="middle" font-size="10" fill="#333">ILD (SiO₂)</text>
+    <text x="100" y="1475" font-size="12" fill="#666">• CVD oxide • W plugs • CMP • Ready for metallization</text>
+  </g>
+  
+  <!-- MEMS Section -->
+  <rect x="650" y="100" width="500" height="800" fill="#fff3e0" stroke="#f57c00" stroke-width="3" rx="10"/>
+  <text x="900" y="130" text-anchor="middle" font-size="24" font-weight="bold" fill="#f57c00">
+    MEMS Surface Micromachining
+  </text>
+  
+  <!-- MEMS Step 1 -->
+  <g id="mems1">
+    <rect x="680" y="160" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="700" y="190" font-size="18" font-weight="bold" fill="#f57c00">1. Sacrificial Layer</text>
+    <rect x="800" y="220" width="200" height="20" fill="#c5e1a5" stroke="#333" stroke-width="2"/>
+    <rect x="800" y="240" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="900" y="235" text-anchor="middle" font-size="10" fill="#333">SiO₂ (2 µm)</text>
+    <text x="700" y="275" font-size="12" fill="#666">• PECVD or thermal oxide • Defines gap height</text>
+  </g>
+  
+  <!-- MEMS Step 2 -->
+  <g id="mems2">
+    <rect x="680" y="295" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="700" y="325" font-size="18" font-weight="bold" fill="#f57c00">2. Structural Layer</text>
+    <rect x="800" y="355" width="200" height="25" fill="#ce93d8" stroke="#333" stroke-width="2"/>
+    <rect x="800" y="380" width="200" height="20" fill="#c5e1a5" stroke="#333" stroke-width="2"/>
+    <rect x="800" y="400" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="900" y="372" text-anchor="middle" font-size="10" fill="#333">Poly-Si (2 µm)</text>
+    <text x="700" y="435" font-size="12" fill="#666">• LPCVD poly-Si • Patterning • Anchor definition</text>
+  </g>
+  
+  <!-- MEMS Step 3 -->
+  <g id="mems3">
+    <rect x="680" y="430" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="700" y="460" font-size="18" font-weight="bold" fill="#f57c00">3. Release Etch</text>
+    <line x1="810" y1="495" x2="990" y2="495" stroke="#ce93d8" stroke-width="25"/>
+    <rect x="800" y="505" width="10" height="30" fill="#ce93d8" stroke="#333" stroke-width="2"/>
+    <rect x="990" y="505" width="10" height="30" fill="#ce93d8" stroke="#333" stroke-width="2"/>
+    <rect x="800" y="535" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="700" y="570" font-size="12" fill="#666">• HF etch removes SiO₂ • Freestanding structure</text>
+  </g>
+  
+  <!-- MEMS Step 4 -->
+  <g id="mems4">
+    <rect x="680" y="565" width="440" height="120" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="700" y="595" font-size="18" font-weight="bold" fill="#f57c00">4. Metallization</text>
+    <line x1="810" y1="630" x2="990" y2="630" stroke="#ce93d8" stroke-width="20"/>
+    <rect x="820" y="620" width="160" height="5" fill="#ffd54f" stroke="#333" stroke-width="1"/>
+    <rect x="800" y="640" width="10" height="30" fill="#ce93d8" stroke="#333" stroke-width="2"/>
+    <rect x="990" y="640" width="10" height="30" fill="#ce93d8" stroke="#333" stroke-width="2"/>
+    <rect x="800" y="670" width="200" height="30" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <text x="700" y="705" font-size="12" fill="#666">• Al or Au sputtering • Contact pads</text>
+  </g>
+  
+  <!-- MEMS Step 5 -->
+  <g id="mems5">
+    <rect x="680" y="700" width="440" height="180" fill="white" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="700" y="730" font-size="18" font-weight="bold" fill="#f57c00">5. Device Examples</text>
+    
+    <!-- Cantilever -->
+    <g transform="translate(710, 750)">
+      <rect x="0" y="30" width="15" height="40" fill="#ce93d8" stroke="#333" stroke-width="2"/>
+      <line x1="15" y1="50" x2="85" y2="50" stroke="#ce93d8" stroke-width="12"/>
+      <text x="50" y="85" text-anchor="middle" font-size="11" fill="#333">Cantilever</text>
+    </g>
+    
+    <!-- Comb Drive -->
+    <g transform="translate(850, 750)">
+      <line x1="0" y1="40" x2="0" y2="60" stroke="#ce93d8" stroke-width="4"/>
+      <line x1="15" y1="40" x2="15" y2="60" stroke="#ce93d8" stroke-width="4"/>
+      <line x1="30" y1="45" x2="30" y2="65" stroke="#ce93d8" stroke-width="4"/>
+      <line x1="45" y1="45" x2="45" y2="65" stroke="#ce93d8" stroke-width="4"/>
+      <line x1="60" y1="40" x2="60" y2="60" stroke="#ce93d8" stroke-width="4"/>
+      <text x="30" y="85" text-anchor="middle" font-size="11" fill="#333">Comb Drive</text>
+    </g>
+  </g>
+  
+  <!-- Integration Section -->
+  <rect x="650" y="920" width="500" height="260" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" rx="10"/>
+  <text x="900" y="950" text-anchor="middle" font-size="24" font-weight="bold" fill="#7b1fa2">
+    MEMS-CMOS Integration
+  </text>
+  
+  <g id="integration">
+    <text x="680" y="985" font-size="16" font-weight="bold" fill="#7b1fa2">Integration Options:</text>
+    
+    <!-- Monolithic -->
+    <rect x="680" y="1000" width="220" height="70" fill="white" stroke="#7b1fa2" stroke-width="2" rx="5"/>
+    <text x="690" y="1020" font-size="14" font-weight="bold" fill="#7b1fa2">Monolithic</text>
+    <text x="690" y="1040" font-size="11" fill="#666">• MEMS + CMOS same die</text>
+    <text x="690" y="1055" font-size="11" fill="#666">• Smallest size</text>
+    <text x="690" y="1070" font-size="11" fill="#666">• Complex process</text>
+    
+    <!-- MCM -->
+    <rect x="920" y="1000" width="220" height="70" fill="white" stroke="#7b1fa2" stroke-width="2" rx="5"/>
+    <text x="930" y="1020" font-size="14" font-weight="bold" fill="#7b1fa2">Multi-Chip Module</text>
+    <text x="930" y="1040" font-size="11" fill="#666">• Separate dies, one pkg</text>
+    <text x="930" y="1055" font-size="11" fill="#666">• Flexible, higher yield</text>
+    <text x="930" y="1070" font-size="11" fill="#666">• Wire bond/flip-chip</text>
+    
+    <!-- SiP -->
+    <rect x="680" y="1090" width="220" height="70" fill="white" stroke="#7b1fa2" stroke-width="2" rx="5"/>
+    <text x="690" y="1110" font-size="14" font-weight="bold" fill="#7b1fa2">System-in-Package</text>
+    <text x="690" y="1130" font-size="11" fill="#666">• Multiple dies + passives</text>
+    <text x="690" y="1145" font-size="11" fill="#666">• Complete system</text>
+    <text x="690" y="1160" font-size="11" fill="#666">• 3D stacking possible</text>
+  </g>
+  
+  <!-- Legend -->
+  <rect x="50" y="1520" width="1100" height="60" fill="#fafafa" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="70" y="1545" font-size="14" font-weight="bold" fill="#333">Material Legend:</text>
+  
+  <rect x="200" y="1530" width="40" height="15" fill="#8b7355" stroke="#333" stroke-width="1"/>
+  <text x="245" y="1542" font-size="12" fill="#333">Silicon</text>
+  
+  <rect x="320" y="1530" width="40" height="15" fill="#4fc3f7" stroke="#333" stroke-width="1"/>
+  <text x="365" y="1542" font-size="12" fill="#333">SiO₂</text>
+  
+  <rect x="440" y="1530" width="40" height="15" fill="#b0bec5" stroke="#333" stroke-width="1"/>
+  <text x="485" y="1542" font-size="12" fill="#333">Poly-Si</text>
+  
+  <rect x="570" y="1530" width="40" height="15" fill="#ff5252" stroke="#333" stroke-width="1"/>
+  <text x="615" y="1542" font-size="12" fill="#333">n+ / p+</text>
+  
+  <rect x="700" y="1530" width="40" height="15" fill="#ffd54f" stroke="#333" stroke-width="1"/>
+  <text x="745" y="1542" font-size="12" fill="#333">Metal</text>
+  
+  <rect x="830" y="1530" width="40" height="15" fill="#ce93d8" stroke="#333" stroke-width="1"/>
+  <text x="875" y="1542" font-size="12" fill="#333">MEMS Structure</text>
+  
+  <text x="70" y="1570" font-size="11" fill="#666">Typical dimensions: Gate length 28-180nm • MEMS gap 1-5µm • Die size 1-10mm²</text>
+</svg>  -->  ...
+</svg>
