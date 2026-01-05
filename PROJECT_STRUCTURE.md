@@ -81,8 +81,8 @@ silicon-fabrication-handbook/
 │       └── case-studies.md           # IMUs, tire pressure sensors, microphones #Done 03/01/2026
 │
 ├── diagrams/                         # Visual aids and illustrations
-│   ├── fabrication-flow.drawio       # Editable process flow diagram
-│   ├── fabrication-flow.svg          # Exported vector graphic
+│   ├── fabrication-flow.drawio       #Done 04/01/2026
+│   ├── fabrication-flow.svg           #Done 04/01/2026
 │   ├── lithography-steps.svg
 │   ├── drie-cross-section.svg
 │   ├── wafer-bonding-types.svg
