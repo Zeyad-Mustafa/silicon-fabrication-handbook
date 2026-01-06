@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  
+  <!-- Title -->
+  <text x="600" y="35" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a1a1a">
+    Photolithography Process
+  </text>
+  <text x="600" y="60" text-anchor="middle" font-size="14" fill="#666">
+    9-Step Pattern Transfer Sequence
+  </text>
+  
+  <!-- Definitions -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+  
+  <!-- Step 1: Clean -->
+  <g id="step1">
+    <rect x="30" y="90" width="220" height="180" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="6"/>
+    <text x="140" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="#1976d2">1. Wafer Cleaning</text>
+    <rect x="70" y="135" width="140" height="20" fill="#8b7355" stroke="#333" stroke-width="2"/>
+    <path d="M 100,165 L 100,175 M 180,165 L 180,175" stroke="#4fc3f7" stroke-width="2"/>
+    <text x="140" y="195" text-anchor="middle" font-size="9" fill="#0277bd">RCA Clean / DI Rinse</text>
+    <rect x="70" y="205" width="140" height="20" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <text x="140" y="218" text-anchor="middle" font-size="8" fill="white">Clean Surface</text>
+    <text x="40" y="245" font-size="9" fill="#666">• Remove particles</text>
+    <text x="40" y="258" font-size="9" fill="#666">• N₂ dry</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 250,180 L 280,180" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 2: Dehydration -->
+  <g id="step2">
+    <rect x="280" y="90" width="220" height="180" fill="#fff3e0" stroke="#f57c00" stroke-width="2" rx="6"/>
+    <text x="390" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="#f57c00">2. Dehydration Bake</text>
+    <rect x="320" y="140" width="140" height="20" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <rect x="315" y="160" width="150" height="12" fill="#ff6f00" stroke="#333" stroke-width="1" rx="2"/>
+    <text x="390" y="169" text-anchor="middle" font-size="8" fill="white">Hotplate</text>
+    <path d="M 340,180 Q 340,188 343,192 T 349,200" stroke="#ff5252" stroke-width="2" fill="none"/>
+    <path d="M 390,180 Q 390,188 393,192 T 399,200" stroke="#ff5252" stroke-width="2" fill="none"/>
+    <path d="M 440,180 Q 440,188 443,192 T 449,200" stroke="#ff5252" stroke-width="2" fill="none"/>
+    <text x="390" y="220" text-anchor="middle" font-size="9" fill="#e65100">H₂O removal</text>
+    <text x="290" y="245" font-size="9" fill="#666">• 150-200°C</text>
+    <text x="290" y="258" font-size="9" fill="#666">• 2-5 minutes</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 500,180 L 530,180" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 3: HMDS -->
+  <g id="step3">
+    <rect x="530" y="90" width="220" height="180" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" rx="6"/>
+    <text x="640" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="#388e3c">3. HMDS Priming</text>
+    <rect x="570" y="140" width="140" height="20" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <circle cx="600" cy="175" r="2" fill="#81c784" opacity="0.6"/>
+    <circle cx="620" cy="170" r="2" fill="#81c784" opacity="0.6"/>
+    <circle cx="640" cy="178" r="2" fill="#81c784" opacity="0.6"/>
+    <circle cx="660" cy="172" r="2" fill="#81c784" opacity="0.6"/>
+    <circle cx="680" cy="176" r="2" fill="#81c784" opacity="0.6"/>
+    <text x="640" y="195" text-anchor="middle" font-size="9" fill="#2e7d32">HMDS vapor</text>
+    <rect x="570" y="205" width="140" height="2" fill="#66bb6a"/>
+    <rect x="570" y="207" width="140" height="18" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <text x="540" y="245" font-size="9" fill="#666">• Adhesion layer</text>
+    <text x="540" y="258" font-size="9" fill="#666">• Hydrophobic</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 750,180 L 780,180" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 4: Spin Coat -->
+  <g id="step4">
+    <rect x="780" y="90" width="220" height="180" fill="#fce4ec" stroke="#c2185b" stroke-width="2" rx="6"/>
+    <text x="890" y="115" text-anchor="middle" font-size="16" font-weight="bold" fill="#c2185b">4. Spin Coating</text>
+    <ellipse cx="890" cy="155" rx="60" ry="12" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <ellipse cx="890" cy="153" rx="56" ry="10" fill="#ec407a" stroke="#ad1457" stroke-width="1"/>
+    <text x="890" y="157" text-anchor="middle" font-size="8" fill="white">Photoresist</text>
+    <rect x="865" y="167" width="50" height="8" fill="#757575" stroke="#333" stroke-width="1"/>
+    <path d="M 935,145 A 45,45 0 0,1 945,160" stroke="#c2185b" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M 845,160 A 45,45 0 0,1 835,145" stroke="#c2185b" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="890" y="190" text-anchor="middle" font-size="10" fill="#c2185b" font-weight="bold">2000-6000 RPM</text>
+    <circle cx="820" cy="152" r="2" fill="#ec407a"/>
+    <circle cx="960" cy="152" r="2" fill="#ec407a"/>
+    <text x="790" y="215" font-size="9" fill="#666">• 0.5-3 μm thick</text>
+    <text x="790" y="228" font-size="9" fill="#666">• 30-60 seconds</text>
+    <text x="790" y="241" font-size="9" fill="# 666">• ±3% uniformity</text>
+    <text x="790" y="254" font-size="9" fill="#666">• Positive/negative</text>
+  </g>
+  
+  <!-- Arrow down -->
+  <path d="M 890,270 L 890,300" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 5: Soft Bake -->
+  <g id="step5">
+    <rect x="780" y="300" width="220" height="180" fill="#fff9c4" stroke="#f9a825" stroke-width="2" rx="6"/>
+    <text x="890" y="325" text-anchor="middle" font-size="16" font-weight="bold" fill="#f9a825">5. Soft Bake (PAB)</text>
+    <rect x="820" y="345" width="140" height="8" fill="#ec407a" stroke="#ad1457" stroke-width="1"/>
+    <rect x="820" y="353" width="140" height="20" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <rect x="815" y="373" width="150" height="12" fill="#ffa726" stroke="#333" stroke-width="1" rx="2"/>
+    <text x="890" y="382" text-anchor="middle" font-size="8" fill="white">Hotplate</text>
+    <path d="M 840,393 Q 840,401 843,405 T 849,413" stroke="#ff6f00" stroke-width="2" fill="none"/>
+    <path d="M 890,393 Q 890,401 893,405 T 899,413" stroke="#ff6f00" stroke-width="2" fill="none"/>
+    <path d="M 940,393 Q 940,401 943,405 T 949,413" stroke="#ff6f00" stroke-width="2" fill="none"/>
+    <text x="890" y="433" text-anchor="middle" font-size="9" fill="#e65100">Solvent evaporation</text>
+    <text x="790" y="455" font-size="9" fill="#666">• 90-110°C, 60-90s</text>
+    <text x="790" y="468" font-size="9" fill="#666">• Densify resist</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 750,390 L 780,390" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 6: Exposure -->
+  <g id="step6">
+    <rect x="530" y="300" width="220" height="180" fill="#e1f5fe" stroke="#0288d1" stroke-width="2" rx="6"/>
+    <text x="640" y="325" text-anchor="middle" font-size="16" font-weight="bold" fill="#0288d1">6. UV Exposure</text>
+    <rect x="600" y="340" width="80" height="15" fill="#ffeb3b" stroke="#f57f17" stroke-width="1" rx="2"/>
+    <text x="640" y="351" text-anchor="middle" font-size="8" fill="#333">UV Source</text>
+    <line x1="615" y1="355" x2="615" y2="385" stroke="#ffd54f" stroke-width="2"/>
+    <line x1="630" y1="355" x2="630" y2="385" stroke="#ffd54f" stroke-width="2"/>
+    <line x1="645" y1="355" x2="645" y2="385" stroke="#ffd54f" stroke-width="2"/>
+    <line x1="660" y1="355" x2="660" y2="385" stroke="#ffd54f" stroke-width="2"/>
+    <rect x="590" y="385" width="30" height="6" fill="#424242" stroke="#212121" stroke-width="1"/>
+    <rect x="640" y="385" width="50" height="6" fill="#424242" stroke="#212121" stroke-width="1"/>
+    <text x="640" y="403" text-anchor="middle" font-size="8" fill="#0277bd">Photomask</text>
+    <rect x="590" y="410" width="30" height="6" fill="#ff80ab" stroke="#ad1457" stroke-width="1"/>
+    <rect x="640" y="410" width="50" height="6" fill="#ec407a" stroke="#ad1457" stroke-width="1"/>
+    <rect x="570" y="416" width="140" height="8" fill="#ec407a" stroke="#ad1457" stroke-width="1"/>
+    <rect x="570" y="424" width="140" height="20" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <text x="540" y="460" font-size="9" fill="#666">• i-line/DUV/EUV</text>
+    <text x="540" y="473" font-size="9" fill="#666">• 50-200 mJ/cm²</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 500,390 L 530,390" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 7: PEB -->
+  <g id="step7">
+    <rect x="280" y="300" width="220" height="180" fill="#fce4ec" stroke="#d81b60" stroke-width="2" rx="6"/>
+    <text x="390" y="325" text-anchor="middle" font-size="16" font-weight="bold" fill="#d81b60">7. PEB (Optional)</text>
+    <rect x="320" y="345" width="140" height="8" fill="#f48fb1" stroke="#ad1457" stroke-width="1"/>
+    <rect x="320" y="353" width="140" height="20" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <rect x="315" y="373" width="150" height="12" fill="#ff6f00" stroke="#333" stroke-width="1" rx="2"/>
+    <text x="390" y="382" text-anchor="middle" font-size="8" fill="white">Hotplate</text>
+    <path d="M 340,393 Q 340,401 343,405 T 349,413" stroke="#ff5252" stroke-width="2" fill="none"/>
+    <path d="M 390,393 Q 390,401 393,405 T 399,413" stroke="#ff5252" stroke-width="2" fill="none"/>
+    <path d="M 440,393 Q 440,401 443,405 T 449,413" stroke="#ff5252" stroke-width="2" fill="none"/>
+    <text x="390" y="433" text-anchor="middle" font-size="9" fill="#c2185b">Chemical reaction</text>
+    <text x="290" y="455" font-size="9" fill="#666">• 100-130°C, 60-90s</text>
+    <text x="290" y="468" font-size="9" fill="#666">• For CAR only</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M 250,390 L 280,390" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 8: Development -->
+  <g id="step8">
+    <rect x="30" y="300" width="220" height="180" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2" rx="6"/>
+    <text x="140" y="325" text-anchor="middle" font-size="16" font-weight="bold" fill="#7b1fa2">8. Development</text>
+    <text x="50" y="345" font-size="9" fill="#666">Before:</text>
+    <rect x="70" y="350" width="50" height="6" fill="#f48fb1" stroke="#ad1457" stroke-width="1"/>
+    <rect x="130" y="350" width="25" height="6" fill="#ec407a" stroke="#ad1457" stroke-width="1"/>
+    <rect x="165" y="350" width="45" height="6" fill="#f48fb1" stroke="#ad1457" stroke-width="1"/>
+    <rect x="70" y="356" width="140" height="18" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <circle cx="100" cy="390" r="2" fill="#ba68c8" opacity="0.6"/>
+    <circle cx="120" cy="385" r="2" fill="#ba68c8" opacity="0.6"/>
+    <circle cx="140" cy="392" r="2" fill="#ba68c8" opacity="0.6"/>
+    <circle cx="160" cy="387" r="2" fill="#ba68c8" opacity="0.6"/>
+    <circle cx="180" cy="391" r="2" fill="#ba68c8" opacity="0.6"/>
+    <text x="140" y="408" text-anchor="middle" font-size="9" fill="#7b1fa2">TMAH Developer</text>
+    <text x="50" y="428" font-size="9" fill="#666">After (Positive):</text>
+    <rect x="130" y="433" width="25" height="6" fill="#ec407a" stroke="#ad1457" stroke-width="1"/>
+    <rect x="70" y="439" width="140" height="18" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <text x="140" y="472" text-anchor="middle" font-size="8" fill="#666">Exposed areas removed</text>
+  </g>
+  
+  <!-- Arrow to Step 9 -->
+  <path d="M 140,480 L 140,510 L 600,510 L 600,530" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 9: Pattern Transfer -->
+  <g id="step9">
+    <rect x="300" y="530" width="600" height="160" fill="#e8eaf6" stroke="#3f51b5" stroke-width="2" rx="6"/>
+    <text x="600" y="555" text-anchor="middle" font-size="18" font-weight="bold" fill="#3f51b5">
+      9. Pattern Transfer (Etch) &amp; Resist Strip
+    </text>
+    
+    <!-- Etching illustration -->
+    <text x="370" y="580" font-size="11" fill="#666" font-weight="bold">Etching:</text>
+    <rect x="370" y="590" width="25" height="6" fill="#ec407a" stroke="#ad1457" stroke-width="1"/>
+    <rect x="370" y="596" width="110" height="12" fill="#90caf9" stroke="#1976d2" stroke-width="1"/>
+    <text x="425" y="605" text-anchor="middle" font-size="8" fill="#333">Thin Film</text>
+    <rect x="370" y="608" width="110" height="18" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <path d="M 405,626 L 405,638" stroke="#ff5252" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M 445,626 L 445,638" stroke="#ff5252" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="425" y="652" text-anchor="middle" font-size="9" fill="#d32f2f">RIE/Wet Etch</text>
+    
+    <!-- After strip -->
+    <text x="560" y="580" font-size="11" fill="#666" font-weight="bold">After Strip:</text>
+    <rect x="560" y="596" width="25" height="12" fill="#90caf9" stroke="#1976d2" stroke-width="1"/>
+    <rect x="605" y="596" width="50" height="12" fill="#90caf9" stroke="#1976d2" stroke-width="1"/>
+    <rect x="560" y="608" width="110" height="18" fill="#c5a876" stroke="#333" stroke-width="2"/>
+    <text x="615" y="645" text-anchor="middle" font-size="8" fill="#666">Pattern transferred</text>
+    
+    <!-- Parameters -->
+    <text x="320" y="670" font-size="10" fill="#666">
+      • Etch: Plasma (RIE, ICP) or Wet (HF, acids) • Anisotropic preferred • High selectivity
+    </text>
+    <text x="320" y="683" font-size="10" fill="#666">
+      • Strip: O₂ plasma or solvent • Final clean • Inspection (CD-SEM, defect review)
+    </text>
+  </g>
+  
+  <!-- Legend -->
+  <rect x="30" y="710" width="420" height="70" fill="#fafafa" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="40" y="730" font-size="11" font-weight="bold" fill="#333">Materials:</text>
+  <rect x="110" y="720" width="25" height="10" fill="#c5a876" stroke="#333" stroke-width="1"/>
+  <text x="140" y="729" font-size="9" fill="#333">Si wafer</text>
+  <rect x="200" y="720" width="25" height="10" fill="#ec407a" stroke="#333" stroke-width="1"/>
+  <text x="230" y="729" font-size="9" fill="#333">Photoresist</text>
+  <rect x="310" y="720" width="25" height="10" fill="#90caf9" stroke="#333" stroke-width="1"/>
+  <text x="340" y="729" font-size="9" fill="#333">Thin film (SiO₂, metal)</text>
+  
+  <text x="40" y="750" font-size="11" font-weight="bold" fill="#333">Types:</text>
+  <text x="110" y="750" font-size="9" fill="#666">Positive PR: Exposed areas dissolve</text>
+  <text x="110" y="763" font-size="9" fill="#666">Negative PR: Exposed areas crosslink (remain)</text>
+  <text x="110" y="776" font-size="9" fill="#666">CAR = Chemically Amplified Resist</text>
+  
+  <!-- Process time -->
+  <text x="600" y="770" text-anchor="middle" font-size="12" fill="#666" font-style="italic">
+    Total cycle time: 2-4 hours per layer • Critical for sub-100nm features
+  </text>
+  
+</svg>
