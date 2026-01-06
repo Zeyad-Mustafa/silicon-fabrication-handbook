@@ -82,8 +82,8 @@ silicon-fabrication-handbook/
 │
 ├── diagrams/                         # Visual aids and illustrations
 │   ├── fabrication-flow.drawio       #Done 04/01/2026
-│   ├── fabrication-flow.svg           #Done 04/01/2026
-│   ├── lithography-steps.svg          #process
+│   ├── fabrication-flow.svg           #Done 05/01/2026
+│   ├── lithography-steps.svg          #Done 06/01/2026
 │   ├── drie-cross-section.svg
 │   ├── wafer-bonding-types.svg
 │   ├── mosfet-structure.svg
