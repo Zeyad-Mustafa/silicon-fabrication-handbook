@@ -2,7 +2,7 @@
 
 This directory contains high-quality SVG diagrams illustrating key concepts in semiconductor fabrication, MEMS processing, and device structures. All diagrams are created in scalable vector format (SVG) for maximum clarity and reusability.
 
-##  Available Diagrams
+##    Available Diagrams
 
 ### 1. [fabrication-flow.svg](./fabrication-flow.svg)
 **Complete CMOS & MEMS Fabrication Flow**
@@ -228,6 +228,92 @@ This directory contains high-quality SVG diagrams illustrating key concepts in s
 
 ---
 
+### 6. [cmos-inverter.svg](./cmos-inverter.svg)
+**CMOS Inverter Layout & Stick Diagram**
+
+![CMOS Inverter Preview](./cmos-inverter.svg)
+
+**Description**: Complete CMOS inverter design showing physical layout, stick diagram, cross-section, and schematic views with design parameters.
+
+**Contents**:
+
+**Physical Layout (Top View)**:
+- All mask layers (n-well, active, poly, metal, contacts)
+- nMOS and pMOS transistors
+- VDD and GND power rails
+- Input and output connections
+- Dimension annotations (W_p, W_total)
+- Contact vias placement
+
+**Stick Diagram**:
+- Simplified symbolic representation
+- Color-coded layers for clarity
+- Shows device connectivity
+- Easier to understand than full layout
+
+**Cross-Section A-A'**:
+- Vertical structure view
+- pMOS in n-well region
+- nMOS in p-well region
+- Shared polysilicon gate
+- Substrate connection
+
+**Schematic**:
+- Standard circuit symbol
+- Device sizing (W_p/L_p = 2W/L, W_n/L_n = W/L)
+- Input/output labels
+- Power connections
+
+**Layer Legend**:
+- n-well (dashed orange)
+- Active/diffusion (light blue)
+- Polysilicon (gray)
+- Metal 1 (yellow)
+- Contacts (gray squares)
+- n⁺ and p⁺ implants
+
+**Design Rules** (180nm typical):
+- Minimum widths: Active=0.6µm, Poly=0.35µm, Metal=0.5µm
+- Spacing: Active=0.9µm, Poly=0.4µm
+- Contact size and spacing
+
+**CMOS Inverter Characteristics**:
+- Voltage Transfer Curve (VTC) parameters
+  - V_IL ≈ 0.3V_DD, V_IH ≈ 0.7V_DD
+  - V_M (switching threshold) = V_DD/2
+  - Noise margins: NM_L = NM_H ≈ 0.4V_DD
+- Timing performance
+  - Propagation delay: ~100ps (28nm), ~1ns (180nm)
+  - Rise/fall time matching
+- Power consumption
+  - Static: P_static ≈ 0 (no DC path)
+  - Dynamic: P_dyn = α·C_L·V_DD²·f
+  - Short-circuit current during transitions
+
+**Key Design Parameters**:
+- Sizing ratio (W_p/W_n): 2:1 to 3:1 typical
+  - Compensates for µ_p ≈ µ_n/2
+  - Provides symmetric rise/fall times
+- Area vs. performance trade-offs
+  - Larger W → faster switching, more drive strength
+  - Larger L → less leakage, slower switching
+  - Minimum area: ~50 λ² (λ = feature size/2)
+- β matching for symmetric operation
+
+**Use Cases**:
+- VLSI circuit design courses
+- Layout design training
+- Understanding CMOS fabrication from circuit perspective
+- Design rule checking (DRC) examples
+- Standard cell library design
+- Teaching mask layer hierarchy
+- Sizing optimization studies
+
+**Dimensions**: 1400 × 900 px  
+**File Size**: ~14 KB
+
+---
+
 ##  File Format & Usage
 
 ### SVG (Scalable Vector Graphics)
@@ -235,12 +321,12 @@ This directory contains high-quality SVG diagrams illustrating key concepts in s
 All diagrams are provided in SVG format for several reasons:
 
 **Advantages**:
--   **Scalable**: Zoom infinitely without quality loss
--   **Small file size**: Typical 10-20 KB per diagram
--   **Editable**: Can be modified in vector graphics software
--   **Web-friendly**: Renders directly in browsers and GitHub
--   **Print-ready**: High quality at any resolution
--   **Accessible**: Text remains searchable and selectable
+-    **Scalable**: Zoom infinitely without quality loss
+-    **Small file size**: Typical 10-20 KB per diagram
+-    **Editable**: Can be modified in vector graphics software
+-    **Web-friendly**: Renders directly in browsers and GitHub
+-    **Print-ready**: High quality at any resolution
+-    **Accessible**: Text remains searchable and selectable
 
 ### Viewing Options
 
@@ -299,7 +385,7 @@ git push origin main
 
 ---
 
-##  Design Specifications
+## 📐 Design Specifications
 
 ### Color Palette
 
@@ -373,8 +459,7 @@ When creating new diagrams for this collection:
 Additional diagrams that would complement this collection:
 
 1. **CMP Process** - Chemical Mechanical Polishing steps
-2. **CMOS Inverter Layout** - Top-view mask layers
-3. **Ion Implantation** - Dopant profiles and channeling
+2. **Ion Implantation** - Dopant profiles and channeling
 4. **CVD/PVD Deposition** - Thin film growth mechanisms
 5. **Etching Types** - Isotropic vs. anisotropic comparison
 6. **MEMS Accelerometer** - Complete device structure
@@ -385,7 +470,7 @@ Additional diagrams that would complement this collection:
 
 ---
 
-##  Usage in Education
+## 📚 Usage in Education
 
 ### For Instructors
 
@@ -494,8 +579,8 @@ For context and detailed explanations of the processes shown in these diagrams, 
 All diagrams in this directory are licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
 
 **You are free to**:
--   Share — copy and redistribute the material in any medium or format
--   Adapt — remix, transform, and build upon the material for any purpose, even commercially
+-    Share — copy and redistribute the material in any medium or format
+-    Adapt — remix, transform, and build upon the material for any purpose, even commercially
 
 **Under the following terms**:
 -  Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made
@@ -518,18 +603,18 @@ If you use these diagrams in academic work, please cite:
 
 ---
 
-##  Technical Notes
+## 🔧 Technical Notes
 
 ### SVG Compatibility
 
 All diagrams have been tested with:
--   GitHub (web interface)
--   Chrome 120+
--   Firefox 120+
--   Safari 17+
--   Edge 120+
--   Inkscape 1.3+
--   Adobe Illustrator CC 2024
+-    GitHub (web interface)
+-    Chrome 120+
+-    Firefox 120+
+-    Safari 17+
+-    Edge 120+
+-    Inkscape 1.3+
+-    Adobe Illustrator CC 2024
 
 ### File Size Optimization
 
@@ -551,7 +636,7 @@ inkscape --export-plain-svg=diagram-optimized.svg diagram.svg
 
 ---
 
-## 📞 Contact & Support
+##  Contact & Support
 
 ### Questions or Issues?
 
@@ -570,6 +655,6 @@ These diagrams were created as part of the Silicon Fabrication Handbook project,
 ---
 
 **Last Updated**: January 2026  
-**Version**: 1.0  
-**Total Diagrams**: 5  
+**Version**: 1.1  
+**Total Diagrams**: 6  
 **Maintained by**: Silicon Fabrication Handbook Team
