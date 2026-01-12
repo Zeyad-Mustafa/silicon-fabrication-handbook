@@ -1,0 +1,315 @@
+#!/usr/bin/env python3
+"""
+Generate MEMS CAD Models in STEP Format
+========================================
+
+This script creates 3D CAD models of common MEMS devices using
+the cadquery library and exports them as STEP files.
+
+Requirements:
+    pip install cadquery
+
+Usage:
+    python generate_cad_models.py
+
+Author: Silicon Fabrication Handbook
+License: MIT
+"""
+
+import cadquery as cq
+import math
+from pathlib import Path
+
+# Output directory
+OUTPUT_DIR = Path(".")
+OUTPUT_DIR.mkdir(exist_ok=True)
+
+# Unit conversion (work in mm, MEMS dimensions in µm)
+UM_TO_MM = 0.001
+
+
+def create_comb_drive_actuator():
+    """
+    Create a lateral comb drive actuator.
+    
+    Specifications:
+        - Finger length: 50 µm
+        - Finger width: 2 µm
+        - Gap: 2 µm
+        - Number of fingers: 50 pairs
+        - Thickness: 10 µm
+    """
+    print("Creating comb drive actuator...")
+    
+    # Dimensions in mm
+    finger_length = 50 * UM_TO_MM
+    finger_width = 2 * UM_TO_MM
+    gap = 2 * UM_TO_MM
+    thickness = 10 * UM_TO_MM
+    num_fingers = 50
+    
+    # Spring beam dimensions
+    beam_length = 100 * UM_TO_MM
+    beam_width = 4 * UM_TO_MM
+    
+    # Anchor dimensions
+    anchor_size = 50 * UM_TO_MM
+    
+    # Create base anchor for fixed fingers
+    fixed_anchor = (
+        cq.Workplane("XY")
+        .box(anchor_size, anchor_size, thickness)
+        .translate((0, -anchor_size/2, 0))
+    )
+    
+    # Create fixed fingers
+    fixed_fingers = None
+    for i in range(num_fingers):
+        x_offset = i * 2 * (finger_width + gap)
+        finger = (
+            cq.Workplane("XY")
+            .box(finger_width, finger_length, thickness)
+            .translate((x_offset + anchor_size, finger_length/2, 0))
+        )
+        if fixed_fingers is None:
+            fixed_fingers = finger
+        else:
+            fixed_fingers = fixed_fingers.union(finger)
+    
+    # Combine fixed anchor and fingers
+    fixed_structure = fixed_anchor.union(fixed_fingers)
+    
+    # Create movable structure with spring suspension
+    shuttle_width = num_fingers * 2 * (finger_width + gap) - gap
+    shuttle_length = 30 * UM_TO_MM
+    
+    # Movable shuttle
+    movable_shuttle = (
+        cq.Workplane("XY")
+        .box(shuttle_width, shuttle_length, thickness)
+        .translate((anchor_size + shuttle_width/2, finger_length + shuttle_length/2 + 10*UM_TO_MM, 0))
+    )
+    
+    # Movable fingers
+    movable_fingers = None
+    for i in range(num_fingers):
+        x_offset = i * 2 * (finger_width + gap)
+        finger = (
+            cq.Workplane("XY")
+            .box(finger_width, finger_length, thickness)
+            .translate((x_offset + anchor_size + finger_width + gap, finger_length/2, 0))
+        )
+        if movable_fingers is None:
+            movable_fingers = finger
+        else:
+            movable_fingers = movable_fingers.union(finger)
+    
+    # Spring beams (folded beam suspension)
+    beam1 = (
+        cq.Workplane("XY")
+        .box(beam_width, beam_length, thickness)
+        .translate((anchor_size/2, finger_length + beam_length/2, 0))
+    )
+    
+    beam2 = (
+        cq.Workplane("XY")
+        .box(beam_length, beam_width, thickness)
+        .translate((anchor_size/2 + beam_length/2, finger_length + beam_length, 0))
+    )
+    
+    # Combine movable parts
+    movable_structure = movable_shuttle.union(movable_fingers).union(beam1).union(beam2)
+    
+    # Combine everything
+    comb_drive = fixed_structure.union(movable_structure)
+    
+    # Export
+    output_file = OUTPUT_DIR / "comb-drive-actuator.step"
+    cq.exporters.export(comb_drive, str(output_file))
+    print(f"✓ Saved: {output_file}")
+    
+    return comb_drive
+
+
+def create_membrane_pressure_sensor():
+    """
+    Create a circular membrane pressure sensor.
+    
+    Specifications:
+        - Membrane diameter: 1000 µm
+        - Membrane thickness: 20 µm
+        - Cavity depth: 400 µm
+        - Boss diameter: 200 µm
+    """
+    print("Creating membrane pressure sensor...")
+    
+    # Dimensions in mm
+    membrane_radius = 500 * UM_TO_MM
+    membrane_thickness = 20 * UM_TO_MM
+    cavity_depth = 400 * UM_TO_MM
+    boss_radius = 100 * UM_TO_MM
+    rim_width = 50 * UM_TO_MM
+    
+    total_thickness = cavity_depth + membrane_thickness
+    
+    # Create base substrate
+    substrate_radius = membrane_radius + rim_width
+    substrate = (
+        cq.Workplane("XY")
+        .circle(substrate_radius)
+        .extrude(total_thickness)
+        .translate((0, 0, -cavity_depth))
+    )
+    
+    # Create cavity (subtract from substrate)
+    cavity = (
+        cq.Workplane("XY")
+        .circle(membrane_radius)
+        .extrude(cavity_depth)
+        .translate((0, 0, -cavity_depth))
+    )
+    
+    # Subtract cavity from substrate
+    sensor = substrate.cut(cavity)
+    
+    # Add boss (center reinforcement) - optional
+    boss = (
+        cq.Workplane("XY")
+        .circle(boss_radius)
+        .extrude(membrane_thickness * 2)
+        .translate((0, 0, 0))
+    )
+    
+    sensor = sensor.union(boss)
+    
+    # Add piezoresistor locations (small markers)
+    marker_size = 10 * UM_TO_MM
+    marker_distance = membrane_radius * 0.7
+    
+    for angle in [0, 90, 180, 270]:
+        rad = math.radians(angle)
+        x = marker_distance * math.cos(rad)
+        y = marker_distance * math.sin(rad)
+        marker = (
+            cq.Workplane("XY")
+            .box(marker_size, marker_size, membrane_thickness * 0.5)
+            .translate((x, y, membrane_thickness * 0.25))
+        )
+        sensor = sensor.union(marker)
+    
+    # Export
+    output_file = OUTPUT_DIR / "membrane-pressure-sensor.step"
+    cq.exporters.export(sensor, str(output_file))
+    print(f"✓ Saved: {output_file}")
+    
+    return sensor
+
+
+def create_cantilever_beam():
+    """
+    Create a simple cantilever beam resonator.
+    
+    Specifications:
+        - Length: 100 µm
+        - Width: 10 µm
+        - Thickness: 2 µm
+        - Tip mass: 10 × 10 × 2 µm³
+    """
+    print("Creating cantilever beam...")
+    
+    # Dimensions in mm
+    beam_length = 100 * UM_TO_MM
+    beam_width = 10 * UM_TO_MM
+    beam_thickness = 2 * UM_TO_MM
+    
+    anchor_length = 20 * UM_TO_MM
+    anchor_width = 20 * UM_TO_MM
+    
+    tip_mass_size = 10 * UM_TO_MM
+    
+    # Create anchor
+    anchor = (
+        cq.Workplane("XY")
+        .box(anchor_width, anchor_length, beam_thickness)
+        .translate((0, -anchor_length/2, 0))
+    )
+    
+    # Create beam
+    beam = (
+        cq.Workplane("XY")
+        .box(beam_width, beam_length, beam_thickness)
+        .translate((0, beam_length/2, 0))
+    )
+    
+    # Create tip mass
+    tip_mass = (
+        cq.Workplane("XY")
+        .box(tip_mass_size, tip_mass_size, beam_thickness)
+        .translate((0, beam_length + tip_mass_size/2, 0))
+    )
+    
+    # Combine all parts
+    cantilever = anchor.union(beam).union(tip_mass)
+    
+    # Export
+    output_file = OUTPUT_DIR / "cantilever-beam.step"
+    cq.exporters.export(cantilever, str(output_file))
+    print(f"✓ Saved: {output_file}")
+    
+    return cantilever
+
+
+def create_all_models():
+    """Generate all MEMS CAD models."""
+    print("=" * 60)
+    print("MEMS CAD Model Generator")
+    print("=" * 60)
+    print()
+    
+    models = []
+    
+    try:
+        models.append(("Comb Drive", create_comb_drive_actuator()))
+    except Exception as e:
+        print(f"✗ Error creating comb drive: {e}")
+    
+    try:
+        models.append(("Pressure Sensor", create_membrane_pressure_sensor()))
+    except Exception as e:
+        print(f"✗ Error creating pressure sensor: {e}")
+    
+    try:
+        models.append(("Cantilever Beam", create_cantilever_beam()))
+    except Exception as e:
+        print(f"✗ Error creating cantilever: {e}")
+    
+    print()
+    print("=" * 60)
+    print(f"Generated {len(models)} MEMS models successfully!")
+    print("=" * 60)
+    print()
+    print("Files created:")
+    for name, _ in models:
+        print(f"  • {name}")
+    print()
+    print("Next steps:")
+    print("  1. Open STEP files in FreeCAD or other CAD software")
+    print("  2. Verify dimensions and geometry")
+    print("  3. Import into FEA software (COMSOL, ANSYS)")
+    print("  4. Run simulations and validate results")
+    print()
+
+
+if __name__ == "__main__":
+    # Check if cadquery is installed
+    try:
+        import cadquery
+        print(f"Using CadQuery version: {cadquery.__version__}")
+        print()
+    except ImportError:
+        print("ERROR: CadQuery not found!")
+        print("Install it with: pip install cadquery")
+        print()
+        exit(1)
+    
+    create_all_models()
