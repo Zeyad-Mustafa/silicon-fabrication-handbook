@@ -98,7 +98,7 @@ silicon-fabrication-handbook/
 │   │   └── cmp-process.mp4
 │   │
 │   └── CAD/
-│       ├── comb-drive-actuator.step
+│       ├── comb-drive-actuator.step      #Done 12/01/2026
 │       ├── membrane-pressure-sensor.step
 │       ├── cantilever-beam.step
 │       └── README.md                 # CAD file information
