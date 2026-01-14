@@ -1,758 +1,144 @@
-solid MembraneSensor
-  facet normal 0 0 -1
+solid AdvancedMembraneSensor
+  # --- BACKSIDE SILICON FRAME (Four pieces forming a hollow square) ---
+  # Left Frame
+  facet normal -1 0 0
     outer loop
       vertex 0 0 0
-      vertex 100 0 0
-      vertex 100 100 0
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 0 0 0
-      vertex 100 100 0
       vertex 0 100 0
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 0 0 5
-      vertex 100 100 5
-      vertex 100 0 5
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 0 0 5
-      vertex 0 100 5
-      vertex 100 100 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 0 0 0
-      vertex 100 0 0
-      vertex 100 0 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 0 0 0
-      vertex 100 0 5
-      vertex 0 0 5
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 0 100 0
-      vertex 100 100 5
-      vertex 100 100 0
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 0 100 0
-      vertex 0 100 5
-      vertex 100 100 5
+      vertex 0 100 10
     endloop
   endfacet
   facet normal -1 0 0
     outer loop
       vertex 0 0 0
-      vertex 0 100 0
-      vertex 0 100 5
+      vertex 0 100 10
+      vertex 0 0 10
     endloop
   endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 0 0 0
-      vertex 0 100 5
-      vertex 0 0 5
-    endloop
-  endfacet
+  # Right Frame
   facet normal 1 0 0
     outer loop
       vertex 100 0 0
-      vertex 100 100 5
+      vertex 100 100 10
       vertex 100 100 0
     endloop
   endfacet
   facet normal 1 0 0
     outer loop
       vertex 100 0 0
-      vertex 100 0 5
-      vertex 100 100 5
+      vertex 100 0 10
+      vertex 100 100 10
     endloop
   endfacet
-  facet normal 0 0 -1
+
+  # --- THIN SUSPENDED MEMBRANE (Z = 10 to 10.5) ---
+  facet normal 0 0 1
     outer loop
-      vertex 10 10 5
-      vertex 90 10 5
-      vertex 90 90 5
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 10 10 5
-      vertex 90 90 5
-      vertex 10 90 5
+      vertex 10 10 10.5
+      vertex 90 90 10.5
+      vertex 90 10 10.5
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 10 10 5.5
-      vertex 90 90 5.5
-      vertex 90 10 5.5
+      vertex 10 10 10.5
+      vertex 10 90 10.5
+      vertex 90 90 10.5
+    endloop
+  endfacet
+
+  # --- INTERDIGITATED SENSING ELECTRODES (The "Comb" in the center) ---
+  # Finger 1
+  facet normal 0 0 1
+    outer loop
+      vertex 30 40 10.8
+      vertex 70 40 10.8
+      vertex 70 42 10.8
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 10 10 5.5
-      vertex 10 90 5.5
-      vertex 90 90 5.5
+      vertex 30 40 10.8
+      vertex 70 42 10.8
+      vertex 30 42 10.8
     endloop
   endfacet
-  facet normal 0 -1 0
+  # Finger 2
+  facet normal 0 0 1
     outer loop
-      vertex 10 10 5
-      vertex 90 10 5
-      vertex 90 10 5.5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 10 10 5
-      vertex 90 10 5.5
-      vertex 10 10 5.5
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 10 90 5
-      vertex 90 90 5.5
-      vertex 90 90 5
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 10 90 5
-      vertex 10 90 5.5
-      vertex 90 90 5.5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 10 10 5
-      vertex 10 90 5
-      vertex 10 90 5.5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 10 10 5
-      vertex 10 90 5.5
-      vertex 10 10 5.5
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 90 10 5
-      vertex 90 90 5.5
-      vertex 90 90 5
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 90 10 5
-      vertex 90 10 5.5
-      vertex 90 90 5.5
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 35 35 5.5
-      vertex 65 35 5.5
-      vertex 65 65 5.5
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 35 35 5.5
-      vertex 65 65 5.5
-      vertex 35 65 5.5
+      vertex 30 50 10.8
+      vertex 70 50 10.8
+      vertex 70 52 10.8
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 35 35 6
-      vertex 65 65 6
-      vertex 65 35 6
+      vertex 30 50 10.8
+      vertex 70 52 10.8
+      vertex 30 52 10.8
+    endloop
+  endfacet
+  # Finger 3
+  facet normal 0 0 1
+    outer loop
+      vertex 30 60 10.8
+      vertex 70 60 10.8
+      vertex 70 62 10.8
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 35 35 6
-      vertex 35 65 6
-      vertex 65 65 6
+      vertex 30 60 10.8
+      vertex 70 62 10.8
+      vertex 30 62 10.8
     endloop
   endfacet
-  facet normal 0 -1 0
+
+  # --- ELECTRICAL CONTACT PADS (Corner Terminals) ---
+  # Pad 1 (Left-Center)
+  facet normal 0 0 1
     outer loop
-      vertex 35 35 5.5
-      vertex 65 35 5.5
-      vertex 65 35 6
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 35 35 5.5
-      vertex 65 35 6
-      vertex 35 35 6
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 35 65 5.5
-      vertex 65 65 6
-      vertex 65 65 5.5
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 35 65 5.5
-      vertex 35 65 6
-      vertex 65 65 6
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 35 35 5.5
-      vertex 35 65 5.5
-      vertex 35 65 6
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 35 35 5.5
-      vertex 35 65 6
-      vertex 35 35 6
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 65 35 5.5
-      vertex 65 65 6
-      vertex 65 65 5.5
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 65 35 5.5
-      vertex 65 35 6
-      vertex 65 65 6
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 5 45 0
-      vertex 10 45 0
-      vertex 10 55 0
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 5 45 0
-      vertex 10 55 0
-      vertex 5 55 0
+      vertex 2 45 11
+      vertex 8 55 11
+      vertex 8 45 11
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 5 45 5
-      vertex 10 55 5
-      vertex 10 45 5
+      vertex 2 45 11
+      vertex 2 55 11
+      vertex 8 55 11
+    endloop
+  endfacet
+  # Pad 2 (Right-Center)
+  facet normal 0 0 1
+    outer loop
+      vertex 92 45 11
+      vertex 98 55 11
+      vertex 98 45 11
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 5 45 5
-      vertex 5 55 5
-      vertex 10 55 5
+      vertex 92 45 11
+      vertex 92 55 11
+      vertex 98 55 11
     endloop
   endfacet
-  facet normal 0 -1 0
+
+  # --- CONNECTING TRACES (Wiring from Pad to Electrodes) ---
+  facet normal 0 0 1
     outer loop
-      vertex 5 45 0
-      vertex 10 45 0
-      vertex 10 45 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 5 45 0
-      vertex 10 45 5
-      vertex 5 45 5
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 5 55 0
-      vertex 10 55 5
-      vertex 10 55 0
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 5 55 0
-      vertex 5 55 5
-      vertex 10 55 5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 5 45 0
-      vertex 5 55 0
-      vertex 5 55 5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 5 45 0
-      vertex 5 55 5
-      vertex 5 45 5
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 10 45 0
-      vertex 10 55 5
-      vertex 10 55 0
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 10 45 0
-      vertex 10 45 5
-      vertex 10 55 5
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 90 45 0
-      vertex 95 45 0
-      vertex 95 55 0
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 90 45 0
-      vertex 95 55 0
-      vertex 90 55 0
+      vertex 8 49 10.7
+      vertex 30 49 10.7
+      vertex 30 51 10.7
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 90 45 5
-      vertex 95 55 5
-      vertex 95 45 5
+      vertex 8 49 10.7
+      vertex 30 51 10.7
+      vertex 8 51 10.7
     endloop
   endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 90 45 5
-      vertex 90 55 5
-      vertex 95 55 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 90 45 0
-      vertex 95 45 0
-      vertex 95 45 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 90 45 0
-      vertex 95 45 5
-      vertex 90 45 5
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 90 55 0
-      vertex 95 55 5
-      vertex 95 55 0
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 90 55 0
-      vertex 90 55 5
-      vertex 95 55 5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 90 45 0
-      vertex 90 55 0
-      vertex 90 55 5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 90 45 0
-      vertex 90 55 5
-      vertex 90 45 5
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 95 45 0
-      vertex 95 55 5
-      vertex 95 55 0
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 95 45 0
-      vertex 95 45 5
-      vertex 95 55 5
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 45 5 0
-      vertex 55 5 0
-      vertex 55 10 0
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 45 5 0
-      vertex 55 10 0
-      vertex 45 10 0
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 45 5 5
-      vertex 55 10 5
-      vertex 55 5 5
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 45 5 5
-      vertex 45 10 5
-      vertex 55 10 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 45 5 0
-      vertex 55 5 0
-      vertex 55 5 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 45 5 0
-      vertex 55 5 5
-      vertex 45 5 5
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 45 10 0
-      vertex 55 10 5
-      vertex 55 10 0
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 45 10 0
-      vertex 45 10 5
-      vertex 55 10 5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 45 5 0
-      vertex 45 10 0
-      vertex 45 10 5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 45 5 0
-      vertex 45 10 5
-      vertex 45 5 5
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 55 5 0
-      vertex 55 10 5
-      vertex 55 10 0
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 55 5 0
-      vertex 55 5 5
-      vertex 55 10 5
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 45 90 0
-      vertex 55 90 0
-      vertex 55 95 0
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 45 90 0
-      vertex 55 95 0
-      vertex 45 95 0
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 45 90 5
-      vertex 55 95 5
-      vertex 55 90 5
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 45 90 5
-      vertex 45 95 5
-      vertex 55 95 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 45 90 0
-      vertex 55 90 0
-      vertex 55 90 5
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 45 90 0
-      vertex 55 90 5
-      vertex 45 90 5
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 45 95 0
-      vertex 55 95 5
-      vertex 55 95 0
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 45 95 0
-      vertex 45 95 5
-      vertex 55 95 5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 45 90 0
-      vertex 45 95 0
-      vertex 45 95 5
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 45 90 0
-      vertex 45 95 5
-      vertex 45 90 5
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 55 90 0
-      vertex 55 95 5
-      vertex 55 95 0
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 55 90 0
-      vertex 55 90 5
-      vertex 55 95 5
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 42 42 6
-      vertex 58 42 6
-      vertex 58 58 6
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 42 42 6
-      vertex 58 58 6
-      vertex 42 58 6
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 42 42 8
-      vertex 58 58 8
-      vertex 58 42 8
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 42 42 8
-      vertex 42 58 8
-      vertex 58 58 8
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 42 42 6
-      vertex 58 42 6
-      vertex 58 42 8
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 42 42 6
-      vertex 58 42 8
-      vertex 42 42 8
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 42 58 6
-      vertex 58 58 8
-      vertex 58 58 6
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 42 58 6
-      vertex 42 58 8
-      vertex 58 58 8
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 42 42 6
-      vertex 42 58 6
-      vertex 42 58 8
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 42 42 6
-      vertex 42 58 8
-      vertex 42 42 8
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 58 42 6
-      vertex 58 58 8
-      vertex 58 58 6
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 58 42 6
-      vertex 58 42 8
-      vertex 58 58 8
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 46 46 8
-      vertex 54 46 8
-      vertex 54 54 8
-    endloop
-  endfacet
-  facet normal 0 0 -1
-    outer loop
-      vertex 46 46 8
-      vertex 54 54 8
-      vertex 46 54 8
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 46 46 9
-      vertex 54 54 9
-      vertex 54 46 9
-    endloop
-  endfacet
-  facet normal 0 0 1
-    outer loop
-      vertex 46 46 9
-      vertex 46 54 9
-      vertex 54 54 9
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 46 46 8
-      vertex 54 46 8
-      vertex 54 46 9
-    endloop
-  endfacet
-  facet normal 0 -1 0
-    outer loop
-      vertex 46 46 8
-      vertex 54 46 9
-      vertex 46 46 9
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 46 54 8
-      vertex 54 54 9
-      vertex 54 54 8
-    endloop
-  endfacet
-  facet normal 0 1 0
-    outer loop
-      vertex 46 54 8
-      vertex 46 54 9
-      vertex 54 54 9
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 46 46 8
-      vertex 46 54 8
-      vertex 46 54 9
-    endloop
-  endfacet
-  facet normal -1 0 0
-    outer loop
-      vertex 46 46 8
-      vertex 46 54 9
-      vertex 46 46 9
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 54 46 8
-      vertex 54 54 9
-      vertex 54 54 8
-    endloop
-  endfacet
-  facet normal 1 0 0
-    outer loop
-      vertex 54 46 8
-      vertex 54 46 9
-      vertex 54 54 9
-    endloop
-  endfacet
-endsolid MembraneSensor
+endsolid AdvancedMembraneSensor
