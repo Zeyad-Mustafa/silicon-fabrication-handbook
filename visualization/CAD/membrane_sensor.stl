@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Camera, RotateCcw, Maximize2, ZoomIn, ZoomOut } from 'lucide-react';
+import { Camera, RotateCcw, Maximize2, ZoomIn, ZoomOut, Grid3x3, Box, Eye, EyeOff } from 'lucide-react';
+import * as THREE from 'three';
 
 const MembraneSensorViewer = () => {
   const containerRef = useRef(null);
@@ -7,6 +8,7 @@ const MembraneSensorViewer = () => {
   const rendererRef = useRef(null);
   const cameraRef = useRef(null);
   const meshRef = useRef(null);
+  const controlsRef = useRef(null);
   const frameRef = useRef(null);
   
   const [isRotating, setIsRotating] = useState(true);
@@ -14,14 +16,25 @@ const MembraneSensorViewer = () => {
   const [showEdges, setShowEdges] = useState(true);
   const [explodedView, setExplodedView] = useState(false);
   const [viewMode, setViewMode] = useState('solid');
+  const [showGrid, setShowGrid] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(150);
 
+  // Initialize client-side flag
   useEffect(() => {
-    if (!containerRef.current) return;
+    setIsClient(true);
+  }, []);
 
+  // Initialize 3D scene
+  useEffect(() => {
+    if (!isClient || !containerRef.current) return;
+
+    // Create scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x0a0a0a);
     sceneRef.current = scene;
 
+    // Create camera
     const camera = new THREE.PerspectiveCamera(
       50,
       containerRef.current.clientWidth / containerRef.current.clientHeight,
@@ -32,9 +45,14 @@ const MembraneSensorViewer = () => {
     camera.lookAt(50, 50, 4);
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // Create renderer
+    const renderer = new THREE.WebGLRenderer({ 
+      antialias: true, 
+      alpha: true,
+      powerPreference: "high-performance"
+    });
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     containerRef.current.appendChild(renderer.domElement);
@@ -819,6 +837,7 @@ const MembraneSensorViewer = () => {
   endfacet
 endsolid MembraneSensor`;
 
+    // Parse STL geometry
     const geometry = new THREE.BufferGeometry();
     const vertices = [];
     const normals = [];
@@ -848,7 +867,7 @@ endsolid MembraneSensor`;
     geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
     geometry.computeBoundingSphere();
 
-    // Create group for main mesh
+    // Create main mesh group
     const group = new THREE.Group();
     
     const material = new THREE.MeshPhysicalMaterial({
@@ -890,6 +909,7 @@ endsolid MembraneSensor`;
     // Grid helper
     const gridHelper = new THREE.GridHelper(200, 20, 0x444444, 0x222222);
     gridHelper.position.y = -10;
+    gridHelper.visible = showGrid;
     scene.add(gridHelper);
 
     // Mouse controls
@@ -900,7 +920,9 @@ endsolid MembraneSensor`;
 
     const onMouseDown = (e) => {
       isDragging = true;
+      setIsRotating(false);
       prevMouse = { x: e.clientX, y: e.clientY };
+      renderer.domElement.style.cursor = 'grabbing';
     };
 
     const onMouseMove = (e) => {
@@ -914,14 +936,17 @@ endsolid MembraneSensor`;
 
     const onMouseUp = () => {
       isDragging = false;
+      renderer.domElement.style.cursor = 'grab';
     };
 
     const onWheel = (e) => {
       e.preventDefault();
       camera.position.z += e.deltaY * 0.1;
       camera.position.z = Math.max(50, Math.min(300, camera.position.z));
+      setZoomLevel(camera.position.z);
     };
 
+    renderer.domElement.style.cursor = 'grab';
     renderer.domElement.addEventListener('mousedown', onMouseDown);
     renderer.domElement.addEventListener('mousemove', onMouseMove);
     renderer.domElement.addEventListener('mouseup', onMouseUp);
@@ -949,7 +974,7 @@ endsolid MembraneSensor`;
 
     // Handle resize
     const handleResize = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !camera || !renderer) return;
       camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
@@ -958,55 +983,203 @@ endsolid MembraneSensor`;
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      renderer.domElement.removeEventListener('mousedown', onMouseDown);
-      renderer.domElement.removeEventListener('mousemove', onMouseMove);
-      renderer.domElement.removeEventListener('mouseup', onMouseUp);
-      renderer.domElement.removeEventListener('wheel', onWheel);
+      if (renderer && renderer.domElement) {
+        renderer.domElement.removeEventListener('mousedown', onMouseDown);
+        renderer.domElement.removeEventListener('mousemove', onMouseMove);
+        renderer.domElement.removeEventListener('mouseup', onMouseUp);
+        renderer.domElement.removeEventListener('wheel', onWheel);
+      }
       cancelAnimationFrame(frameRef.current);
-      renderer.dispose();
-      geometry.dispose();
-      material.dispose();
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);      }
+      if (renderer) {
+        renderer.dispose();
+      }
+      if (geometry) {
+        geometry.dispose();
+      }
+      if (material) {
+        material.dispose();
+      }
+      if (edgeMaterial) {
+        edgeMaterial.dispose();
+      }
+      if (edges) {
+        edges.dispose();
+      }
+      if (containerRef.current && renderer && renderer.domElement) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
     };
-  }, [isRotating, showEdges]);
+  }, [isClient, isRotating, showEdges, showGrid, wireframe, viewMode, explodedView]);
 
+  // Control functions
   const toggleRotation = () => setIsRotating(v => !v);
+  
   const resetView = () => {
     if (!meshRef.current) return;
     meshRef.current.rotation.set(0.3, 0.4, 0);
+    if (cameraRef.current) {
+      cameraRef.current.position.set(150, 120, 150);
+      setZoomLevel(150);
+    }
   };
 
   const zoomIn = () => {
     if (!cameraRef.current) return;
     cameraRef.current.position.z = Math.max(50, cameraRef.current.position.z - 20);
+    setZoomLevel(cameraRef.current.position.z);
   };
 
   const zoomOut = () => {
     if (!cameraRef.current) return;
     cameraRef.current.position.z = Math.min(300, cameraRef.current.position.z + 20);
+    setZoomLevel(cameraRef.current.position.z);
   };
 
+  const toggleGrid = () => setShowGrid(v => !v);
+  
+  const toggleWireframe = () => {
+    setWireframe(v => !v);
+    if (meshRef.current && meshRef.current.children[0]) {
+      meshRef.current.children[0].material.wireframe = !wireframe;
+    }
+  };
+
+  const toggleEdges = () => setShowEdges(v => !v);
+
+  const toggleViewMode = () => {
+    const modes = ['solid', 'wireframe', 'transparent'];
+    const currentIndex = modes.indexOf(viewMode);
+    const nextIndex = (currentIndex + 1) % modes.length;
+    setViewMode(modes[nextIndex]);
+    
+    if (meshRef.current && meshRef.current.children[0]) {
+      const material = meshRef.current.children[0].material;
+      switch (modes[nextIndex]) {
+        case 'solid':
+          material.opacity = 0.95;
+          material.transparent = false;
+          material.wireframe = false;
+          break;
+        case 'wireframe':
+          material.opacity = 1;
+          material.transparent = false;
+          material.wireframe = true;
+          break;
+        case 'transparent':
+          material.opacity = 0.3;
+          material.transparent = true;
+          material.wireframe = false;
+          break;
+      }
+    }
+  };
+
+  if (!isClient) {
+    return (
+      <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-black rounded-xl overflow-hidden flex items-center justify-center">
+        <div className="text-white text-lg">Initializing 3D viewer...</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="relative w-full h-full bg-black rounded-xl overflow-hidden">
+    <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-black rounded-xl overflow-hidden">
       <div ref={containerRef} className="w-full h-full" />
-
-      <div className="absolute top-3 left-3 flex gap-2">
-        <button onClick={toggleRotation} className="p-2 bg-gray-900 text-white rounded">
-          <Camera size={18} />
+      
+      {/* Top controls */}
+      <div className="absolute top-4 left-4 flex flex-col gap-2">
+        <button 
+          onClick={toggleRotation}
+          className={`p-3 rounded-lg flex items-center justify-center transition-all ${isRotating ? 'bg-blue-600 text-white' : 'bg-gray-900/80 text-gray-300 hover:bg-gray-800'}`}
+          title={isRotating ? 'Stop Rotation' : 'Start Rotation'}
+        >
+          <Camera size={20} />
         </button>
 
-        <button onClick={resetView} className="p-2 bg-gray-900 text-white rounded">
-          <RotateCcw size={18} />
+        <button 
+          onClick={resetView}
+          className="p-3 bg-gray-900/80 text-gray-300 rounded-lg hover:bg-gray-800 transition-all"
+          title="Reset View"
+        >
+          <RotateCcw size={20} />
         </button>
 
-        <button onClick={zoomIn} className="p-2 bg-gray-900 text-white rounded">
-          <ZoomIn size={18} />
+        <button 
+          onClick={toggleGrid}
+          className={`p-3 rounded-lg flex items-center justify-center transition-all ${showGrid ? 'bg-green-600 text-white' : 'bg-gray-900/80 text-gray-300 hover:bg-gray-800'}`}
+          title={showGrid ? 'Hide Grid' : 'Show Grid'}
+        >
+          <Grid3x3 size={20} />
         </button>
 
-        <button onClick={zoomOut} className="p-2 bg-gray-900 text-white rounded">
-          <ZoomOut size={18} />
+        <button 
+          onClick={toggleViewMode}
+          className="p-3 bg-gray-900/80 text-gray-300 rounded-lg hover:bg-gray-800 transition-all"
+          title="Change View Mode"
+        >
+          <Eye size={20} />
         </button>
+      </div>
+
+      {/* Right controls */}
+      <div className="absolute top-4 right-4 flex flex-col gap-2">
+        <button 
+          onClick={zoomIn}
+          className="p-3 bg-gray-900/80 text-gray-300 rounded-lg hover:bg-gray-800 transition-all"
+          title="Zoom In"
+        >
+          <ZoomIn size={20} />
+        </button>
+
+        <button 
+          onClick={zoomOut}
+          className="p-3 bg-gray-900/80 text-gray-300 rounded-lg hover:bg-gray-800 transition-all"
+          title="Zoom Out"
+        >
+          <ZoomOut size={20} />
+        </button>
+
+        <button 
+          onClick={toggleEdges}
+          className={`p-3 rounded-lg flex items-center justify-center transition-all ${showEdges ? 'bg-cyan-600 text-white' : 'bg-gray-900/80 text-gray-300 hover:bg-gray-800'}`}
+          title={showEdges ? 'Hide Edges' : 'Show Edges'}
+        >
+          <Box size={20} />
+        </button>
+
+        <button 
+          onClick={toggleWireframe}
+          className={`p-3 rounded-lg flex items-center justify-center transition-all ${wireframe ? 'bg-purple-600 text-white' : 'bg-gray-900/80 text-gray-300 hover:bg-gray-800'}`}
+          title={wireframe ? 'Hide Wireframe' : 'Show Wireframe'}
+        >
+          <Maximize2 size={20} />
+        </button>
+      </div>
+
+      {/* Bottom status bar */}
+      <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
+        <div className="px-4 py-2 bg-gray-900/80 text-gray-300 rounded-lg backdrop-blur-sm">
+          <span className="font-medium">Membrane Sensor</span>
+          <span className="mx-2">•</span>
+          <span className="text-sm">Zoom: {Math.round((300 - zoomLevel) / 250 * 100)}%</span>
+        </div>
+        
+        <div className="flex gap-2">
+          <div className={`px-3 py-1 rounded-full text-sm ${isRotating ? 'bg-blue-500/20 text-blue-300' : 'bg-gray-800/50 text-gray-400'}`}>
+            {isRotating ? 'Rotating' : 'Static'}
+          </div>
+          <div className={`px-3 py-1 rounded-full text-sm ${showEdges ? 'bg-cyan-500/20 text-cyan-300' : 'bg-gray-800/50 text-gray-400'}`}>
+            Edges {showEdges ? 'On' : 'Off'}
+          </div>
+          <div className={`px-3 py-1 rounded-full text-sm ${viewMode === 'solid' ? 'bg-green-500/20 text-green-300' : viewMode === 'wireframe' ? 'bg-purple-500/20 text-purple-300' : 'bg-blue-500/20 text-blue-300'}`}>
+            {viewMode.charAt(0).toUpperCase() + viewMode.slice(1)}
+          </div>
+        </div>
+      </div>
+
+      {/* Instructions */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-gray-900/60 text-gray-300 text-sm rounded-lg backdrop-blur-sm">
+        Click and drag to rotate • Scroll to zoom
       </div>
     </div>
   );
