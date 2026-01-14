@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Camera, RotateCcw, Maximize2, ZoomIn, ZoomOut, Grid3x3, Box } from 'lucide-react';
+import { Camera, RotateCcw, Maximize2, ZoomIn, ZoomOut } from 'lucide-react';
 
 const MembraneSensorViewer = () => {
   const containerRef = useRef(null);
@@ -12,6 +12,7 @@ const MembraneSensorViewer = () => {
   const [isRotating, setIsRotating] = useState(true);
   const [wireframe, setWireframe] = useState(false);
   const [showEdges, setShowEdges] = useState(true);
+  const [explodedView, setExplodedView] = useState(false);
   const [viewMode, setViewMode] = useState('solid');
 
   useEffect(() => {
@@ -39,6 +40,7 @@ const MembraneSensorViewer = () => {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
+    // Enhanced lighting setup
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
@@ -57,6 +59,7 @@ const MembraneSensorViewer = () => {
     backLight.position.set(0, -50, -100);
     scene.add(backLight);
 
+    // Parse STL data
     const stlData = `solid MembraneSensor
   facet normal 0 0 -1
     outer loop
@@ -845,6 +848,7 @@ endsolid MembraneSensor`;
     geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
     geometry.computeBoundingSphere();
 
+    // Create group for main mesh
     const group = new THREE.Group();
     
     const material = new THREE.MeshPhysicalMaterial({
@@ -863,16 +867,19 @@ endsolid MembraneSensor`;
     mesh.receiveShadow = true;
     group.add(mesh);
 
+    // Add edge lines
     const edges = new THREE.EdgesGeometry(geometry);
     const edgeMaterial = new THREE.LineBasicMaterial({ 
       color: 0x00ffff,
       transparent: true,
-      opacity: 0.4
+      opacity: 0.4,
+      linewidth: 1
     });
     const edgeLines = new THREE.LineSegments(edges, edgeMaterial);
     edgeLines.visible = showEdges;
     group.add(edgeLines);
 
+    // Center the model
     const box = new THREE.Box3().setFromObject(group);
     const center = box.getCenter(new THREE.Vector3());
     group.position.sub(center);
@@ -880,10 +887,12 @@ endsolid MembraneSensor`;
     scene.add(group);
     meshRef.current = group;
 
+    // Grid helper
     const gridHelper = new THREE.GridHelper(200, 20, 0x444444, 0x222222);
     gridHelper.position.y = -10;
     scene.add(gridHelper);
 
+    // Mouse controls
     let isDragging = false;
     let prevMouse = { x: 0, y: 0 };
     let targetRotation = { x: 0.3, y: 0.4 };
@@ -918,6 +927,7 @@ endsolid MembraneSensor`;
     renderer.domElement.addEventListener('mouseup', onMouseUp);
     renderer.domElement.addEventListener('wheel', onWheel);
 
+    // Animation loop
     const animate = () => {
       frameRef.current = requestAnimationFrame(animate);
 
@@ -937,6 +947,7 @@ endsolid MembraneSensor`;
     };
     animate();
 
+    // Handle resize
     const handleResize = () => {
       if (!containerRef.current) return;
       camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
@@ -951,27 +962,54 @@ endsolid MembraneSensor`;
       renderer.domElement.removeEventListener('mousemove', onMouseMove);
       renderer.domElement.removeEventListener('mouseup', onMouseUp);
       renderer.domElement.removeEventListener('wheel', onWheel);
-      if (frameRef.current) {
-        cancelAnimationFrame(frameRef.current);
-      }
+      cancelAnimationFrame(frameRef.current);
       renderer.dispose();
       geometry.dispose();
       material.dispose();
-      if (containerRef.current && renderer.domElement && containerRef.current.contains(renderer.domElement)) {
-        containerRef.current.removeChild(renderer.domElement);
-      }
+      if (containerRef.current && renderer.domElement) {
+        containerRef.current.removeChild(renderer.domElement);      }
     };
-  }, []);
+  }, [isRotating, showEdges]);
 
-  useEffect(() => {
+  const toggleRotation = () => setIsRotating(v => !v);
+  const resetView = () => {
     if (!meshRef.current) return;
-    const mesh = meshRef.current.children[0];
-    if (wireframe) {
-      mesh.material.wireframe = true;
-    } else {
-      mesh.material.wireframe = false;
-    }
-  }, [wireframe]);
+    meshRef.current.rotation.set(0.3, 0.4, 0);
+  };
 
-  useEffect(() => {
-    if (!meshRef.current)
+  const zoomIn = () => {
+    if (!cameraRef.current) return;
+    cameraRef.current.position.z = Math.max(50, cameraRef.current.position.z - 20);
+  };
+
+  const zoomOut = () => {
+    if (!cameraRef.current) return;
+    cameraRef.current.position.z = Math.min(300, cameraRef.current.position.z + 20);
+  };
+
+  return (
+    <div className="relative w-full h-full bg-black rounded-xl overflow-hidden">
+      <div ref={containerRef} className="w-full h-full" />
+
+      <div className="absolute top-3 left-3 flex gap-2">
+        <button onClick={toggleRotation} className="p-2 bg-gray-900 text-white rounded">
+          <Camera size={18} />
+        </button>
+
+        <button onClick={resetView} className="p-2 bg-gray-900 text-white rounded">
+          <RotateCcw size={18} />
+        </button>
+
+        <button onClick={zoomIn} className="p-2 bg-gray-900 text-white rounded">
+          <ZoomIn size={18} />
+        </button>
+
+        <button onClick={zoomOut} className="p-2 bg-gray-900 text-white rounded">
+          <ZoomOut size={18} />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default MembraneSensorViewer;
