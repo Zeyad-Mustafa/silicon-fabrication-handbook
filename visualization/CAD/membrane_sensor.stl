@@ -1,4 +1,63 @@
-solid MembraneSensor
+import React, { useEffect, useRef, useState } from 'react';
+import { Camera, RotateCcw, Maximize2, ZoomIn, ZoomOut, Grid3x3, Box } from 'lucide-react';
+
+const MembraneSensorViewer = () => {
+  const containerRef = useRef(null);
+  const sceneRef = useRef(null);
+  const rendererRef = useRef(null);
+  const cameraRef = useRef(null);
+  const meshRef = useRef(null);
+  const frameRef = useRef(null);
+  
+  const [isRotating, setIsRotating] = useState(true);
+  const [wireframe, setWireframe] = useState(false);
+  const [showEdges, setShowEdges] = useState(true);
+  const [viewMode, setViewMode] = useState('solid');
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a0a);
+    sceneRef.current = scene;
+
+    const camera = new THREE.PerspectiveCamera(
+      50,
+      containerRef.current.clientWidth / containerRef.current.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.set(150, 120, 150);
+    camera.lookAt(50, 50, 4);
+    cameraRef.current = camera;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    containerRef.current.appendChild(renderer.domElement);
+    rendererRef.current = renderer;
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    scene.add(ambientLight);
+
+    const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    mainLight.position.set(100, 150, 100);
+    mainLight.castShadow = true;
+    mainLight.shadow.mapSize.width = 2048;
+    mainLight.shadow.mapSize.height = 2048;
+    scene.add(mainLight);
+
+    const fillLight = new THREE.DirectionalLight(0x4a9eff, 0.3);
+    fillLight.position.set(-100, 50, -100);
+    scene.add(fillLight);
+
+    const backLight = new THREE.DirectionalLight(0xff6b9d, 0.2);
+    backLight.position.set(0, -50, -100);
+    scene.add(backLight);
+
+    const stlData = `solid MembraneSensor
   facet normal 0 0 -1
     outer loop
       vertex 0 0 0
@@ -755,4 +814,164 @@ solid MembraneSensor
       vertex 54 54 9
     endloop
   endfacet
-endsolid MembraneSensor
+endsolid MembraneSensor`;
+
+    const geometry = new THREE.BufferGeometry();
+    const vertices = [];
+    const normals = [];
+
+    const lines = stlData.split('\n');
+    let currentNormal = null;
+    let currentVertices = [];
+
+    for (let line of lines) {
+      line = line.trim();
+      if (line.startsWith('facet normal')) {
+        const parts = line.split(/\s+/);
+        currentNormal = [parseFloat(parts[2]), parseFloat(parts[3]), parseFloat(parts[4])];
+      } else if (line.startsWith('vertex')) {
+        const parts = line.split(/\s+/);
+        currentVertices.push(parseFloat(parts[1]), parseFloat(parts[2]), parseFloat(parts[3]));
+      } else if (line.startsWith('endfacet')) {
+        for (let i = 0; i < currentVertices.length; i += 3) {
+          vertices.push(currentVertices[i], currentVertices[i + 1], currentVertices[i + 2]);
+          normals.push(currentNormal[0], currentNormal[1], currentNormal[2]);
+        }
+        currentVertices = [];
+      }
+    }
+
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+    geometry.computeBoundingSphere();
+
+    const group = new THREE.Group();
+    
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 0x3b82f6,
+      metalness: 0.3,
+      roughness: 0.4,
+      clearcoat: 0.8,
+      clearcoatRoughness: 0.2,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.95
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    group.add(mesh);
+
+    const edges = new THREE.EdgesGeometry(geometry);
+    const edgeMaterial = new THREE.LineBasicMaterial({ 
+      color: 0x00ffff,
+      transparent: true,
+      opacity: 0.4
+    });
+    const edgeLines = new THREE.LineSegments(edges, edgeMaterial);
+    edgeLines.visible = showEdges;
+    group.add(edgeLines);
+
+    const box = new THREE.Box3().setFromObject(group);
+    const center = box.getCenter(new THREE.Vector3());
+    group.position.sub(center);
+
+    scene.add(group);
+    meshRef.current = group;
+
+    const gridHelper = new THREE.GridHelper(200, 20, 0x444444, 0x222222);
+    gridHelper.position.y = -10;
+    scene.add(gridHelper);
+
+    let isDragging = false;
+    let prevMouse = { x: 0, y: 0 };
+    let targetRotation = { x: 0.3, y: 0.4 };
+    let currentRotation = { x: 0.3, y: 0.4 };
+
+    const onMouseDown = (e) => {
+      isDragging = true;
+      prevMouse = { x: e.clientX, y: e.clientY };
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - prevMouse.x;
+      const dy = e.clientY - prevMouse.y;
+      targetRotation.y += dx * 0.005;
+      targetRotation.x += dy * 0.005;
+      prevMouse = { x: e.clientX, y: e.clientY };
+    };
+
+    const onMouseUp = () => {
+      isDragging = false;
+    };
+
+    const onWheel = (e) => {
+      e.preventDefault();
+      camera.position.z += e.deltaY * 0.1;
+      camera.position.z = Math.max(50, Math.min(300, camera.position.z));
+    };
+
+    renderer.domElement.addEventListener('mousedown', onMouseDown);
+    renderer.domElement.addEventListener('mousemove', onMouseMove);
+    renderer.domElement.addEventListener('mouseup', onMouseUp);
+    renderer.domElement.addEventListener('wheel', onWheel);
+
+    const animate = () => {
+      frameRef.current = requestAnimationFrame(animate);
+
+      if (isRotating && !isDragging) {
+        targetRotation.y += 0.003;
+      }
+
+      currentRotation.x += (targetRotation.x - currentRotation.x) * 0.1;
+      currentRotation.y += (targetRotation.y - currentRotation.y) * 0.1;
+
+      if (meshRef.current) {
+        meshRef.current.rotation.x = currentRotation.x;
+        meshRef.current.rotation.y = currentRotation.y;
+      }
+
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    const handleResize = () => {
+      if (!containerRef.current) return;
+      camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      renderer.domElement.removeEventListener('mousedown', onMouseDown);
+      renderer.domElement.removeEventListener('mousemove', onMouseMove);
+      renderer.domElement.removeEventListener('mouseup', onMouseUp);
+      renderer.domElement.removeEventListener('wheel', onWheel);
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+      renderer.dispose();
+      geometry.dispose();
+      material.dispose();
+      if (containerRef.current && renderer.domElement && containerRef.current.contains(renderer.domElement)) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!meshRef.current) return;
+    const mesh = meshRef.current.children[0];
+    if (wireframe) {
+      mesh.material.wireframe = true;
+    } else {
+      mesh.material.wireframe = false;
+    }
+  }, [wireframe]);
+
+  useEffect(() => {
+    if (!meshRef.current)
