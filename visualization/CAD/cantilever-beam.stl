@@ -1,0 +1,384 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { RotateCcw, Eye, Layers, Grid3x3 } from 'lucide-react';
+
+const CantileverBeamViewer = () => {
+  const containerRef = useRef(null);
+  const sceneRef = useRef(null);
+  const rendererRef = useRef(null);
+  const cameraRef = useRef(null);
+  const beamRef = useRef(null);
+  const frameRef = useRef(null);
+  
+  const [isRotating, setIsRotating] = useState(true);
+  const [showWireframe, setShowWireframe] = useState(false);
+  const [showEdges, setShowEdges] = useState(true);
+  const [colorScheme, setColorScheme] = useState('gradient');
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    // Scene setup
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0f0f1a);
+    sceneRef.current = scene;
+
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      containerRef.current.clientWidth / containerRef.current.clientHeight,
+      0.1,
+      2000
+    );
+    camera.position.set(300, 200, 300);
+    camera.lookAt(0, 0, 0);
+    cameraRef.current = camera;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    containerRef.current.appendChild(renderer.domElement);
+    rendererRef.current = renderer;
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const mainLight = new THREE.DirectionalLight(0xffffff, 1);
+    mainLight.position.set(200, 300, 200);
+    mainLight.castShadow = true;
+    mainLight.shadow.mapSize.width = 2048;
+    mainLight.shadow.mapSize.height = 2048;
+    scene.add(mainLight);
+
+    const fillLight = new THREE.DirectionalLight(0x6ba3ff, 0.4);
+    fillLight.position.set(-150, 100, -150);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xff6bba, 0.3);
+    rimLight.position.set(0, -100, -200);
+    scene.add(rimLight);
+
+    // Create cantilever beam geometry
+    const beamGroup = new THREE.Group();
+    
+    // Main beam (longer horizontal section)
+    const mainBeamGeom = new THREE.BoxGeometry(200, 20, 40);
+    const mainBeamMat = new THREE.MeshPhysicalMaterial({
+      color: 0x4a90e2,
+      metalness: 0.6,
+      roughness: 0.3,
+      clearcoat: 0.5,
+      clearcoatRoughness: 0.3
+    });
+    const mainBeam = new THREE.Mesh(mainBeamGeom, mainBeamMat);
+    mainBeam.position.set(0, 0, 0);
+    mainBeam.castShadow = true;
+    mainBeam.receiveShadow = true;
+    beamGroup.add(mainBeam);
+
+    // Fixed support (wall mount)
+    const supportGeom = new THREE.BoxGeometry(15, 60, 50);
+    const supportMat = new THREE.MeshPhysicalMaterial({
+      color: 0x2c3e50,
+      metalness: 0.8,
+      roughness: 0.2
+    });
+    const support = new THREE.Mesh(supportGeom, supportMat);
+    support.position.set(-107.5, 0, 0);
+    support.castShadow = true;
+    support.receiveShadow = true;
+    beamGroup.add(support);
+
+    // Mounting bolts
+    for (let i = 0; i < 4; i++) {
+      const boltGeom = new THREE.CylinderGeometry(3, 3, 18, 16);
+      const boltMat = new THREE.MeshStandardMaterial({
+        color: 0x95a5a6,
+        metalness: 0.9,
+        roughness: 0.1
+      });
+      const bolt = new THREE.Mesh(boltGeom, boltMat);
+      bolt.rotation.z = Math.PI / 2;
+      const yPos = i < 2 ? 20 : -20;
+      const zPos = i % 2 === 0 ? 15 : -15;
+      bolt.position.set(-100, yPos, zPos);
+      bolt.castShadow = true;
+      beamGroup.add(bolt);
+    }
+
+    // Load indicator (weight at free end)
+    const loadGeom = new THREE.BoxGeometry(25, 25, 35);
+    const loadMat = new THREE.MeshPhysicalMaterial({
+      color: 0xe74c3c,
+      metalness: 0.4,
+      roughness: 0.5,
+      clearcoat: 0.7
+    });
+    const load = new THREE.Mesh(loadGeom, loadMat);
+    load.position.set(100, -20, 0);
+    load.castShadow = true;
+    load.receiveShadow = true;
+    beamGroup.add(load);
+
+    // Strain gauges (small rectangles on beam surface)
+    for (let i = 0; i < 3; i++) {
+      const gaugeGeom = new THREE.BoxGeometry(15, 0.5, 8);
+      const gaugeMat = new THREE.MeshStandardMaterial({
+        color: 0xf39c12,
+        emissive: 0xf39c12,
+        emissiveIntensity: 0.3
+      });
+      const gauge = new THREE.Mesh(gaugeGeom, gaugeMat);
+      gauge.position.set(-50 + i * 50, 10.5, 0);
+      beamGroup.add(gauge);
+    }
+
+    // Edge lines for better definition
+    const edgesMaterial = new THREE.LineBasicMaterial({ 
+      color: 0x00d9ff,
+      transparent: true,
+      opacity: 0.6
+    });
+    
+    [mainBeam, support, load].forEach(mesh => {
+      const edges = new THREE.EdgesGeometry(mesh.geometry);
+      const edgeLines = new THREE.LineSegments(edges, edgesMaterial);
+      edgeLines.position.copy(mesh.position);
+      edgeLines.visible = showEdges;
+      beamGroup.add(edgeLines);
+    });
+
+    scene.add(beamGroup);
+    beamRef.current = beamGroup;
+
+    // Grid and axes
+    const gridHelper = new THREE.GridHelper(400, 40, 0x444466, 0x222233);
+    gridHelper.position.y = -50;
+    scene.add(gridHelper);
+
+    const axesHelper = new THREE.AxesHelper(150);
+    axesHelper.position.y = -49;
+    scene.add(axesHelper);
+
+    // Mouse interaction
+    let isDragging = false;
+    let prevMouse = { x: 0, y: 0 };
+    let targetRotation = { x: 0.2, y: 0.5 };
+    let currentRotation = { x: 0.2, y: 0.5 };
+
+    const onMouseDown = (e) => {
+      isDragging = true;
+      prevMouse = { x: e.clientX, y: e.clientY };
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - prevMouse.x;
+      const dy = e.clientY - prevMouse.y;
+      targetRotation.y += dx * 0.006;
+      targetRotation.x += dy * 0.006;
+      targetRotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, targetRotation.x));
+      prevMouse = { x: e.clientX, y: e.clientY };
+    };
+
+    const onMouseUp = () => {
+      isDragging = false;
+    };
+
+    const onWheel = (e) => {
+      e.preventDefault();
+      const factor = e.deltaY > 0 ? 1.1 : 0.9;
+      camera.position.multiplyScalar(factor);
+      camera.position.x = Math.max(-500, Math.min(500, camera.position.x));
+      camera.position.y = Math.max(50, Math.min(500, camera.position.y));
+      camera.position.z = Math.max(-500, Math.min(500, camera.position.z));
+    };
+
+    renderer.domElement.addEventListener('mousedown', onMouseDown);
+    renderer.domElement.addEventListener('mousemove', onMouseMove);
+    renderer.domElement.addEventListener('mouseup', onMouseUp);
+    renderer.domElement.addEventListener('wheel', onWheel);
+
+    // Animation
+    const animate = () => {
+      frameRef.current = requestAnimationFrame(animate);
+
+      if (isRotating && !isDragging) {
+        targetRotation.y += 0.002;
+      }
+
+      currentRotation.x += (targetRotation.x - currentRotation.x) * 0.08;
+      currentRotation.y += (targetRotation.y - currentRotation.y) * 0.08;
+
+      if (beamRef.current) {
+        beamRef.current.rotation.x = currentRotation.x;
+        beamRef.current.rotation.y = currentRotation.y;
+      }
+
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    const handleResize = () => {
+      if (!containerRef.current) return;
+      camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      renderer.domElement.removeEventListener('mousedown', onMouseDown);
+      renderer.domElement.removeEventListener('mousemove', onMouseMove);
+      renderer.domElement.removeEventListener('mouseup', onMouseUp);
+      renderer.domElement.removeEventListener('wheel', onWheel);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      renderer.dispose();
+      if (containerRef.current && renderer.domElement && containerRef.current.contains(renderer.domElement)) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
+    };
+  }, [isRotating, showEdges]);
+
+  useEffect(() => {
+    if (!beamRef.current) return;
+    beamRef.current.children.forEach(child => {
+      if (child.material && child.material.wireframe !== undefined) {
+        child.material.wireframe = showWireframe;
+      }
+    });
+  }, [showWireframe]);
+
+  useEffect(() => {
+    if (!beamRef.current) return;
+    const colors = {
+      gradient: { main: 0x4a90e2, support: 0x2c3e50, load: 0xe74c3c },
+      blue: { main: 0x2196f3, support: 0x1976d2, load: 0x0d47a1 },
+      green: { main: 0x4caf50, support: 0x388e3c, load: 0x1b5e20 },
+      purple: { main: 0x9c27b0, support: 0x7b1fa2, load: 0x4a148c }
+    };
+    const scheme = colors[colorScheme];
+    beamRef.current.children.forEach((child, idx) => {
+      if (child.material && child.material.color) {
+        if (idx === 0) child.material.color.setHex(scheme.main);
+        else if (idx === 1) child.material.color.setHex(scheme.support);
+        else if (idx === 6) child.material.color.setHex(scheme.load);
+      }
+    });
+  }, [colorScheme]);
+
+  const resetView = () => {
+    if (cameraRef.current) {
+      cameraRef.current.position.set(300, 200, 300);
+      cameraRef.current.lookAt(0, 0, 0);
+    }
+  };
+
+  return (
+    <div className="w-full h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex flex-col">
+      <div className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 px-6 py-4">
+        <h1 className="text-2xl font-bold text-white mb-1">Cantilever Beam Sensor</h1>
+        <p className="text-sm text-slate-300">Interactive 3D model with strain gauges and load cell</p>
+      </div>
+
+      <div className="flex-1 relative" ref={containerRef} />
+
+      <div className="absolute top-24 right-6 bg-slate-800/90 backdrop-blur-md rounded-lg shadow-2xl p-4 space-y-3 border border-slate-700">
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-slate-300 font-medium">Auto Rotate</span>
+          <button
+            onClick={() => setIsRotating(!isRotating)}
+            className={`w-12 h-6 rounded-full transition-colors ${
+              isRotating ? 'bg-blue-500' : 'bg-slate-600'
+            }`}
+          >
+            <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
+              isRotating ? 'translate-x-6' : 'translate-x-1'
+            }`} />
+          </button>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-slate-300 font-medium">Wireframe</span>
+          <button
+            onClick={() => setShowWireframe(!showWireframe)}
+            className={`w-12 h-6 rounded-full transition-colors ${
+              showWireframe ? 'bg-blue-500' : 'bg-slate-600'
+            }`}
+          >
+            <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
+              showWireframe ? 'translate-x-6' : 'translate-x-1'
+            }`} />
+          </button>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-slate-300 font-medium">Edge Lines</span>
+          <button
+            onClick={() => setShowEdges(!showEdges)}
+            className={`w-12 h-6 rounded-full transition-colors ${
+              showEdges ? 'bg-blue-500' : 'bg-slate-600'
+            }`}
+          >
+            <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
+              showEdges ? 'translate-x-6' : 'translate-x-1'
+            }`} />
+          </button>
+        </div>
+
+        <div className="border-t border-slate-600 pt-3">
+          <span className="text-sm text-slate-300 font-medium block mb-2">Color Scheme</span>
+          <div className="grid grid-cols-2 gap-2">
+            {['gradient', 'blue', 'green', 'purple'].map(scheme => (
+              <button
+                key={scheme}
+                onClick={() => setColorScheme(scheme)}
+                className={`px-3 py-1.5 rounded text-xs font-medium transition-all ${
+                  colorScheme === scheme
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                }`}
+              >
+                {scheme.charAt(0).toUpperCase() + scheme.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button
+          onClick={resetView}
+          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors font-medium text-sm"
+        >
+          <RotateCcw size={16} />
+          Reset View
+        </button>
+      </div>
+
+      <div className="absolute bottom-6 left-6 bg-slate-800/90 backdrop-blur-md rounded-lg shadow-2xl p-4 border border-slate-700">
+        <h3 className="text-sm font-semibold text-white mb-2">Components</h3>
+        <div className="space-y-1.5 text-xs text-slate-300">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-blue-500 rounded"></div>
+            <span>Main Cantilever Beam</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-slate-600 rounded"></div>
+            <span>Fixed Support Mount</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-red-500 rounded"></div>
+            <span>Load Cell</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-yellow-500 rounded"></div>
+            <span>Strain Gauges (3x)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CantileverBeamViewer;
