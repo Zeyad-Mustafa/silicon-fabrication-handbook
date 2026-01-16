@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { RotateCcw, Eye, Layers, Grid3x3 } from 'lucide-react';
+import * as THREE from 'three';
 
 const CantileverBeamViewer = () => {
   const containerRef = useRef(null);
