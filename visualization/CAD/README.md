@@ -166,7 +166,7 @@ f = f₀ / √(1 + M/(0.24×m_beam))
 
 ---
 
-## 🖥️ Software Compatibility
+## Software Compatibility
 
 ### Viewing STEP Files
 
@@ -242,7 +242,7 @@ These STEP/STL files can be imported into:
 
 ---
 
-## 🛠️ Creating MEMS CAD Models
+## Creating MEMS CAD Models
 
 ### Method 1: Using FreeCAD (Free)
 
@@ -382,7 +382,7 @@ write_stl_file(beam, "cantilever-beam.stl")
 
 ---
 
-## 🔬 Design Guidelines
+## Design Guidelines
 
 ### General MEMS CAD Best Practices
 
@@ -429,7 +429,7 @@ write_stl_file(beam, "cantilever-beam.stl")
 
 ---
 
-## 📊 Using Models for Analysis
+## Using Models for Analysis
 
 ### Finite Element Analysis (FEA)
 
@@ -496,7 +496,7 @@ model.sol('sol1').run;
 
 ---
 
-## 📈 Validation Data
+## Validation Data
 
 ### Comb Drive Actuator
 
@@ -532,7 +532,7 @@ model.sol('sol1').run;
 
 ---
 
-## 🔗 Related Resources
+## Related Resources
 
 ### MEMS Design Tools
 
@@ -566,7 +566,7 @@ model.sol('sol1').run;
 
 ---
 
-## 🎨 Interactive 3D Viewers
+## Interactive 3D Viewers
 
 This repository includes interactive web-based 3D viewers for STL files:
 
@@ -592,7 +592,7 @@ This repository includes interactive web-based 3D viewers for STL files:
 
 ---
 
-## 📦 Contributing
+## Contributing
 
 ### Adding New CAD Models
 
@@ -629,7 +629,7 @@ Before submitting:
 
 ---
 
-## 📄 File Format Details
+## File Format Details
 
 ### STEP (Standard for Exchange of Product Data)
 
@@ -641,11 +641,11 @@ Before submitting:
 - AP214: Automotive design (most common)
 
 **Advantages**:
-- ✅ Universal CAD format
-- ✅ Preserves exact geometry
-- ✅ Supports assemblies
-- ✅ Includes metadata
-- ✅ Text-based (version control friendly)
+- Universal CAD format
+- Preserves exact geometry
+- Supports assemblies
+- Includes metadata
+- Text-based (version control friendly)
 
 **File Structure**:
 ```
@@ -669,11 +669,11 @@ END-ISO-10303-21;
 **Type**: ASCII or Binary
 
 **Advantages**:
-- ✅ Simple format, widely supported
-- ✅ Perfect for 3D printing
-- ✅ Fast rendering in web browsers
-- ✅ Lightweight (binary format)
-- ✅ Good for visualization
+- Simple format, widely supported
+- Perfect for 3D printing
+- Fast rendering in web browsers
+- Lightweight (binary format)
+- Good for visualization
 
 **Limitations**:
 - ❌ No parametric information
