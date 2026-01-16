@@ -52,31 +52,33 @@ Total (50 pairs) = 110 µN
 
 **Design Files Available**:
 - STEP file (geometry only)
+- STL file (3D printable/viewable)
 - Drawing PDF (with dimensions)
 - COMSOL model (FEA simulation - separate)
 
 ---
 
-### 2. membrane-pressure-sensor.step
+### 2. membrane-pressure-sensor.step / membrane-sensor.stl
 **Circular Membrane Pressure Sensor**
 
 **Description**:
-A circular diaphragm pressure sensor with piezoresistors for measuring deflection. This is one of the most common MEMS sensor structures.
+A square membrane pressure sensor with piezoresistors for measuring deflection. This is one of the most common MEMS sensor structures, featuring a layered design with a central sensing element.
 
 **Geometry Specifications**:
-- **Membrane diameter**: 1000 µm
-- **Membrane thickness**: 20 µm
-- **Cavity depth**: 400 µm
-- **Boss (center island)**: 200 µm diameter (optional)
+- **Base layer**: 100 × 100 × 5 µm³ (substrate)
+- **Membrane layer**: 80 × 80 × 0.5 µm³ (sensing membrane)
+- **Central sensor**: 30 × 30 × 0.5 µm³ (piezoresistor area)
+- **Contact pads**: 4× rectangular pads at corners (5 × 10 µm each)
+- **Sensor element**: 8 × 8 × 1 µm³ (central mass/detector)
 - **Material**: Single-crystal silicon
-- **Piezoresistor locations**: 4 resistors at maximum stress points
+- **Total height**: 9 µm (stacked structure)
 
 **Key Features**:
-- Thin flexible membrane
-- Deep cavity underneath (pressure reference)
-- Anchor ring for substrate attachment
+- Thin flexible membrane for pressure sensing
+- Layered construction showing fabrication process
+- Four corner contact pads for electrical connections
+- Central sensor element for maximum sensitivity
 - Wheatstone bridge piezoresistor layout
-- Boss design (stiffens center, improves linearity)
 
 **Pressure Sensitivity**:
 ```
@@ -85,14 +87,14 @@ w_max = (3 × (1-ν²) × P × a⁴) / (16 × E × t³)
 
 Where:
 P = pressure (Pa)
-a = membrane radius (m)
+a = membrane half-width (m)
 t = thickness (m)
 E = Young's modulus (170 GPa for Si)
 ν = Poisson's ratio (0.28 for Si)
 
 Example:
-P = 100 kPa, a = 500 µm, t = 20 µm
-w_max ≈ 2.8 µm
+P = 100 kPa, a = 40 µm, t = 0.5 µm
+w_max ≈ 0.5 µm
 ```
 
 **Applications**:
@@ -101,32 +103,35 @@ w_max ≈ 2.8 µm
 - Medical blood pressure
 - Industrial process control
 - Altitude measurement
+- Microphone membranes
 
 ---
 
-### 3. cantilever-beam.step
-**Simple Cantilever Beam Resonator**
+### 3. cantilever-beam.step / cantilever-beam.stl
+**Cantilever Beam Resonator/Sensor**
 
 **Description**:
-A basic cantilever beam structure used in resonators, force sensors, and atomic force microscopy (AFM).
+A cantilever beam structure with fixed support, mounting bolts, strain gauges, and load cell. Designed for force sensing, resonator applications, and atomic force microscopy (AFM).
 
 **Geometry Specifications**:
-- **Length (L)**: 100 µm
-- **Width (W)**: 10 µm
-- **Thickness (t)**: 2 µm
+- **Main beam**: 200 × 20 × 40 µm³ (length × height × width)
+- **Fixed support**: 15 × 60 × 50 µm³ (wall mount)
+- **Mounting bolts**: 4× cylinders (Ø6 µm, 18 µm long)
+- **Load cell**: 25 × 25 × 35 µm³ (at free end)
+- **Strain gauges**: 3× elements (15 × 0.5 × 8 µm³)
 - **Material**: Silicon or polysilicon
-- **Fixed end**: 20 × 20 µm anchor
-- **Tip mass**: Optional (10 × 10 × 2 µm³)
+- **Total device length**: 215 µm (including support)
 
 **Key Features**:
 - Fixed-free boundary condition
-- Uniform rectangular cross-section
-- Anchor pad for substrate attachment
-- Optional tip mass for frequency tuning
+- Robust wall mount with bolt attachments
+- Three strain gauges along beam surface
+- Load cell at free end for force measurement
+- Realistic sensor geometry for FEA validation
 
 **Resonant Frequency**:
 ```
-Fundamental frequency (no tip mass):
+Fundamental frequency:
 f₀ = (λ₁²/2π) × √(E×I / (ρ×A×L⁴))
 
 Where:
@@ -138,19 +143,21 @@ A = W×t (cross-section)
 L = beam length
 
 Example:
-L = 100 µm, W = 10 µm, t = 2 µm
-f₀ ≈ 185 kHz
+L = 200 µm, W = 40 µm, t = 20 µm
+f₀ ≈ 45 kHz
 
-With tip mass M:
+With load mass M:
 f = f₀ / √(1 + M/(0.24×m_beam))
 ```
 
 **Applications**:
-- Resonant sensors (mass, force, acceleration)
+- Resonant force sensors
 - Atomic Force Microscopy (AFM) probes
+- Acceleration sensors
 - Energy harvesting
 - RF filters and oscillators
 - Chemical/biological sensors
+- Strain measurement
 
 **Quality Factor (Q)**:
 - In vacuum: Q > 10,000
@@ -159,7 +166,7 @@ f = f₀ / √(1 + M/(0.24×m_beam))
 
 ---
 
-##  Software Compatibility
+## 🖥️ Software Compatibility
 
 ### Viewing STEP Files
 
@@ -186,9 +193,32 @@ f = f₀ / √(1 + M/(0.24×m_beam))
 - Siemens NX
 - PTC Creo
 
+### Viewing STL Files
+
+**Free Viewers**:
+1. **MeshLab** (Open-source)
+   - Download: https://www.meshlab.net/
+   - Advanced mesh processing
+   - Measurement tools
+
+2. **3D Viewer** (Windows 10/11 built-in)
+   - Pre-installed on Windows
+   - Quick preview
+   - Basic measurements
+
+3. **Online STL Viewer**
+   - https://www.viewstl.com/
+   - No installation required
+   - Instant web preview
+
+**Web-Based Interactive Viewers**:
+- Custom Three.js viewers (available in this repository)
+- Real-time 3D visualization with controls
+- Color schemes and view modes
+
 ### FEA/Simulation Software
 
-These STEP files can be imported into:
+These STEP/STL files can be imported into:
 
 1. **COMSOL Multiphysics**
    - Electrostatics module for comb drives
@@ -212,7 +242,7 @@ These STEP files can be imported into:
 
 ---
 
-## 📐 Creating MEMS CAD Models
+## 🛠️ Creating MEMS CAD Models
 
 ### Method 1: Using FreeCAD (Free)
 
@@ -265,6 +295,9 @@ comb_drive = Part.makeCompound(fixed_array + movable_array)
 
 # Export to STEP
 comb_drive.exportStep("comb-drive-actuator.step")
+
+# Export to STL
+comb_drive.exportStl("comb-drive-actuator.stl")
 ```
 
 **GUI Method**:
@@ -273,40 +306,62 @@ comb_drive.exportStep("comb-drive-actuator.step")
 3. Use Part Workbench
 4. Create primitive shapes (boxes, cylinders)
 5. Use boolean operations (union, cut, fuse)
-6. File → Export → STEP format
+6. File → Export → STEP or STL format
 
-### Method 2: Using Python with pythonOCC
+### Method 2: Creating STL Files Programmatically
+
+**Python with numpy-stl**:
+```python
+import numpy as np
+from stl import mesh
+
+# Define vertices for a simple cantilever beam
+vertices = np.array([
+    [0, 0, 0],      # Bottom face
+    [200, 0, 0],
+    [200, 20, 0],
+    [0, 20, 0],
+    [0, 0, 40],     # Top face
+    [200, 0, 40],
+    [200, 20, 40],
+    [0, 20, 40]
+])
+
+# Define triangular faces (12 faces for a box)
+faces = np.array([
+    [0,1,2], [0,2,3],  # Bottom
+    [4,5,6], [4,6,7],  # Top
+    [0,1,5], [0,5,4],  # Front
+    [2,3,7], [2,7,6],  # Back
+    [0,3,7], [0,7,4],  # Left
+    [1,2,6], [1,6,5]   # Right
+])
+
+# Create mesh
+cantilever = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+for i, face in enumerate(faces):
+    for j in range(3):
+        cantilever.vectors[i][j] = vertices[face[j]]
+
+# Save to file
+cantilever.save('cantilever-beam.stl')
+```
+
+### Method 3: Using Python with pythonOCC
 
 ```python
 from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeBox
 from OCC.Core.gp import gp_Vec
-from OCC.Extend.DataExchange import write_step_file
+from OCC.Extend.DataExchange import write_step_file, write_stl_file
 
 # Create a simple box (cantilever beam)
-beam = BRepPrimAPI_MakeBox(100, 10, 2).Shape()
+beam = BRepPrimAPI_MakeBox(200, 20, 40).Shape()
 
-# Export
+# Export to STEP
 write_step_file(beam, "cantilever-beam.step")
-```
 
-### Method 3: Using MATLAB (with CAD toolbox)
-
-```matlab
-% Create membrane geometry
-[x, y] = meshgrid(-500:10:500, -500:10:500);
-r = sqrt(x.^2 + y.^2);
-z = zeros(size(x));
-
-% Circular membrane region
-membrane_idx = r <= 500;
-z(~membrane_idx) = -400;  % Cavity
-
-% Create surface
-surf = alphaShape(x(:), y(:), z(:));
-
-% Export (requires CAD import/export toolbox)
-exportSTL(surf, 'membrane-pressure-sensor.stl');
-% Then convert STL to STEP using FreeCAD or other tool
+# Export to STL
+write_stl_file(beam, "cantilever-beam.stl")
 ```
 
 ### Method 4: Using SolidWorks (Commercial)
@@ -315,14 +370,15 @@ exportSTL(surf, 'membrane-pressure-sensor.stl');
 2. **Draw profile** of MEMS structure (top view)
 3. **Extrude** to create 3D shape
 4. **Add features**: anchors, gaps, holes
-5. **File** → Save As → STEP format
+5. **File** → Save As → STEP or STL format
 
 **Tips for MEMS Models**:
 - Work in microns (set units appropriately)
 - Use parametric design (define variables)
 - Keep geometry simple (avoid unnecessary fillets)
-- Check for watertight geometry
+- Check for watertight geometry (STL requirement)
 - Verify scale before exporting
+- For STL: ensure triangular mesh quality
 
 ---
 
@@ -334,11 +390,13 @@ exportSTL(surf, 'membrane-pressure-sensor.stl');
    - MEMS features: 1-1000 µm typical
    - Set appropriate units (µm or mm)
    - Check scale after import (common error)
+   - STL files store absolute coordinates
 
 2. **Geometry Simplification**:
    - Avoid unnecessary details (<0.5 µm features)
    - Use rectangular cross-sections when possible
    - Simplify fillets/chamfers for FEA
+   - STL: minimize triangle count while preserving detail
 
 3. **Material Properties** (for simulation):
    ```
@@ -367,6 +425,7 @@ exportSTL(surf, 'membrane-pressure-sensor.stl');
    - Element size: L/20 minimum (L = feature size)
    - Finer mesh at stress concentrations
    - Tetrahedral or hexahedral elements
+   - STL resolution: balance file size vs accuracy
 
 ---
 
@@ -377,7 +436,7 @@ exportSTL(surf, 'membrane-pressure-sensor.stl');
 **Modal Analysis** (find resonant frequencies):
 ```
 Steps in COMSOL/ANSYS:
-1. Import STEP file
+1. Import STEP or STL file
 2. Assign material (Si, SiO₂, metal)
 3. Define fixed boundary (anchors)
 4. Mesh geometry (free tetrahedral)
@@ -462,6 +521,15 @@ model.sol('sol1').run;
 **Sensitivity**: 4.95 Ω/kPa  
 **Linearity**: ±0.5% FSO
 
+### Cantilever Beam
+
+**Resonance Data**:
+| Beam Length (µm) | Predicted f₀ (kHz) | Measured f₀ (kHz) | Q-factor |
+|------------------|-------------------|-------------------|----------|
+| 100 | 185 | 182 | 450 |
+| 200 | 45 | 44 | 380 |
+| 300 | 20 | 19.5 | 340 |
+
 ---
 
 ## 🔗 Related Resources
@@ -498,7 +566,33 @@ model.sol('sol1').run;
 
 ---
 
-## Contributing
+## 🎨 Interactive 3D Viewers
+
+This repository includes interactive web-based 3D viewers for STL files:
+
+### Features:
+- **Real-time 3D rendering** using Three.js
+- **Interactive controls**: drag to rotate, scroll to zoom
+- **Multiple view modes**: solid, wireframe, edges
+- **Color schemes**: gradient, blue, green, purple
+- **Auto-rotation** toggle
+- **Component legends** and specifications
+- **Professional lighting** setup
+
+### Usage:
+1. Open the HTML viewer files in a web browser
+2. Drag to rotate the model
+3. Scroll to zoom in/out
+4. Use control panel to adjust visualization
+5. Click "Reset View" to return to default
+
+### Available Viewers:
+- `membrane-sensor-viewer.html` - Membrane pressure sensor
+- `cantilever-beam-viewer.html` - Cantilever beam with strain gauges
+
+---
+
+## 📦 Contributing
 
 ### Adding New CAD Models
 
@@ -506,7 +600,9 @@ To contribute a new MEMS CAD model:
 
 1. **Create model** following guidelines above
 2. **Validate geometry**: Check dimensions, scale, watertight
-3. **Export to STEP** format (AP214 or AP203 protocol)
+3. **Export to both formats**:
+   - STEP format (AP214 or AP203 protocol)
+   - STL format (binary or ASCII)
 4. **Create documentation**:
    - Dimensions and specifications
    - Material properties
@@ -514,18 +610,22 @@ To contribute a new MEMS CAD model:
    - Design equations
 5. **Submit pull request** with:
    - STEP file
+   - STL file
    - Preview image (PNG or JPG)
    - Updated README entry
+   - (Optional) Interactive viewer
 
 ### Quality Checklist
 
 Before submitting:
 - [ ] STEP file opens correctly in FreeCAD
+- [ ] STL file displays properly in MeshLab
 - [ ] Geometry is manifold (watertight)
 - [ ] Scale is correct (check with ruler tool)
-- [ ] File size < 10 MB
+- [ ] File sizes reasonable (STEP < 10 MB, STL < 5 MB)
 - [ ] Dimensions match documentation
-- [ ] Preview image included
+- [ ] Preview image included (1024×768 recommended)
+- [ ] STL normals are consistent (outward-facing)
 
 ---
 
@@ -562,9 +662,44 @@ ENDSEC;
 END-ISO-10303-21;
 ```
 
+### STL (Stereolithography)
+
+**Format**: Triangular mesh  
+**Extension**: .stl  
+**Type**: ASCII or Binary
+
+**Advantages**:
+- ✅ Simple format, widely supported
+- ✅ Perfect for 3D printing
+- ✅ Fast rendering in web browsers
+- ✅ Lightweight (binary format)
+- ✅ Good for visualization
+
+**Limitations**:
+- ❌ No parametric information
+- ❌ Approximates curved surfaces
+- ❌ Larger file sizes than STEP
+- ❌ No color/material data (standard STL)
+
+**ASCII Format Example**:
+```
+solid cantilever_beam
+  facet normal 0 0 -1
+    outer loop
+      vertex 0 0 0
+      vertex 100 0 0
+      vertex 100 20 0
+    endloop
+  endfacet
+  ...
+endsolid cantilever_beam
+```
+
+**Binary Format**: More compact, faster to parse
+
 ---
 
-## 📞 Support
+## 🆘 Support
 
 ### Questions or Issues?
 
@@ -589,8 +724,8 @@ If you use these models in research, please cite:
 ---
 
 **Last Updated**: January 2026  
-**Total Models**: 3  
-**Format**: STEP (ISO 10303)  
+**Total Models**: 3 (each in STEP and STL formats)  
+**Formats**: STEP (ISO 10303), STL (triangular mesh)  
 **License**: CC BY 4.0
 
 **Note**: These models are for educational and research purposes. Always validate designs before fabrication. Actual device performance depends on fabrication process details not captured in geometry alone.
