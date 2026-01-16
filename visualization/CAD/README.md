@@ -676,10 +676,10 @@ END-ISO-10303-21;
 - Good for visualization
 
 **Limitations**:
-- ❌ No parametric information
-- ❌ Approximates curved surfaces
-- ❌ Larger file sizes than STEP
-- ❌ No color/material data (standard STL)
+- No parametric information
+- Approximates curved surfaces
+- Larger file sizes than STEP
+- No color/material data (standard STL)
 
 **ASCII Format Example**:
 ```
@@ -699,7 +699,7 @@ endsolid cantilever_beam
 
 ---
 
-## 🆘 Support
+## Support
 
 ### Questions or Issues?
 
