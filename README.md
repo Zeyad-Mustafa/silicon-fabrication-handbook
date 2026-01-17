@@ -118,6 +118,10 @@ For a complete breakdown of repository structure, see [PROJECT_STRUCTURE.md](PRO
 
 ---
 
+## Generated Figures
+
+Plots produced by the simulation scripts are stored in `images/`. See [images/README.md](images/README.md) for previews and short descriptions.
+
 ##    Quick Start
 
 ### 1. Clone the Repository
