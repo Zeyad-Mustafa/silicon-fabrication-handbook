@@ -14,12 +14,16 @@ Physical processes modeled:
 
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from matplotlib.animation import FuncAnimation
 from matplotlib.patches import Rectangle
 from dataclasses import dataclass
 from typing import List, Tuple, Optional
 from enum import Enum
 import matplotlib.patches as mpatches
+
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "images"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 class Material(Enum):
@@ -672,9 +676,10 @@ if __name__ == "__main__":
     print("="*60)
     
     fig = process.run_full_process(animation=False)
-    plt.savefig('damascene_process_complete.png', dpi=150, bbox_inches='tight')
+    output_path = OUTPUT_DIR / "damascene_process_complete.png"
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
     print("\n" + "="*60)
     print("Simulation Complete!")
-    print("Output saved to: damascene_process_complete.png")
+    print(f"Output saved to: {output_path}")
     print("="*60)
     plt.show()

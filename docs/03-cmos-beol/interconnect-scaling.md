@@ -255,7 +255,7 @@ python interconnect-scaling.py
 
 **Output**: 
 - Console table with numerical values
-- `interconnect_scaling.png` (2×2 panel figure, 300 DPI)
+- `images/interconnect_scaling.png` (2×2 panel figure, 300 DPI)
 
 ###  Figure Analysis
 
@@ -369,8 +369,7 @@ This panel clearly quantifies the **scaling crisis**:
 
 **Related Files**:
 - `interconnect-scaling.py` - Python simulation code
-- `interconnect_scaling.png` - Generated visualization
+- `images/interconnect_scaling.png` - Generated visualization
 ---
 
 **Last Updated**: December 2024
-

@@ -6,8 +6,12 @@ https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook
 
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from scipy import integrate
 from scipy.constants import epsilon_0
+
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "images"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 class MembranePressureSensor:
     """
@@ -199,7 +203,8 @@ def simulate_pressure_response():
     print(f"  Sensitivity: {sensitivity*1e15:.2f} fF/Pa")
     
     plt.tight_layout()
-    plt.savefig('membrane_sensor_response.png', dpi=150)
+    output_path = OUTPUT_DIR / "membrane_sensor_response.png"
+    plt.savefig(output_path, dpi=150)
     plt.show()
     
     return sensor, pressures_kpa, capacitances_pf, deflections_nm

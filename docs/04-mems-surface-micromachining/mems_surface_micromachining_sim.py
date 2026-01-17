@@ -18,12 +18,16 @@ License: MIT
 
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from scipy.integrate import odeint
 from scipy.optimize import fsolve
 from dataclasses import dataclass
 from typing import Tuple, Dict, List
 import warnings
 warnings.filterwarnings('ignore')
+
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "images"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Physical Constants
 K_B = 1.381e-23  # Boltzmann constant (J/K)
@@ -486,8 +490,9 @@ def design_space_exploration():
     axes[1, 1].grid(True, alpha=0.3)
     
     plt.tight_layout()
-    plt.savefig('mems_design_space.png', dpi=300, bbox_inches='tight')
-    print("\n✓ Design space exploration plot saved as 'mems_design_space.png'")
+    output_path = OUTPUT_DIR / "mems_design_space.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    print(f"\n✓ Design space exploration plot saved as '{output_path}'")
     
     return fig
 
@@ -541,8 +546,9 @@ def analyze_release_process():
     ax.legend()
     
     plt.tight_layout()
-    plt.savefig('release_optimization.png', dpi=300, bbox_inches='tight')
-    print("\n✓ Release optimization plot saved as 'release_optimization.png'")
+    output_path = OUTPUT_DIR / "release_optimization.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    print(f"\n✓ Release optimization plot saved as '{output_path}'")
     
     return fig
 
@@ -611,8 +617,9 @@ def simulate_cantilever_dynamics():
     axes[1].grid(True, alpha=0.3)
     
     plt.tight_layout()
-    plt.savefig('cantilever_dynamics.png', dpi=300, bbox_inches='tight')
-    print("\n✓ Dynamics plot saved as 'cantilever_dynamics.png'")
+    output_path = OUTPUT_DIR / "cantilever_dynamics.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    print(f"\n✓ Dynamics plot saved as '{output_path}'")
     
     return fig
 
@@ -687,8 +694,9 @@ def stiction_analysis():
     ax.set_ylim(0, 3)
     
     plt.tight_layout()
-    plt.savefig('stiction_analysis.png', dpi=300, bbox_inches='tight')
-    print("\n✓ Stiction analysis plot saved as 'stiction_analysis.png'")
+    output_path = OUTPUT_DIR / "stiction_analysis.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    print(f"\n✓ Stiction analysis plot saved as '{output_path}'")
     
     return fig
 
@@ -764,8 +772,9 @@ def simulate_process_flow():
     ax.set_xticks([])
     
     plt.tight_layout()
-    plt.savefig('process_flow_stack.png', dpi=300, bbox_inches='tight')
-    print("\n✓ Process stack visualization saved as 'process_flow_stack.png'")
+    output_path = OUTPUT_DIR / "process_flow_stack.png"
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    print(f"\n✓ Process stack visualization saved as '{output_path}'")
     
     return fig
 
@@ -798,11 +807,11 @@ def main():
         print("SIMULATION COMPLETE!")
         print("=" * 70)
         print("\nGenerated files:")
-        print("  1. mems_design_space.png - Design parameter exploration")
-        print("  2. release_optimization.png - Sacrificial layer release")
-        print("  3. cantilever_dynamics.png - Frequency and phase response")
-        print("  4. stiction_analysis.png - Adhesion risk assessment")
-        print("  5. process_flow_stack.png - Multi-layer process visualization")
+        print(f"  1. {OUTPUT_DIR / 'mems_design_space.png'} - Design parameter exploration")
+        print(f"  2. {OUTPUT_DIR / 'release_optimization.png'} - Sacrificial layer release")
+        print(f"  3. {OUTPUT_DIR / 'cantilever_dynamics.png'} - Frequency and phase response")
+        print(f"  4. {OUTPUT_DIR / 'stiction_analysis.png'} - Adhesion risk assessment")
+        print(f"  5. {OUTPUT_DIR / 'process_flow_stack.png'} - Multi-layer process visualization")
         print("\nAll simulations completed successfully!")
         print("\nFor more information, visit:")
         print("https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook")

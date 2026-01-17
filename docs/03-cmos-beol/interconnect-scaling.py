@@ -1,5 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
+
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "images"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 class InterconnectModel:
     """Model interconnect scaling behavior across technology nodes"""
@@ -104,7 +108,8 @@ class InterconnectModel:
         axes[1, 1].invert_xaxis()
         
         plt.tight_layout()
-        plt.savefig('interconnect_scaling.png', dpi=300, bbox_inches='tight')
+        output_path = OUTPUT_DIR / "interconnect_scaling.png"
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
         plt.show()
         
         # Print summary

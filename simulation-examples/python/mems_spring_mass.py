@@ -13,8 +13,12 @@ License: MIT
 
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from scipy import signal
 from scipy.integrate import odeint
+
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "images"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Physical constants
 RHO_SI = 2329  # Silicon density [kg/m³]
@@ -311,14 +315,18 @@ if __name__ == "__main__":
     fig3 = plot_shock_response(accel)
     
     # Save figures
-    fig1.savefig('frequency_response.png', dpi=300, bbox_inches='tight')
-    fig2.savefig('step_response.png', dpi=300, bbox_inches='tight')
-    fig3.savefig('shock_response.png', dpi=300, bbox_inches='tight')
+    output_frequency = OUTPUT_DIR / "frequency_response.png"
+    output_step = OUTPUT_DIR / "step_response.png"
+    output_shock = OUTPUT_DIR / "shock_response.png"
+
+    fig1.savefig(output_frequency, dpi=300, bbox_inches='tight')
+    fig2.savefig(output_step, dpi=300, bbox_inches='tight')
+    fig3.savefig(output_shock, dpi=300, bbox_inches='tight')
     
     print("\n✓ Plots saved successfully!")
-    print("  - frequency_response.png")
-    print("  - step_response.png")
-    print("  - shock_response.png")
+    print(f"  - {output_frequency}")
+    print(f"  - {output_step}")
+    print(f"  - {output_shock}")
     
     # Display plots
     plt.show()
@@ -350,7 +358,8 @@ def compare_designs():
     plt.title('Comparison of Accelerometer Designs', fontsize=14, fontweight='bold')
     plt.legend(fontsize=10)
     plt.tight_layout()
-    plt.savefig('design_comparison.png', dpi=300, bbox_inches='tight')
+    output_comparison = OUTPUT_DIR / "design_comparison.png"
+    plt.savefig(output_comparison, dpi=300, bbox_inches='tight')
     plt.show()
 
 

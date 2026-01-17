@@ -17,9 +17,13 @@ License: MIT
 
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from dataclasses import dataclass
 from typing import Tuple, List
 import warnings
+
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "images"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Physical constants
 K_BOLTZMANN = 8.617e-5  # eV/K
@@ -781,16 +785,19 @@ def main():
         try:
             # 1. Generate and save plots to files (so you can find them)
             fig1 = plot_resistivity_scaling(sim)
-            fig1.savefig('resistivity_scaling.png', dpi=300, bbox_inches='tight')
-            print("  [OK] Resistivity scaling plot saved to resistivity_scaling.png")
+            output_resistivity = OUTPUT_DIR / "resistivity_scaling.png"
+            fig1.savefig(output_resistivity, dpi=300, bbox_inches='tight')
+            print(f"  [OK] Resistivity scaling plot saved to {output_resistivity}")
             
             fig2 = plot_rc_delay_comparison(sim)
-            fig2.savefig('rc_delay_comparison.png', dpi=300, bbox_inches='tight')
-            print("  [OK] RC delay comparison plot saved to rc_delay_comparison.png")
+            output_rc = OUTPUT_DIR / "rc_delay_comparison.png"
+            fig2.savefig(output_rc, dpi=300, bbox_inches='tight')
+            print(f"  [OK] RC delay comparison plot saved to {output_rc}")
             
             fig3 = plot_em_lifetime(sim)
-            fig3.savefig('em_lifetime.png', dpi=300, bbox_inches='tight')
-            print("  [OK] Electromigration lifetime plot saved to em_lifetime.png")
+            output_em = OUTPUT_DIR / "em_lifetime.png"
+            fig3.savefig(output_em, dpi=300, bbox_inches='tight')
+            print(f"  [OK] Electromigration lifetime plot saved to {output_em}")
             
             # 2. Call plt.show() to display the figures in a pop-up window
             # This is the command that will open the figure windows on your local machine.

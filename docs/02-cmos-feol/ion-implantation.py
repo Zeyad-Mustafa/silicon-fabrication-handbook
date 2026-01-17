@@ -18,6 +18,7 @@ License: MIT
 
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from scipy import special, optimize
 from dataclasses import dataclass
 from typing import Tuple, List
@@ -26,6 +27,9 @@ from typing import Tuple, List
 Q_E = 1.602e-19  # Elementary charge [C]
 K_B = 1.381e-23  # Boltzmann constant [J/K]
 N_SI = 5.0e22    # Silicon atomic density [atoms/cm³]
+
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "images"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 @dataclass
 class IonSpecies:
@@ -531,18 +535,24 @@ if __name__ == "__main__":
     # Save figures
     print("\n" + "="*70)
     print("Saving figures...")
-    fig1.savefig('ion_implant_species_comparison.png', dpi=300, bbox_inches='tight')
-    fig2.savefig('ion_implant_energy_comparison.png', dpi=300, bbox_inches='tight')
-    fig3.savefig('ion_implant_anneal_effects.png', dpi=300, bbox_inches='tight')
-    fig4.savefig('nmos_implant_stack.png', dpi=300, bbox_inches='tight')
-    fig5.savefig('pmos_implant_stack.png', dpi=300, bbox_inches='tight')
+    output_species = OUTPUT_DIR / "ion_implant_species_comparison.png"
+    output_energy = OUTPUT_DIR / "ion_implant_energy_comparison.png"
+    output_anneal = OUTPUT_DIR / "ion_implant_anneal_effects.png"
+    output_nmos = OUTPUT_DIR / "nmos_implant_stack.png"
+    output_pmos = OUTPUT_DIR / "pmos_implant_stack.png"
+
+    fig1.savefig(output_species, dpi=300, bbox_inches='tight')
+    fig2.savefig(output_energy, dpi=300, bbox_inches='tight')
+    fig3.savefig(output_anneal, dpi=300, bbox_inches='tight')
+    fig4.savefig(output_nmos, dpi=300, bbox_inches='tight')
+    fig5.savefig(output_pmos, dpi=300, bbox_inches='tight')
     
     print("\n✓ Figures saved successfully!")
-    print("  - ion_implant_species_comparison.png")
-    print("  - ion_implant_energy_comparison.png")
-    print("  - ion_implant_anneal_effects.png")
-    print("  - nmos_implant_stack.png")
-    print("  - pmos_implant_stack.png")
+    print(f"  - {output_species}")
+    print(f"  - {output_energy}")
+    print(f"  - {output_anneal}")
+    print(f"  - {output_nmos}")
+    print(f"  - {output_pmos}")
     
     print("\n" + "="*70)
     print("Simulation complete!")
