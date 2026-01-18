@@ -90,17 +90,17 @@ These notes combine academic knowledge with real-world industry insights from bo
 - [Failure Analysis](docs/07-testing-yield/failure-analysis.md) - SEM, FIB, root cause analysis
 - [Statistical Process Control](docs/07-testing-yield/statistical-process-control.md) - SPC charts, process monitoring
 
+**8. [Integrated MEMS-CMOS](docs/08-integrated-mems-cmos)** - Combining Sensors & Electronics
+- [Integration Strategies](docs/08-integrated-mems-cmos/integration-strategies.md) - Process integration approaches
+- [Monolithic Integration](docs/08-integrated-mems-cmos/monolithic-integration.md) - Co-fabrication workflows
+- [Multi-Chip Modules](docs/08-integrated-mems-cmos/multi-chip-modules.md) - Heterogeneous integration
+- [Interface Circuits](docs/08-integrated-mems-cmos/interface-circuits.md) - Readout and conditioning
+- [Case Studies](docs/08-integrated-mems-cmos/case-studies.md) - IMUs, tire pressure sensors, microphones
+
 ####   **In Progress**
 
 **7. [Testing & Yield](docs/07-testing-yield)** - *Final chapter being completed*
 - [Yield Modeling](docs/07-testing-yield/yield-modeling.md) - *Coming next!*
-
-**8. [Integrated MEMS-CMOS](docs/08-integrated-mems-cmos)** - Combining Sensors & Electronics
-- [Integration Strategies](docs/08-integrated-mems-cmos/integration-strategies.md) -   Completed
-- [Monolithic Integration](docs/08-integrated-mems-cmos/monolithic-integration.md) -   Completed
-- [Multi-Chip Modules](docs/08-integrated-mems-cmos/multi-chip-modules.md) -   Completed
-- [Interface Circuits](docs/08-integrated-mems-cmos/interface-circuits.md) -   Completed
-- [Case Studies](docs/08-integrated-mems-cmos/case-studies.md) - *Final touches*
 
 ### 🛠️ Additional Resources
 
@@ -259,7 +259,7 @@ matlab -r "run('capacitor_model.m')"
 | MEMS Bulk |   Complete | 5/5 | 100% |
 | Packaging |   Complete | 6/6 | 100% |
 | Testing & Yield |   In Progress | 5/6 | 85% |
-| Integration |   In Progress | 4/5 | 80% |
+| Integration |   Complete | 5/5 | 100% |
 
 **Overall Progress: ~95% Complete**
 
@@ -267,9 +267,8 @@ matlab -r "run('capacitor_model.m')"
 
 -   Completed all packaging documentation
 -   Finished testing & reliability chapters
--   Added integration strategies documentation
+-   Completed integration case studies
 -   Updated equipment reference with latest tools
--   Working on final case studies
 
 ---
 
