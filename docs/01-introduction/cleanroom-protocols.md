@@ -559,7 +559,7 @@ Person → ESD shoes + Conductive floor → Ground
 - Neutralize static charge in air
 - Balanced ion output (positive and negative)
 - Typical range: 30-50 cm from source
-
+  
 **Locations**:
 - Near wafer handling stations
 - Critical assembly areas
