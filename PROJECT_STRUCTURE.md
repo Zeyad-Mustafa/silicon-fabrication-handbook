@@ -206,23 +206,17 @@ silicon-fabrication-handbook/
 ###  Suggested Next Files to Create
 
 #### High Priority
-1. **docs/03-cmos-beol/metallization.md** - Backend processes
-2. **docs/04-mems-surface-micromachining/polysilicon-processes.md**
-3. **docs/05-mems-bulk-micromachining/deep-rie.md**
-4. **resources/material-properties.md** - Si, SiO₂, metals properties
-5. **resources/design-rules-examples.md** - Typical foundry rules
+1. **resources/material-properties.md** - Si, SiO₂, metals properties
+2. **simulation-examples/python/oxide_growth_model.py**
+3. **exercises/README.md** - Problem sets overview
 
 #### Medium Priority
-6. **docs/06-packaging/wire-bonding.md**
-7. **docs/07-testing-yield/parametric-testing.md**
-8. **simulation-examples/python/oxide_growth_model.py**
-9. **exercises/README.md** - Problem sets overview
+4. Diagram files (SVG format)
+5. Additional simulation examples
 
 #### Lower Priority (But Valuable)
-10. Diagram files (SVG format)
-11. Additional simulation examples
-12. Case studies
-13. Video animations (if possible)
+6. Case studies
+7. Video animations (if possible)
 
 ##  Content Coverage
 
