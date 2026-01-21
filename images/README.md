@@ -65,3 +65,11 @@ Source: `simulation-examples/python/mems_spring_mass.py`
 ## Stiction Analysis
 ![Stiction risk assessment for released structures.](./stiction_analysis.png)
 Source: `docs/04-mems-surface-micromachining/mems_surface_micromachining_sim.py`
+
+## 3D Chip Fabrication Process
+![3D visualization of MOSFET fabrication steps.](./chip_fabrication_3d.png)
+Source: `simulation-examples/python/chip_fabrication_3d.py`
+
+## Final MOSFET Structure
+![Detailed 3D view of the final nMOS structure.](./final_mosfet_structure.png)
+Source: `simulation-examples/python/chip_fabrication_3d.py`
