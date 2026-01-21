@@ -15,10 +15,10 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from pathlib import Path
+import argparse
 
 # Output directory
-OUTPUT_DIR = Path("images")
-OUTPUT_DIR.mkdir(exist_ok=True)
+DEFAULT_OUTPUT_DIR = Path("images")
 
 # Colors for different materials
 COLORS = {
@@ -181,7 +181,7 @@ def step8_metallization(ax):
     ax.set_title('Step 8: Metallization (Al/Cu)', fontsize=14, fontweight='bold')
 
 
-def setup_axis(ax):
+def setup_axis(ax, elev=25, azim=45):
     """Configure 3D axis appearance."""
     ax.set_xlabel('X [µm]', fontsize=10)
     ax.set_ylabel('Y [µm]', fontsize=10)
@@ -189,11 +189,11 @@ def setup_axis(ax):
     ax.set_xlim([0, 10])
     ax.set_ylim([0, 5])
     ax.set_zlim([0, 4])
-    ax.view_init(elev=25, azim=45)
+    ax.view_init(elev=elev, azim=azim)
     ax.grid(True, alpha=0.3)
 
 
-def create_fabrication_animation(save_plots=True):
+def create_fabrication_animation(output_dir, save_plots=True, dpi=300, elev=25, azim=45, show=True):
     """Create step-by-step fabrication visualization."""
     print("Creating 3D chip fabrication visualization...")
     
@@ -213,20 +213,21 @@ def create_fabrication_animation(save_plots=True):
     for i, step_func in enumerate(steps, 1):
         ax = fig.add_subplot(2, 4, i, projection='3d')
         step_func(ax)
-        setup_axis(ax)
+        setup_axis(ax, elev=elev, azim=azim)
     
     plt.tight_layout()
     
     if save_plots:
-        output_file = OUTPUT_DIR / "chip_fabrication_3d.png"
-        plt.savefig(output_file, dpi=300, bbox_inches='tight')
+        output_file = output_dir / "chip_fabrication_3d.png"
+        plt.savefig(output_file, dpi=dpi, bbox_inches='tight')
         print(f"✓ Saved: {output_file}")
     
-    plt.show()
+    if show:
+        plt.show()
     print()
 
 
-def create_final_structure_detail(save_plots=True):
+def create_final_structure_detail(output_dir, save_plots=True, dpi=300, elev=25, azim=45, show=True):
     """Create detailed view of final MOSFET structure."""
     print("Creating detailed final structure...")
     
@@ -278,7 +279,7 @@ def create_final_structure_detail(save_plots=True):
     ax.text(5.0, 5.5, 3.5, 'Gate', fontsize=10, color='black', weight='bold')
     ax.text(6.6, 5.5, 3.5, 'Drain', fontsize=10, color='black', weight='bold')
     
-    setup_axis(ax)
+    setup_axis(ax, elev=elev, azim=azim)
     ax.set_title('Complete nMOS Transistor Structure', fontsize=16, fontweight='bold', pad=20)
     
     # Add legend
@@ -295,27 +296,93 @@ def create_final_structure_detail(save_plots=True):
     plt.tight_layout()
     
     if save_plots:
-        output_file = OUTPUT_DIR / "final_mosfet_structure.png"
-        plt.savefig(output_file, dpi=300, bbox_inches='tight')
+        output_file = output_dir / "final_mosfet_structure.png"
+        plt.savefig(output_file, dpi=dpi, bbox_inches='tight')
         print(f"✓ Saved: {output_file}")
     
-    plt.show()
+    if show:
+        plt.show()
     print()
+
+
+def build_parser():
+    parser = argparse.ArgumentParser(
+        description="Generate 3D MOSFET fabrication visuals."
+    )
+    parser.add_argument(
+        "--outdir",
+        type=Path,
+        default=DEFAULT_OUTPUT_DIR,
+        help="Output directory for generated images.",
+    )
+    parser.add_argument(
+        "--dpi",
+        type=int,
+        default=300,
+        help="DPI for saved images.",
+    )
+    parser.add_argument(
+        "--no-show",
+        action="store_true",
+        help="Do not open interactive windows (useful for headless runs).",
+    )
+    parser.add_argument(
+        "--no-save",
+        action="store_true",
+        help="Render figures without saving images.",
+    )
+    parser.add_argument(
+        "--elev",
+        type=float,
+        default=25,
+        help="Camera elevation angle.",
+    )
+    parser.add_argument(
+        "--azim",
+        type=float,
+        default=45,
+        help="Camera azimuth angle.",
+    )
+    return parser
 
 
 def main():
     """Run 3D fabrication visualization."""
+    parser = build_parser()
+    args = parser.parse_args()
+    output_dir = args.outdir
+    output_dir.mkdir(parents=True, exist_ok=True)
+    save_plots = not args.no_save
+    show = not args.no_show
+
     print("=" * 60)
     print("3D Chip Fabrication Process Visualization")
     print("=" * 60)
     print()
     
-    create_fabrication_animation()
-    create_final_structure_detail()
+    create_fabrication_animation(
+        output_dir=output_dir,
+        save_plots=save_plots,
+        dpi=args.dpi,
+        elev=args.elev,
+        azim=args.azim,
+        show=show,
+    )
+    create_final_structure_detail(
+        output_dir=output_dir,
+        save_plots=save_plots,
+        dpi=args.dpi,
+        elev=args.elev,
+        azim=args.azim,
+        show=show,
+    )
     
     print("=" * 60)
     print("Visualization complete!")
-    print(f"Images saved to: {OUTPUT_DIR}/")
+    if save_plots:
+        print(f"Images saved to: {output_dir}/")
+    else:
+        print("Images were not saved (--no-save).")
     print("=" * 60)
 
 
