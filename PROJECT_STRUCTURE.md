@@ -109,7 +109,7 @@ silicon-fabrication-handbook/
 │   │   ├── requirements.txt          #  CREATED - Python dependencies
 │   │   ├── mems_spring_mass.py       #  CREATED - MEMS accelerometer model
 │   │   ├── mems_spring_mass.ipynb    # Jupyter notebook version
-│   │   ├── capacitive_sensor.py
+│   │   ├── capacitive_sensor3d.py    #Done 25/01/2026
 │   │   ├── thermal_actuator_sim.py
 │   │   ├── comb_drive_analysis.py
 │   │   ├── resonator_response.py
