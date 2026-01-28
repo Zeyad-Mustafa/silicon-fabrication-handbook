@@ -15,7 +15,7 @@ run('ion_implant_profile.m')
 
 You can also open a script and press **Run** in the editor.
 
-Images are saved to a local `images/` directory (created automatically when needed).
+When you run a script locally, any saved figures are written to a local `images/` folder in the current working directory. The screenshots shown below live in the repository root at `images/` so they render on GitHub.
 
 ---
 
@@ -42,7 +42,7 @@ Simulates dopant concentration profiles (Gaussian and multi-energy), annealing d
 
 **Output Plot:**
 
-![Ion Implantation Profile Analysis](images/ion_implant_profile.png)
+![Ion Implantation Profile Analysis](../../images/ion_implant_profile.png)
 
 **Plot Details:**
 1. **Gaussian Profile** - Single-energy implant showing projected range (Rₚ) vs substrate doping
@@ -82,7 +82,7 @@ Calculates and visualizes MOSFET threshold voltage (Vₜₕ) with comprehensive 
 
 **Output Plot:**
 
-![MOSFET Threshold Voltage Analysis](images/mosfet_threshold.png)
+![MOSFET Threshold Voltage Analysis](../../images/mosfet_threshold.png)
 
 **Plot Details:**
 1. **Body Effect** - Vₜₕ increase with substrate bias (√2φF + VSB dependence)
@@ -122,7 +122,7 @@ Comprehensive design tool for folded-beam (default), serpentine, or crab-leg MEM
 
 **Output Plot:**
 
-![MEMS Spring Design Analysis](images/spring_design.png)
+![MEMS Spring Design Analysis](../../images/spring_design.png)
 
 **Plot Details:**
 1. **Frequency Response** - Resonance peak showing Q-factor in air (typically Q=10)
@@ -166,7 +166,7 @@ Analyzes viscous air damping for micro-plates oscillating parallel to a substrat
 
 **Output Plot:**
 
-![Squeeze-Film Damping Analysis](images/squeeze_film_damping.png)
+![Squeeze-Film Damping Analysis](../../images/squeeze_film_damping.png)
 
 **Plot Details:**
 1. **Quality Factor vs Pressure** - Dramatic Q increase in vacuum (Q ∝ 1/P)
@@ -212,7 +212,7 @@ Comprehensive thermal modeling for MEMS devices (cantilever/bridge/membrane geom
 
 **Output Plot:**
 
-![MEMS Thermal Analysis](images/thermal_analysis.png)
+![MEMS Thermal Analysis](../../images/thermal_analysis.png)
 
 **Plot Details:**
 1. **Steady-State Temp vs Power** - Linear relationship with thermal resistance
@@ -259,7 +259,7 @@ Simulates MOS capacitor C-V characteristics across accumulation, depletion, and 
 
 **Output Plot:**
 
-![MOS Capacitor C-V Characteristics](images/capacitor_model.png)
+![MOS Capacitor C-V Characteristics](../../images/capacitor_model.png)
 
 **Plot Details:**
 1. **Normalized C/Cox vs VG** - Three distinct regions with Vfb and Vt markers
