@@ -123,9 +123,9 @@ silicon-fabrication-handbook/
 │   │   ├── spring_design.m            #Done
 │   │   ├── thermal_analysis.m         #Done 
 │   │   ├── squeeze_film_damping.m     #Done 
-│   │   ├── mosfet_threshold.m         
-│   │   ├── ion_implant_profile.m
-│   │   └── README.md                 # MATLAB setup instructions
+│   │   ├── mosfet_threshold.m         #Done 
+│   │   ├── ion_implant_profile.m      #Done 
+│   │   └── README.md                 # MATLAB setup instructions #Done 28.01.2026
 │   │
 │   └── comsol/                       # FEA simulation files
 │       ├── membrane_deflection.mph
