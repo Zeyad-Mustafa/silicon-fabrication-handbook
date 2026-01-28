@@ -110,7 +110,7 @@ silicon-fabrication-handbook/
 │   │   ├── mems_spring_mass.py       #  CREATED - MEMS accelerometer model
 │   │   ├── mems_spring_mass.ipynb    # Jupyter notebook version
 │   │   ├── capacitive_sensor3d.py    #Done 25/01/2026
-│   │   ├── thermal_actuator_sim.py
+│   │   ├── thermal_actuator_sim.py    
 │   │   ├── comb_drive_analysis.py
 │   │   ├── resonator_response.py
 │   │   ├── mosfet_iv_curves.py
@@ -120,10 +120,10 @@ silicon-fabrication-handbook/
 │   ├── matlab/
 │   │   ├── accelerometer_resonance.m
 │   │   ├── capacitor_model.m         #  CREATED - Capacitive sensor analysis
-│   │   ├── spring_design.m
-│   │   ├── thermal_analysis.m
-│   │   ├── squeeze_film_damping.m
-│   │   ├── mosfet_threshold.m
+│   │   ├── spring_design.m            #Done
+│   │   ├── thermal_analysis.m         #Done 
+│   │   ├── squeeze_film_damping.m     #Done 
+│   │   ├── mosfet_threshold.m         
 │   │   ├── ion_implant_profile.m
 │   │   └── README.md                 # MATLAB setup instructions
 │   │
