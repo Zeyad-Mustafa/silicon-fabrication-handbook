@@ -88,7 +88,7 @@ silicon-fabrication-handbook/
 │   ├── wafer-bonding-types.svg        #Done 08/01/2026
 │   ├── mosfet-structure.svg           #Done 10/01/2026
 │   ├── cmos-inverter.svg             #Done 11/01/2026
-│   └── README.md                     # Diagram usage guide
+│   └── README.md                     # Diagram usage guide #Done
 │
 ├── visualization/                    # 3D models and animations
 │   ├── animations/
@@ -110,11 +110,11 @@ silicon-fabrication-handbook/
 │   │   ├── mems_spring_mass.py       #  CREATED - MEMS accelerometer model
 │   │   ├── mems_spring_mass.ipynb    # Jupyter notebook version
 │   │   ├── capacitive_sensor3d.py    #Done 25/01/2026
-│   │   ├── thermal_actuator_sim.py    
-│   │   ├── comb_drive_analysis.py
-│   │   ├── resonator_response.py
-│   │   ├── mosfet_iv_curves.py
-│   │   ├── oxide_growth_model.py
+│   │   ├── thermal_actuator_sim_3d.py    #Done 
+│   │   ├── comb_drive_analysis_3D.py
+│   │   ├── resonator_response_3D.py
+│   │   ├── mosfet_iv_curves_3D.py
+│   │   ├── oxide_growth_model_3D.py
 │   │   └── README.md                 # Python setup instructions
 │   │
 │   ├── matlab/
@@ -207,7 +207,7 @@ silicon-fabrication-handbook/
 
 #### High Priority
 1. **resources/material-properties.md** - Si, SiO₂, metals properties
-2. **simulation-examples/python/oxide_growth_model.py**
+2. **simulation-examples/python/oxide_growth_model_3D.py**
 3. **exercises/README.md** - Problem sets overview
 
 #### Medium Priority
