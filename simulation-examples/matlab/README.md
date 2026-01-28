@@ -285,13 +285,13 @@ Simulates MOS capacitor C-V characteristics across accumulation, depletion, and 
 
 ## Output Folder
 
-Scripts that automatically save images will create `simulation-examples/matlab/images/` if it does not exist:
-- `ion_implant_profile.png` (automatically saved)
-- `mosfet_threshold.png` (automatically saved)
-- `squeeze_film_damping.png` (automatically saved)
-- `spring_design.png` (manual save required)
-- `thermal_analysis.png` (manual save required)
-- `capacitor_model.png` (manual save required)
+When you run the scripts locally, any saved figures are written to a local `images/` folder in your current working directory. The screenshots shown in this README are stored at the repo root in `images/` so they render on GitHub:
+- `ion_implant_profile.png` (auto-saved by script)
+- `mosfet_threshold.png` (auto-saved by script)
+- `squeeze_film_damping.png` (auto-saved by script)
+- `spring_design.png` (manually saved)
+- `thermal_analysis.png` (manually saved)
+- `capacitor_model.png` (manually saved)
 
 ## Tips
 
@@ -339,4 +339,4 @@ To add new simulation examples:
 
 **Last Updated:** January 2026  
 **License:** MIT  
-**Author:** Silicon Fabrication Handbook Contributors
+**Author:** Zeyad Mustafa (Silicon Fabrication Handbook Contributors)
