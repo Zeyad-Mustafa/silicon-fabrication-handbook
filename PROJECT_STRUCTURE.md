@@ -71,7 +71,7 @@ silicon-fabrication-handbook/
 │   │   ├── reliability-testing.md    #Done 25/12/2025
 │   │   ├── failure-analysis.md       #Done 26/12/2025
 │   │   ├── statistical-process-control.md #Done 27/12/2025
-│   │   └── yield-modeling.md
+│   │   └── yield-modeling.md          #Done 28/12/2025
 │   │
 │   └── 08-integrated-mems-cmos/
 │       ├── integration-strategies.md     #Done 30/12/2025
