@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wafer Bonding Process - 3D Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+        }
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 380px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(129, 199, 132, 0.3);
+        }
+        #info-panel h1 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            color: #81c784;
+        }
+        #info-panel h2 {
+            margin: 15px 0 5px 0;
+            font-size: 16px;
+            color: #4fc3f7;
+        }
+        #info-panel p {
+            margin: 5px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .param {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 12px;
+            color: #aaa;
+        }
+        .param-value {
+            color: #81c784;
+            font-weight: bold;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: flex;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(129, 199, 132, 0.3);
+        }
+        button {
+            background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4);
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 187, 106, 0.6);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        #progress {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #66bb6a, #43a047);
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+        #temp-gauge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 152, 0, 0.5);
+            color: white;
+            text-align: center;
+        }
+        #temp-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff9800;
+            margin: 10px 0;
+        }
+        .heat-active {
+            animation: heat-pulse 2s infinite;
+        }
+        @keyframes heat-pulse {
+            0%, 100% { border-color: rgba(255, 152, 0, 0.5); }
+            50% { border-color: rgba(255, 152, 0, 1); box-shadow: 0 0 20px rgba(255, 152, 0, 0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div id="info-panel">
+        <h1>Wafer Bonding</h1>
+        <h2 id="step-title">Step 1: Surface Preparation</h2>
+        <p id="step-description">Cleaning and activating wafer surfaces for bonding. RCA clean followed by plasma activation.</p>
+        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
+            <div class="param"><span>Bonding Type:</span><span class="param-value">Fusion Bonding</span></div>
+            <div class="param"><span>Atmosphere:</span><span class="param-value" id="atmosphere">Clean Room</span></div>
+            <div class="param"><span>Pressure:</span><span class="param-value" id="pressure">Atmospheric</span></div>
+            <div class="param"><span>Alignment:</span><span class="param-value">&lt; 1 µm</span></div>
+        </div>
+    </div>
+
+    <div id="temp-gauge">
+        <div style="font-size: 12px; color: #aaa;">Temperature</div>
+        <div id="temp-value">25°C</div>
+        <div style="font-size: 12px; color: #aaa;">Room Temp</div>
+    </div>
+
+    <div id="progress">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="controls">
+        <button id="prev-btn">← Previous</button>
+        <button id="play-btn">Play</button>
+        <button id="next-btn">Next →</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a2e);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 8, 14);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const topLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        topLight.position.set(0, 10, 5);
+        topLight.castShadow = true;
+        topLight.shadow.camera.left = -10;
+        topLight.shadow.camera.right = 10;
+        topLight.shadow.camera.top = 10;
+        topLight.shadow.camera.bottom = -10;
+        scene.add(topLight);
+
+        const spotLight = new THREE.SpotLight(0x81c784, 0.6);
+        spotLight.position.set(0, 15, 0);
+        spotLight.angle = Math.PI / 4;
+        scene.add(spotLight);
+
+        // Create bottom wafer
+        const wafer1Geometry = new THREE.CylinderGeometry(4, 4, 0.4, 64);
+        const wafer1Material = new THREE.MeshPhongMaterial({ 
+            color: 0x708090,
+            shininess: 100,
+            specular: 0x555555
+        });
+        const wafer1 = new THREE.Mesh(wafer1Geometry, wafer1Material);
+        wafer1.castShadow = true;
+        wafer1.receiveShadow = true;
+        wafer1.position.y = -1;
+        scene.add(wafer1);
+
+        // Create top wafer
+        const wafer2Geometry = new THREE.CylinderGeometry(4, 4, 0.4, 64);
+        const wafer2Material = new THREE.MeshPhongMaterial({ 
+            color: 0x708090,
+            shininess: 100,
+            specular: 0x555555
+        });
+        const wafer2 = new THREE.Mesh(wafer2Geometry, wafer2Material);
+        wafer2.castShadow = true;
+        wafer2.receiveShadow = true;
+        wafer2.position.y = 4;
+        scene.add(wafer2);
+
+        // Oxide layers
+        const oxide1Geometry = new THREE.CylinderGeometry(4, 4, 0.05, 64);
+        const oxide1Material = new THREE.MeshPhongMaterial({ 
+            color: 0x4fc3f7,
+            transparent: true,
+            opacity: 0.7,
+            shininess: 80
+        });
+        const oxide1 = new THREE.Mesh(oxide1Geometry, oxide1Material);
+        oxide1.position.y = -0.775;
+        oxide1.visible = false;
+        scene.add(oxide1);
+
+        const oxide2 = new THREE.Mesh(oxide1Geometry, oxide1Material.clone());
+        oxide2.position.y = 3.775;
+        oxide2.visible = false;
+        scene.add(oxide2);
+
+        // Cleaning particles
+        const cleanParticles = [];
+        const particleGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+        const particleMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x00bcd4,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        for (let i = 0; i < 50; i++) {
+            const particle = new THREE.Mesh(particleGeometry, particleMaterial.clone());
+            particle.visible = false;
+            cleanParticles.push(particle);
+            scene.add(particle);
+        }
+
+        // Plasma activation particles
+        const plasmaParticles = [];
+        const plasmaMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x9c27b0,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        for (let i = 0; i < 60; i++) {
+            const particle = new THREE.Mesh(particleGeometry, plasmaMaterial.clone());
+            particle.visible = false;
+            plasmaParticles.push(particle);
+            scene.add(particle);
+        }
+
+        // Bond interface visualization
+        const bondGeometry = new THREE.CylinderGeometry(4, 4, 0.02, 64);
+        const bondMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x81c784,
+            transparent: true,
+            opacity: 0
+        });
+        const bondInterface = new THREE.Mesh(bondGeometry, bondMaterial);
+        bondInterface.position.y = -0.6;
+        scene.add(bondInterface);
+
+        // Heat waves
+        const heatWaves = [];
+        const heatMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0xff9800,
+            transparent: true,
+            opacity: 0.3,
+            side: THREE.DoubleSide
+        });
+
+        for (let i = 0; i < 5; i++) {
+            const waveGeometry = new THREE.RingGeometry(0.5 + i * 0.8, 0.7 + i * 0.8, 32);
+            const wave = new THREE.Mesh(waveGeometry, heatMaterial.clone());
+            wave.rotation.x = Math.PI / 2;
+            wave.position.y = 0;
+            wave.visible = false;
+            heatWaves.push(wave);
+            scene.add(wave);
+        }
+
+        // Grid
+        const gridHelper = new THREE.GridHelper(25, 25, 0x444444, 0x222222);
+        gridHelper.position.y = -3;
+        scene.add(gridHelper);
+
+        // Animation functions
+        function animateParticles(particles, active, targetY, spread = 4) {
+            particles.forEach((particle, i) => {
+                if (active) {
+                    particle.visible = true;
+                    const angle = (i / particles.length) * Math.PI * 2;
+                    const radius = Math.random() * spread;
+                    
+                    function update() {
+                        const time = Date.now() * 0.001 + i * 0.1;
+                        particle.position.x = Math.cos(angle + time) * radius;
+                        particle.position.z = Math.sin(angle + time) * radius;
+                        particle.position.y = targetY + Math.sin(time * 2) * 0.3;
+                        
+                        if (particle.visible) {
+                            requestAnimationFrame(update);
+                        }
+                    }
+                    update();
+                } else {
+                    particle.visible = false;
+                }
+            });
+        }
+
+        function animatePosition(object, targetY, duration) {
+            const startY = object.position.y;
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                object.position.y = startY + (targetY - startY) * eased;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function animateTemperature(targetTemp, duration) {
+            const startTemp = parseInt(document.getElementById('temp-value').textContent);
+            const startTime = Date.now();
+            const gauge = document.getElementById('temp-gauge');
+            
+            if (targetTemp > 100) {
+                gauge.classList.add('heat-active');
+            } else {
+                gauge.classList.remove('heat-active');
+            }
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentTemp = Math.round(startTemp + (targetTemp - startTemp) * progress);
+                document.getElementById('temp-value').textContent = currentTemp + '°C';
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function animateHeatWaves(active) {
+            heatWaves.forEach((wave, i) => {
+                wave.visible = active;
+                if (active) {
+                    const delay = i * 200;
+                    setTimeout(() => {
+                        animateWave(wave, i);
+                    }, delay);
+                }
+            });
+        }
+
+        function animateWave(wave, index) {
+            const startTime = Date.now();
+            const duration = 2000;
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = (elapsed % duration) / duration;
+                
+                wave.scale.set(1 + progress * 2, 1 + progress * 2, 1);
+                wave.material.opacity = 0.3 * (1 - progress);
+                
+                if (wave.visible) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        // Animation state
+        let currentStep = 0;
+        let isPlaying = false;
+        let playInterval = null;
+
+        const steps = [
+            {
+                title: "Step 1: Surface Preparation",
+                description: "Cleaning and activating wafer surfaces for bonding. RCA clean followed by plasma activation.",
+                action: () => {
+                    document.getElementById('atmosphere').textContent = 'Clean Room';
+                    document.getElementById('pressure').textContent = 'Atmospheric';
+                    animateParticles(cleanParticles, true, 0, 4.5);
+                    oxide1.visible = false;
+                    oxide2.visible = false;
+                }
+            },
+            {
+                title: "Step 2: Surface Activation",
+                description: "O2/N2 plasma treatment to activate surfaces, creating hydroxyl groups for bonding.",
+                action: () => {
+                    cleanParticles.forEach(p => p.visible = false);
+                    animateParticles(plasmaParticles, true, 0, 5);
+                    oxide1.visible = true;
+                    oxide2.visible = true;
+                    oxide1.scale.y = 0;
+                    oxide2.scale.y = 0;
+                    setTimeout(() => {
+                        animateScale(oxide1, 1, 'y', 1000);
+                        animateScale(oxide2, 1, 'y', 1000);
+                    }, 300);
+                }
+            },
+            {
+                title: "Step 3: Alignment",
+                description: "Precision alignment of wafers using infrared cameras. Alignment accuracy < 1 µm required.",
+                action: () => {
+                    plasmaParticles.forEach(p => p.visible = false);
+                    document.getElementById('atmosphere').textContent = 'Clean Room';
+                    // Add slight rotation and position adjustment to show alignment
+                    wafer2.rotation.y = 0.1;
+                    setTimeout(() => {
+                        const startRot = wafer2.rotation.y;
+                        const startTime = Date.now();
+                        function alignRotation() {
+                            const elapsed = Date.now() - startTime;
+                            const progress = Math.min(elapsed / 1500, 1);
+                            wafer2.rotation.y = startRot * (1 - easeInOutCubic(progress));
+                            if (progress < 1) requestAnimationFrame(alignRotation);
+                        }
+                        alignRotation();
+                    }, 500);
+                }
+            },
+            {
+                title: "Step 4: Pre-bonding Contact",
+                description: "Bringing wafers into contact. Van der Waals forces create initial bond at room temperature.",
+                action: () => {
+                    document.getElementById('pressure').textContent = 'Light Contact';
+                    animatePosition(wafer2, -0.4, 2000);
+                    setTimeout(() => {
+                        bondInterface.material.opacity = 0;
+                        animateOpacity(bondInterface, 0.6, 1000);
+                    }, 2000);
+                }
+            },
+            {
+                title: "Step 5: Bond Wave Propagation",
+                description: "Bond wave spreads from contact point across wafer surface. Process takes seconds to minutes.",
+                action: () => {
+                    // Animate bond wave spreading
+                    const startTime = Date.now();
+                    function spreadBond() {
+                        const elapsed = Date.now() - startTime;
+                        const progress = Math.min(elapsed / 2000, 1);
+                        bondInterface.scale.set(progress, 1, progress);
+                        bondInterface.material.opacity = 0.6 + Math.sin(progress * Math.PI * 4) * 0.2;
+                        if (progress < 1) requestAnimationFrame(spreadBond);
+                    }
+                    spreadBond();
+                }
+            },
+            {
+                title: "Step 6: Annealing",
+                description: "High temperature anneal (800-1100°C) strengthens bonds. Hydroxyl groups form covalent Si-O-Si bonds.",
+                action: () => {
+                    document.getElementById('atmosphere').textContent = 'N2 Furnace';
+                    document.getElementById('pressure').textContent = 'Bonded';
+                    animateTemperature(1000, 3000);
+                    animateHeatWaves(true);
+                    
+                    // Change wafer colors to show heat
+                    setTimeout(() => {
+                        wafer1Material.color.setHex(0xff6b35);
+                        wafer2Material.color.setHex(0xff6b35);
+                        wafer1Material.emissive = new THREE.Color(0x331100);
+                        wafer2Material.emissive = new THREE.Color(0x331100);
+                    }, 500);
+                }
+            },
+            {
+                title: "Step 7: Cool Down & Completion",
+                description: "Controlled cooling to room temperature. Bonded wafer pair ready for further processing.",
+                action: () => {
+                    animateTemperature(25, 2500);
+                    setTimeout(() => {
+                        animateHeatWaves(false);
+                        wafer1Material.color.setHex(0x708090);
+                        wafer2Material.color.setHex(0x708090);
+                        wafer1Material.emissive = new THREE.Color(0x000000);
+                        wafer2Material.emissive = new THREE.Color(0x000000);
+                        bondInterface.material.color.setHex(0x81c784);
+                        bondInterface.material.opacity = 0.9;
+                    }, 1000);
+                }
+            }
+        ];
+
+        function animateScale(object, targetScale, axis, duration) {
+            const startScale = object.scale[axis];
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                object.scale[axis] = startScale + (targetScale - startScale) * eased;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function animateOpacity(object, targetOpacity, duration) {
+            const startOpacity = object.material.opacity;
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                object.material.opacity = startOpacity + (targetOpacity - startOpacity) * eased;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function updateStep(stepIndex) {
+            if (stepIndex < 0 || stepIndex >= steps.length) return;
+            
+            currentStep = stepIndex;
+            const step = steps[stepIndex];
+            
+            document.getElementById('step-title').textContent = step.title;
+            document.getElementById('step-description').textContent = step.description;
+            document.getElementById('progress-bar').style.width = ((stepIndex + 1) / steps.length * 100) + '%';
+            
+            if (stepIndex === 0) {
+                resetScene();
+            }
+            
+            step.action();
+        }
+
+        function resetScene() {
+            wafer2.position.y = 4;
+            wafer2.rotation.y = 0;
+            cleanParticles.forEach(p => p.visible = false);
+            plasmaParticles.forEach(p => p.visible = false);
+            oxide1.visible = false;
+            oxide2.visible = false;
+            bondInterface.material.opacity = 0;
+            bondInterface.scale.set(1, 1, 1);
+            heatWaves.forEach(w => w.visible = false);
+            wafer1Material.color.setHex(0x708090);
+            wafer2Material.color.setHex(0x708090);
+            wafer1Material.emissive = new THREE.Color(0x000000);
+            wafer2Material.emissive = new THREE.Color(0x000000);
+            document.getElementById('temp-value').textContent = '25°C';
+            document.getElementById('temp-gauge').classList.remove('heat-active');
+        }
+
+        // Controls
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                updateStep(currentStep + 1);
+            }
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentStep > 0) {
+                updateStep(currentStep - 1);
+            }
+        });
+
+        document.getElementById('play-btn').addEventListener('click', () => {
+            const playBtn = document.getElementById('play-btn');
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.textContent = 'Pause';
+                playInterval = setInterval(() => {
+                    if (currentStep < steps.length - 1) {
+                        updateStep(currentStep + 1);
+                    } else {
+                        isPlaying = false;
+                        playBtn.textContent = 'Play';
+                        clearInterval(playInterval);
+                    }
+                }, 4000);
+            } else {
+                isPlaying = false;
+                playBtn.textContent = 'Play';
+                clearInterval(playInterval);
+            }
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            isPlaying = false;
+            document.getElementById('play-btn').textContent = 'Play';
+            clearInterval(playInterval);
+            currentStep = 0;
+            resetScene();
+            updateStep(0);
+        });
+
+        // Camera animation
+        let cameraAngle = Math.PI / 4;
+        function updateCamera() {
+            cameraAngle += 0.002;
+            camera.position.x = Math.sin(cameraAngle) * 14;
+            camera.position.z = Math.cos(cameraAngle) * 14;
+            camera.lookAt(0, 0, 0);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            updateCamera();
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        updateStep(0);
+        animate();
+    </script>
+</body>
+</html>
