@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Documentation: CC BY 4.0](https://img.shields.io/badge/Docs-CC%20BY%204.0-blue.svg)](LICENSE)
 [![Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-green.svg)]()
-[![Last Updated: January 2026](https://img.shields.io/badge/Updated-January%202026-brightgreen.svg)]()
+[![Last Updated: January 31, 2026](https://img.shields.io/badge/Updated-Jan%2031%202026-brightgreen.svg)]()
 
 ## What's This About?
 
@@ -89,6 +89,7 @@ These notes combine academic knowledge with real-world industry insights from bo
 - [Reliability Testing](docs/07-testing-yield/reliability-testing.md) - Accelerated life testing, qualification
 - [Failure Analysis](docs/07-testing-yield/failure-analysis.md) - SEM, FIB, root cause analysis
 - [Statistical Process Control](docs/07-testing-yield/statistical-process-control.md) - SPC charts, process monitoring
+- [Yield Modeling](docs/07-testing-yield/yield-modeling.md) - Defect density, yield prediction, models
 
 **8. [Integrated MEMS-CMOS](docs/08-integrated-mems-cmos)** - Combining Sensors & Electronics
 - [Integration Strategies](docs/08-integrated-mems-cmos/integration-strategies.md) - Process integration approaches
@@ -97,10 +98,9 @@ These notes combine academic knowledge with real-world industry insights from bo
 - [Interface Circuits](docs/08-integrated-mems-cmos/interface-circuits.md) - Readout and conditioning
 - [Case Studies](docs/08-integrated-mems-cmos/case-studies.md) - IMUs, tire pressure sensors, microphones
 
-####   **In Progress**
+####   **Status**
 
-**7. [Testing & Yield](docs/07-testing-yield)** - *Final chapter being completed*
-- [Yield Modeling](docs/07-testing-yield/yield-modeling.md) - *Coming next!*
+All core documentation chapters are complete.
 
 ### 🛠️ Additional Resources
 
@@ -109,10 +109,13 @@ These notes combine academic knowledge with real-world industry insights from bo
   - Capacitive sensor analysis
   - Oxide growth models
   - MOSFET I-V curves
-- **[Diagrams & Visualizations](diagrams)** - Process flow diagrams, cross-sections, 3D models
+- **[Diagrams & Visualizations](diagrams)** - Process flow diagrams, cross-sections, and device visuals
+- **[Interactive Animations](visualization/animations)** - Three.js process animations (HTML)
+- **[3D CAD Models](visualization/CAD)** - STEP files for MEMS components
 - **[Research Papers Database](resources/research-papers.md)** - 37+ curated papers organized by topic
 - **[Equipment Reference](resources/fab-equipment-list.md)** - Comprehensive list of fab tools and specifications
 - **[Design Rules Examples](resources/design-rules-examples.md)** - Practical design constraints from foundries
+- **[Case Studies](case-studies)** - Real-world MEMS/CMOS applications
 
 For a complete breakdown of repository structure, see [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
 
