@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRIE Etch Process - 3D Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+        }
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 380px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+        }
+        #info-panel h1 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            color: #4fc3f7;
+        }
+        #info-panel h2 {
+            margin: 15px 0 5px 0;
+            font-size: 16px;
+            color: #81c784;
+        }
+        #info-panel p {
+            margin: 5px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .param {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 12px;
+            color: #aaa;
+        }
+        .param-value {
+            color: #4fc3f7;
+            font-weight: bold;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: flex;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        #progress {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+        #plasma-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(156, 39, 176, 0.5);
+            color: white;
+            font-size: 14px;
+        }
+        .plasma-active {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { border-color: rgba(156, 39, 176, 0.5); }
+            50% { border-color: rgba(156, 39, 176, 1); box-shadow: 0 0 20px rgba(156, 39, 176, 0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div id="info-panel">
+        <h1>DRIE Process (Bosch)</h1>
+        <h2 id="step-title">Step 1: Initial Setup</h2>
+        <p id="step-description">Wafer loaded into DRIE chamber with SF6 and C4F8 gases ready for Bosch process.</p>
+        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
+            <div class="param"><span>Etch Gas:</span><span class="param-value" id="etch-gas">SF6</span></div>
+            <div class="param"><span>Passivation Gas:</span><span class="param-value">C4F8</span></div>
+            <div class="param"><span>Pressure:</span><span class="param-value">10-50 mTorr</span></div>
+            <div class="param"><span>RF Power:</span><span class="param-value" id="rf-power">600W</span></div>
+            <div class="param"><span>Etch Rate:</span><span class="param-value">3-6 µm/min</span></div>
+        </div>
+    </div>
+
+    <div id="plasma-indicator">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div id="plasma-dot" style="width: 12px; height: 12px; border-radius: 50%; background: #666;"></div>
+            <span id="plasma-status">Plasma: Inactive</span>
+        </div>
+    </div>
+
+    <div id="progress">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="controls">
+        <button id="prev-btn">← Previous</button>
+        <button id="play-btn">Play</button>
+        <button id="next-btn">Next →</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0a0a0a);
+        scene.fog = new THREE.FogExp2(0x0a0a0a, 0.02);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(8, 6, 12);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        scene.add(ambientLight);
+
+        const topLight = new THREE.PointLight(0x9c27b0, 1, 50);
+        topLight.position.set(0, 10, 0);
+        scene.add(topLight);
+
+        const sideLight = new THREE.DirectionalLight(0x4fc3f7, 0.5);
+        sideLight.position.set(10, 5, 5);
+        scene.add(sideLight);
+
+        // Create wafer substrate (silicon)
+        const waferGeometry = new THREE.BoxGeometry(6, 0.5, 6);
+        const waferMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x404040,
+            shininess: 80,
+            specular: 0x333333
+        });
+        const wafer = new THREE.Mesh(waferGeometry, waferMaterial);
+        wafer.castShadow = true;
+        wafer.receiveShadow = true;
+        wafer.position.y = 0;
+        scene.add(wafer);
+
+        // Create photoresist mask
+        const maskPieces = [];
+        const maskMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0xffa726,
+            transparent: true,
+            opacity: 0.9
+        });
+        
+        const positions = [
+            { x: -2.5, z: 0, width: 1 },
+            { x: 0, z: 0, width: 1.5 },
+            { x: 2.5, z: 0, width: 1 }
+        ];
+
+        positions.forEach(pos => {
+            const maskGeometry = new THREE.BoxGeometry(pos.width, 0.2, 4);
+            const mask = new THREE.Mesh(maskGeometry, maskMaterial);
+            mask.position.set(pos.x, 0.35, pos.z);
+            mask.castShadow = true;
+            maskPieces.push(mask);
+            scene.add(mask);
+        });
+
+        // Create plasma chamber walls (transparent)
+        const chamberMaterial = new THREE.MeshPhongMaterial({
+            color: 0x4fc3f7,
+            transparent: true,
+            opacity: 0.1,
+            side: THREE.DoubleSide
+        });
+        
+        const chamberWalls = new THREE.Group();
+        
+        // Chamber cylinder
+        const chamberGeometry = new THREE.CylinderGeometry(5, 5, 12, 32, 1, true);
+        const chamber = new THREE.Mesh(chamberGeometry, chamberMaterial);
+        chamberWalls.add(chamber);
+        
+        // Top plate
+        const topPlateGeometry = new THREE.CylinderGeometry(5, 5, 0.2, 32);
+        const topPlateMaterial = new THREE.MeshPhongMaterial({
+            color: 0x666666,
+            metalness: 0.8
+        });
+        const topPlate = new THREE.Mesh(topPlateGeometry, topPlateMaterial);
+        topPlate.position.y = 6;
+        chamberWalls.add(topPlate);
+        
+        scene.add(chamberWalls);
+
+        // Plasma particles
+        const plasmaParticles = [];
+        const plasmaGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+        
+        function createPlasmaParticle(color) {
+            const plasmaMaterial = new THREE.MeshBasicMaterial({ 
+                color: color,
+                transparent: true,
+                opacity: 0.8
+            });
+            const particle = new THREE.Mesh(plasmaGeometry, plasmaMaterial);
+            particle.visible = false;
+            return particle;
+        }
+
+        // Create SF6 plasma particles (purple)
+        for (let i = 0; i < 100; i++) {
+            const particle = createPlasmaParticle(0x9c27b0);
+            plasmaParticles.push(particle);
+            scene.add(particle);
+        }
+
+        // Create C4F8 plasma particles (cyan)
+        for (let i = 0; i < 80; i++) {
+            const particle = createPlasmaParticle(0x00bcd4);
+            plasmaParticles.push(particle);
+            scene.add(particle);
+        }
+
+        // Ion bombardment effect
+        const ionBeams = [];
+        const ionMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0xff00ff,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        for (let i = 0; i < 30; i++) {
+            const ionGeometry = new THREE.CylinderGeometry(0.05, 0.05, 1.5, 8);
+            const ion = new THREE.Mesh(ionGeometry, ionMaterial);
+            ion.visible = false;
+            ionBeams.push(ion);
+            scene.add(ion);
+        }
+
+        // Passivation layer
+        const passivationPieces = [];
+        const passivationMaterial = new THREE.MeshPhongMaterial({
+            color: 0x00bcd4,
+            transparent: true,
+            opacity: 0.5
+        });
+
+        // Etched trenches (will be created during animation)
+        const etchedTrenches = [];
+        let trenchDepth = 0;
+
+        // Grid
+        const gridHelper = new THREE.GridHelper(30, 30, 0x333333, 0x1a1a1a);
+        gridHelper.position.y = -3;
+        scene.add(gridHelper);
+
+        // Animation state
+        let currentStep = 0;
+        let isPlaying = false;
+        let playInterval = null;
+        let cycleCount = 0;
+
+        function setPlasmaActive(active, color) {
+            const indicator = document.getElementById('plasma-indicator');
+            const dot = document.getElementById('plasma-dot');
+            const status = document.getElementById('plasma-status');
+            
+            if (active) {
+                indicator.classList.add('plasma-active');
+                dot.style.background = color || '#9c27b0';
+                dot.style.boxShadow = `0 0 10px ${color || '#9c27b0'}`;
+                status.textContent = 'Plasma: Active';
+            } else {
+                indicator.classList.remove('plasma-active');
+                dot.style.background = '#666';
+                dot.style.boxShadow = 'none';
+                status.textContent = 'Plasma: Inactive';
+            }
+        }
+
+        function animatePlasma(particles, active, startY = 1, endY = 0.5, duration = 1000) {
+            particles.forEach((particle, i) => {
+                if (active) {
+                    particle.visible = true;
+                    const angle = (i / particles.length) * Math.PI * 2;
+                    const radius = 2 + Math.random() * 2;
+                    const delay = i * 5;
+                    
+                    setTimeout(() => {
+                        animateParticle(particle, angle, radius, startY, endY, duration);
+                    }, delay);
+                } else {
+                    particle.visible = false;
+                }
+            });
+        }
+
+        function animateParticle(particle, angle, radius, startY, endY, duration) {
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = (elapsed % duration) / duration;
+                
+                particle.position.x = Math.cos(angle + progress * Math.PI * 2) * radius;
+                particle.position.z = Math.sin(angle + progress * Math.PI * 2) * radius;
+                particle.position.y = startY + (endY - startY) * progress;
+                
+                if (particle.visible) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function animateIonBombardment() {
+            ionBeams.forEach((ion, i) => {
+                ion.visible = true;
+                const x = (Math.random() - 0.5) * 3.5;
+                const z = (Math.random() - 0.5) * 4;
+                const delay = i * 30;
+                
+                setTimeout(() => {
+                    animateIon(ion, x, z);
+                }, delay);
+            });
+        }
+
+        function animateIon(ion, x, z) {
+            const startTime = Date.now();
+            const duration = 800;
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = elapsed / duration;
+                
+                if (progress < 1) {
+                    ion.position.set(x, 4 - progress * 3.5, z);
+                    ion.material.opacity = 0.8 * (1 - progress);
+                    requestAnimationFrame(update);
+                } else {
+                    ion.visible = false;
+                }
+            }
+            update();
+        }
+
+        function createEtchedTrench(x, z, width, depth) {
+            const trenchGeometry = new THREE.BoxGeometry(width, depth, 4);
+            const trenchMaterial = new THREE.MeshPhongMaterial({
+                color: 0x202020,
+                side: THREE.DoubleSide
+            });
+            const trench = new THREE.Mesh(trenchGeometry, trenchMaterial);
+            trench.position.set(x, 0.25 - depth / 2, z);
+            scene.add(trench);
+            return trench;
+        }
+
+        const steps = [
+            {
+                title: "Step 1: Initial Setup",
+                description: "Wafer loaded into DRIE chamber with SF6 and C4F8 gases ready for Bosch process.",
+                action: () => {
+                    setPlasmaActive(false);
+                    document.getElementById('etch-gas').textContent = 'SF6';
+                    document.getElementById('rf-power').textContent = '600W';
+                }
+            },
+            {
+                title: "Step 2: Etch Cycle - Plasma Generation",
+                description: "SF6 plasma generated. RF power ionizes gas creating fluorine radicals for silicon etching.",
+                action: () => {
+                    setPlasmaActive(true, '#9c27b0');
+                    document.getElementById('etch-gas').textContent = 'SF6 (Active)';
+                    document.getElementById('rf-power').textContent = '800W';
+                    const sf6Particles = plasmaParticles.slice(0, 100);
+                    animatePlasma(sf6Particles, true, 4, 1);
+                }
+            },
+            {
+                title: "Step 3: Ion Bombardment & Etching",
+                description: "Directional ions bombard exposed silicon, removing material anisotropically. Chemical + physical etching.",
+                action: () => {
+                    animateIonBombardment();
+                    setTimeout(() => {
+                        if (etchedTrenches.length === 0) {
+                            const gap1 = createEtchedTrench(-1.5, 0, 1.5, 0.5);
+                            const gap2 = createEtchedTrench(1.75, 0, 1, 0.5);
+                            etchedTrenches.push(gap1, gap2);
+                        }
+                    }, 1000);
+                }
+            },
+            {
+                title: "Step 4: Passivation Cycle - C4F8 Plasma",
+                description: "Switch to C4F8 plasma. Deposits polymer layer on all surfaces to protect sidewalls.",
+                action: () => {
+                    plasmaParticles.slice(0, 100).forEach(p => p.visible = false);
+                    setPlasmaActive(true, '#00bcd4');
+                    document.getElementById('etch-gas').textContent = 'C4F8';
+                    document.getElementById('rf-power').textContent = '400W';
+                    const c4f8Particles = plasmaParticles.slice(100);
+                    animatePlasma(c4f8Particles, true, 4, 0.5);
+                    
+                    // Create passivation layers
+                    setTimeout(() => {
+                        if (passivationPieces.length === 0 && etchedTrenches.length > 0) {
+                            etchedTrenches.forEach((trench, i) => {
+                                const passGeometry = new THREE.BoxGeometry(
+                                    trench.geometry.parameters.width + 0.1,
+                                    trench.geometry.parameters.height + 0.05,
+                                    4
+                                );
+                                const pass = new THREE.Mesh(passGeometry, passivationMaterial);
+                                pass.position.copy(trench.position);
+                                passivationPieces.push(pass);
+                                scene.add(pass);
+                            });
+                        }
+                    }, 800);
+                }
+            },
+            {
+                title: "Step 5: Second Etch Cycle",
+                description: "Return to SF6 etch. Ions remove passivation from trench bottom, sidewalls protected. Etch deepens vertically.",
+                action: () => {
+                    plasmaParticles.slice(100).forEach(p => p.visible = false);
+                    setPlasmaActive(true, '#9c27b0');
+                    document.getElementById('etch-gas').textContent = 'SF6 (Active)';
+                    document.getElementById('rf-power').textContent = '800W';
+                    const sf6Particles = plasmaParticles.slice(0, 100);
+                    animatePlasma(sf6Particles, true, 4, 1);
+                    
+                    // Remove passivation from bottom
+                    passivationPieces.forEach(pass => {
+                        setTimeout(() => scene.remove(pass), 500);
+                    });
+                    
+                    // Deepen trenches
+                    setTimeout(() => {
+                        etchedTrenches.forEach(trench => {
+                            const newDepth = trench.geometry.parameters.height + 0.4;
+                            trench.geometry = new THREE.BoxGeometry(
+                                trench.geometry.parameters.width,
+                                newDepth,
+                                4
+                            );
+                            trench.position.y = 0.25 - newDepth / 2;
+                        });
+                        animateIonBombardment();
+                    }, 600);
+                }
+            },
+            {
+                title: "Step 6: Cycle Completion",
+                description: "Bosch process cycles repeat hundreds of times. High aspect ratio trenches achieved with smooth sidewalls.",
+                action: () => {
+                    plasmaParticles.forEach(p => p.visible = false);
+                    setPlasmaActive(false);
+                    document.getElementById('etch-gas').textContent = 'Process Complete';
+                    document.getElementById('rf-power').textContent = '0W';
+                    
+                    // Final deep trenches
+                    etchedTrenches.forEach(trench => {
+                        const newDepth = 2.5;
+                        trench.geometry = new THREE.BoxGeometry(
+                            trench.geometry.parameters.width,
+                            newDepth,
+                            4
+                        );
+                        trench.position.y = 0.25 - newDepth / 2;
+                    });
+                }
+            }
+        ];
+
+        function updateStep(stepIndex) {
+            if (stepIndex < 0 || stepIndex >= steps.length) return;
+            
+            currentStep = stepIndex;
+            const step = steps[stepIndex];
+            
+            document.getElementById('step-title').textContent = step.title;
+            document.getElementById('step-description').textContent = step.description;
+            document.getElementById('progress-bar').style.width = ((stepIndex + 1) / steps.length * 100) + '%';
+            
+            if (stepIndex === 0) {
+                resetScene();
+            }
+            
+            step.action();
+        }
+
+        function resetScene() {
+            plasmaParticles.forEach(p => p.visible = false);
+            ionBeams.forEach(ion => ion.visible = false);
+            etchedTrenches.forEach(trench => scene.remove(trench));
+            passivationPieces.forEach(pass => scene.remove(pass));
+            etchedTrenches.length = 0;
+            passivationPieces.length = 0;
+            setPlasmaActive(false);
+        }
+
+        // Controls
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                updateStep(currentStep + 1);
+            }
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentStep > 0) {
+                updateStep(currentStep - 1);
+            }
+        });
+
+        document.getElementById('play-btn').addEventListener('click', () => {
+            const playBtn = document.getElementById('play-btn');
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.textContent = 'Pause';
+                playInterval = setInterval(() => {
+                    if (currentStep < steps.length - 1) {
+                        updateStep(currentStep + 1);
+                    } else {
+                        isPlaying = false;
+                        playBtn.textContent = 'Play';
+                        clearInterval(playInterval);
+                    }
+                }, 3500);
+            } else {
+                isPlaying = false;
+                playBtn.textContent = 'Play';
+                clearInterval(playInterval);
+            }
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            isPlaying = false;
+            document.getElementById('play-btn').textContent = 'Play';
+            clearInterval(playInterval);
+            currentStep = 0;
+            resetScene();
+            updateStep(0);
+        });
+
+        // Camera animation
+        let cameraAngle = 0;
+        function updateCamera() {
+            cameraAngle += 0.003;
+            camera.position.x = Math.sin(cameraAngle) * 12;
+            camera.position.z = Math.cos(cameraAngle) * 12;
+            camera.lookAt(0, 0, 0);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            updateCamera();
+            
+            // Glow effect for plasma
+            if (topLight.intensity > 0.5) {
+                topLight.intensity = 0.8 + Math.sin(Date.now() * 0.003) * 0.2;
+            }
+            
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        updateStep(0);
+        animate();
+    </script>
+</body>
+</html>
