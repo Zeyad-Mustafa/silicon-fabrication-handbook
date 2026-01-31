@@ -1,0 +1,154 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#141e30;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#243b55;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wafer" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#606060;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#404040;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#6d4c41;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8d6e63;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffc107" text-anchor="middle">
+    CMP Process (Chemical Mechanical Planarization)
+  </text>
+  
+  <!-- Polishing pad (rotating) - top view ellipse -->
+  <ellipse cx="400" cy="180" rx="180" ry="25" fill="url(#pad)" opacity="0.9"/>
+  <rect x="220" y="180" width="360" height="35" fill="url(#pad)"/>
+  <ellipse cx="400" cy="215" rx="180" ry="25" fill="#8d6e63"/>
+  
+  <!-- Pores in pad (texture) -->
+  <circle cx="320" cy="195" r="3" fill="#5d4037"/>
+  <circle cx="360" cy="200" r="3" fill="#5d4037"/>
+  <circle cx="400" cy="192" r="3" fill="#5d4037"/>
+  <circle cx="440" cy="205" r="3" fill="#5d4037"/>
+  <circle cx="480" cy="198" r="3" fill="#5d4037"/>
+  <circle cx="350" cy="210" r="3" fill="#5d4037"/>
+  <circle cx="450" cy="188" r="3" fill="#5d4037"/>
+  
+  <!-- Rotation indicator lines on pad -->
+  <line x1="400" y1="197" x2="520" y2="197" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  <line x1="400" y1="197" x2="350" y2="140" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  <text x="540" y="202" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.5">⟳</text>
+  
+  <!-- Slurry particles (white dots) between pad and wafer -->
+  <circle cx="300" cy="240" r="3" fill="#ffffff" opacity="0.7"/>
+  <circle cx="350" cy="245" r="3" fill="#ffffff" opacity="0.7"/>
+  <circle cx="400" cy="238" r="3" fill="#ffffff" opacity="0.7"/>
+  <circle cx="450" cy="243" r="3" fill="#ffffff" opacity="0.7"/>
+  <circle cx="500" cy="241" r="3" fill="#ffffff" opacity="0.7"/>
+  <circle cx="330" cy="250" r="3" fill="#ffffff" opacity="0.7"/>
+  <circle cx="470" cy="236" r="3" fill="#ffffff" opacity="0.7"/>
+  
+  <!-- Debris particles (blue) flowing outward -->
+  <circle cx="250" cy="255" r="3" fill="#64b5f6" opacity="0.6"/>
+  <circle cx="550" cy="252" r="3" fill="#64b5f6" opacity="0.6"/>
+  <circle cx="270" cy="265" r="3" fill="#64b5f6" opacity="0.5"/>
+  <circle cx="530" cy="268" r="3" fill="#64b5f6" opacity="0.5"/>
+  
+  <!-- Wafer with non-uniform surface features -->
+  <ellipse cx="400" cy="290" rx="200" ry="28" fill="url(#wafer)"/>
+  <rect x="200" y="290" width="400" height="35" fill="url(#wafer)"/>
+  <ellipse cx="400" cy="325" rx="200" ry="28" fill="#505050"/>
+  
+  <!-- Surface bumps (before polishing - different heights) -->
+  <rect x="260" y="280" width="50" height="15" fill="#2196f3" opacity="0.8"/>
+  <rect x="340" y="275" width="60" height="20" fill="#2196f3" opacity="0.8"/>
+  <rect x="430" y="282" width="45" height="13" fill="#2196f3" opacity="0.8"/>
+  <rect x="505" y="278" width="55" height="17" fill="#2196f3" opacity="0.8"/>
+  
+  <!-- Top surfaces of bumps -->
+  <ellipse cx="285" cy="280" rx="25" ry="5" fill="#64b5f6" opacity="0.9"/>
+  <ellipse cx="370" cy="275" rx="30" ry="5" fill="#64b5f6" opacity="0.9"/>
+  <ellipse cx="452" cy="282" rx="22" ry="5" fill="#64b5f6" opacity="0.9"/>
+  <ellipse cx="532" cy="278" rx="27" ry="5" fill="#64b5f6" opacity="0.9"/>
+  
+  <!-- Down pressure arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <polygon points="0 0, 10 5, 0 10" fill="#ff9800"/>
+    </marker>
+  </defs>
+  <line x1="300" y1="130" x2="300" y2="175" stroke="#ff9800" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="130" x2="400" y2="175" stroke="#ff9800" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="500" y1="130" x2="500" y2="175" stroke="#ff9800" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="400" y="115" font-family="Arial, sans-serif" font-size="14" fill="#ff9800" text-anchor="middle">
+    Down Force: 4 psi
+  </text>
+  
+  <!-- Info panel -->
+  <rect x="20" y="420" width="380" height="160" rx="10" fill="#000000" opacity="0.85"/>
+  <text x="210" y="450" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4fc3f7" text-anchor="middle">
+    Step 5: Material Removal
+  </text>
+  <text x="35" y="475" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    Combined chemical and mechanical action
+  </text>
+  <text x="35" y="495" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    removes material. Preston's equation governs
+  </text>
+  <text x="35" y="515" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    removal rate. Surface being planarized.
+  </text>
+  <rect x="35" y="530" width="340" height="1" fill="#ffffff" opacity="0.2"/>
+  <text x="35" y="552" font-family="Arial, sans-serif" font-size="12" fill="#aaaaaa">
+    Pad Speed: 60 RPM | Removal: 3000 Å/min
+  </text>
+  <text x="35" y="568" font-family="Arial, sans-serif" font-size="12" fill="#aaaaaa">
+    Uniformity: 75% | Roughness: 120 Å
+  </text>
+  
+  <!-- Stats panel -->
+  <rect x="420" y="420" width="360" height="160" rx="10" fill="#000000" opacity="0.85"/>
+  <text x="600" y="450" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffc107" text-anchor="middle">
+    Surface Profile
+  </text>
+  
+  <!-- Uniformity bar -->
+  <text x="440" y="478" font-family="Arial, sans-serif" font-size="13" fill="#aaaaaa">
+    Uniformity:
+  </text>
+  <rect x="540" y="465" width="200" height="20" rx="10" fill="#333333"/>
+  <rect x="540" y="465" width="150" height="20" rx="10" fill="#4caf50"/>
+  <text x="750" y="478" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#4caf50">
+    75%
+  </text>
+  
+  <!-- Roughness indicator -->
+  <text x="440" y="513" font-family="Arial, sans-serif" font-size="13" fill="#aaaaaa">
+    Roughness:
+  </text>
+  <text x="750" y="513" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#4caf50">
+    120 Å
+  </text>
+  
+  <!-- Material removed -->
+  <text x="440" y="548" font-family="Arial, sans-serif" font-size="13" fill="#aaaaaa">
+    Removed:
+  </text>
+  <text x="750" y="548" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#4caf50">
+    3750 Å
+  </text>
+  
+  <!-- Polishing active indicator -->
+  <text x="600" y="571" font-family="Arial, sans-serif" font-size="14" fill="#4caf50" text-anchor="middle">
+    <tspan font-size="20">⟳</tspan> Polishing Active
+  </text>
+  
+  <!-- Controls indicator -->
+  <rect x="250" y="560" width="300" height="35" rx="17.5" fill="#000000" opacity="0.85"/>
+  <text x="400" y="583" font-family="Arial, sans-serif" font-size="14" fill="#ffb300" text-anchor="middle">
+    Interactive 3D Animation
+  </text>
+</svg>

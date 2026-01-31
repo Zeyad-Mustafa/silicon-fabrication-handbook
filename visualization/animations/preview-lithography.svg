@@ -1,0 +1,73 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3c72;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a5298;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wafer" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#909090;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#505050;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="photoresist" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffeb3b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#fdd835;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f9a825;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#4fc3f7" text-anchor="middle">
+    Photolithography Process
+  </text>
+  
+  <!-- Wafer substrate (3D perspective) -->
+  <ellipse cx="400" cy="380" rx="200" ry="30" fill="url(#wafer)" opacity="0.9"/>
+  <rect x="200" y="350" width="400" height="30" fill="url(#wafer)"/>
+  <ellipse cx="400" cy="350" rx="200" ry="30" fill="#708090"/>
+  
+  <!-- Photoresist layer -->
+  <ellipse cx="400" cy="335" rx="200" ry="30" fill="url(#photoresist)" opacity="0.8"/>
+  <rect x="200" y="320" width="400" height="15" fill="url(#photoresist)" opacity="0.8"/>
+  <ellipse cx="400" cy="320" rx="200" ry="30" fill="#ffeb3b" opacity="0.9"/>
+  
+  <!-- Photomask above -->
+  <rect x="150" y="150" width="500" height="10" fill="#333333" opacity="0.7"/>
+  
+  <!-- Mask patterns (opaque areas) -->
+  <rect x="230" y="148" width="80" height="14" fill="#000000"/>
+  <rect x="360" y="148" width="80" height="14" fill="#000000"/>
+  <rect x="490" y="148" width="80" height="14" fill="#000000"/>
+  
+  <!-- UV light rays -->
+  <line x1="280" y1="170" x2="280" y2="310" stroke="#9c27b0" stroke-width="3" opacity="0.6"/>
+  <line x1="320" y1="175" x2="320" y2="315" stroke="#9c27b0" stroke-width="3" opacity="0.6"/>
+  <line x1="410" y1="170" x2="410" y2="310" stroke="#9c27b0" stroke-width="3" opacity="0.6"/>
+  <line x1="450" y1="175" x2="450" y2="315" stroke="#9c27b0" stroke-width="3" opacity="0.6"/>
+  <line x1="540" y1="170" x2="540" y2="310" stroke="#9c27b0" stroke-width="3" opacity="0.6"/>
+  <line x1="580" y1="175" x2="580" y2="315" stroke="#9c27b0" stroke-width="3" opacity="0.6"/>
+  
+  <!-- Info panel -->
+  <rect x="20" y="450" width="350" height="130" rx="10" fill="#000000" opacity="0.8"/>
+  <text x="195" y="480" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#81c784" text-anchor="middle">
+    Step 4: UV Exposure
+  </text>
+  <text x="35" y="505" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    Exposing photoresist through the mask
+  </text>
+  <text x="35" y="525" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    using UV light. Exposed areas undergo
+  </text>
+  <text x="35" y="545" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    chemical change.
+  </text>
+  
+  <!-- Controls indicator -->
+  <rect x="250" y="560" width="300" height="35" rx="17.5" fill="#000000" opacity="0.8"/>
+  <text x="400" y="583" font-family="Arial, sans-serif" font-size="14" fill="#4fc3f7" text-anchor="middle">
+    Interactive 3D Animation
+  </text>
+</svg>

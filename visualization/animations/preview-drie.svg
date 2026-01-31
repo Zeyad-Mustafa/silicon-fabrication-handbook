@@ -1,0 +1,104 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f2027;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#203a43;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c5364;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="plasma" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#9c27b0;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#9c27b0;stop-opacity:0.2" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#667eea" text-anchor="middle">
+    DRIE Etch Process (Bosch)
+  </text>
+  
+  <!-- Plasma glow effect -->
+  <ellipse cx="400" cy="250" rx="250" ry="150" fill="url(#plasma)"/>
+  
+  <!-- Chamber walls (outline) -->
+  <ellipse cx="400" cy="480" rx="300" ry="40" fill="none" stroke="#4fc3f7" stroke-width="2" opacity="0.3"/>
+  <line x1="100" y1="480" x2="100" y2="120" stroke="#4fc3f7" stroke-width="2" opacity="0.3"/>
+  <line x1="700" y1="480" x2="700" y2="120" stroke="#4fc3f7" stroke-width="2" opacity="0.3"/>
+  <ellipse cx="400" cy="120" rx="300" ry="40" fill="none" stroke="#4fc3f7" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Top electrode -->
+  <rect x="250" y="100" width="300" height="15" rx="3" fill="#666666"/>
+  
+  <!-- Silicon wafer with etched trenches -->
+  <rect x="250" y="400" width="300" height="40" fill="#404040"/>
+  
+  <!-- Photoresist mask pieces -->
+  <rect x="250" y="395" width="60" height="8" fill="#ffa726"/>
+  <rect x="330" y="395" width="70" height="8" fill="#ffa726"/>
+  <rect x="420" y="395" width="60" height="8" fill="#ffa726"/>
+  <rect x="500" y="395" width="50" height="8" fill="#ffa726"/>
+  
+  <!-- Deep etched trenches -->
+  <rect x="310" y="403" width="20" height="100" fill="#202020"/>
+  <rect x="400" y="403" width="20" height="100" fill="#202020"/>
+  <rect x="480" y="403" width="20" height="100" fill="#202020"/>
+  
+  <!-- Passivation layer visualization on sidewalls -->
+  <rect x="308" y="403" width="2" height="100" fill="#00bcd4" opacity="0.5"/>
+  <rect x="330" y="403" width="2" height="100" fill="#00bcd4" opacity="0.5"/>
+  <rect x="398" y="403" width="2" height="100" fill="#00bcd4" opacity="0.5"/>
+  <rect x="420" y="403" width="2" height="100" fill="#00bcd4" opacity="0.5"/>
+  <rect x="478" y="403" width="2" height="100" fill="#00bcd4" opacity="0.5"/>
+  <rect x="500" y="403" width="2" height="100" fill="#00bcd4" opacity="0.5"/>
+  
+  <!-- Plasma particles (SF6) -->
+  <circle cx="280" cy="200" r="5" fill="#9c27b0" opacity="0.8"/>
+  <circle cx="350" cy="230" r="5" fill="#9c27b0" opacity="0.8"/>
+  <circle cx="420" cy="210" r="5" fill="#9c27b0" opacity="0.8"/>
+  <circle cx="490" cy="240" r="5" fill="#9c27b0" opacity="0.8"/>
+  <circle cx="320" cy="180" r="5" fill="#9c27b0" opacity="0.8"/>
+  <circle cx="460" cy="190" r="5" fill="#9c27b0" opacity="0.8"/>
+  <circle cx="380" cy="260" r="5" fill="#9c27b0" opacity="0.8"/>
+  <circle cx="520" cy="220" r="5" fill="#9c27b0" opacity="0.8"/>
+  
+  <!-- Ion beams -->
+  <line x1="310" y1="150" x2="320" y2="390" stroke="#ff00ff" stroke-width="2" opacity="0.6"/>
+  <line x1="400" y1="150" x2="410" y2="390" stroke="#ff00ff" stroke-width="2" opacity="0.6"/>
+  <line x1="480" y1="150" x2="490" y2="390" stroke="#ff00ff" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Info panel -->
+  <rect x="20" y="450" width="350" height="130" rx="10" fill="#000000" opacity="0.85"/>
+  <text x="195" y="480" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#81c784" text-anchor="middle">
+    Step 3: Ion Bombardment
+  </text>
+  <text x="35" y="505" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    Directional ions bombard exposed silicon,
+  </text>
+  <text x="35" y="525" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    removing material anisotropically. Chemical
+  </text>
+  <text x="35" y="545" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    + physical etching creates deep trenches.
+  </text>
+  
+  <!-- Plasma indicator -->
+  <rect x="620" y="70" width="160" height="80" rx="10" fill="#000000" opacity="0.85"/>
+  <circle cx="640" cy="95" r="8" fill="#9c27b0">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  <text x="655" y="100" font-family="Arial, sans-serif" font-size="14" fill="#ffffff">
+    Plasma: Active
+  </text>
+  <text x="640" y="125" font-family="Arial, sans-serif" font-size="12" fill="#aaaaaa">
+    SF6 Etch Mode
+  </text>
+  
+  <!-- Controls indicator -->
+  <rect x="250" y="560" width="300" height="35" rx="17.5" fill="#000000" opacity="0.85"/>
+  <text x="400" y="583" font-family="Arial, sans-serif" font-size="14" fill="#667eea" text-anchor="middle">
+    Interactive 3D Animation
+  </text>
+</svg>

@@ -1,0 +1,104 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34495e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wafer" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#909090;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#505050;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="heat" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#ff9800;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ff9800;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#81c784" text-anchor="middle">
+    Wafer Bonding Process
+  </text>
+  
+  <!-- Heat glow during annealing -->
+  <ellipse cx="400" cy="330" rx="280" ry="120" fill="url(#heat)"/>
+  
+  <!-- Top wafer (3D perspective) -->
+  <ellipse cx="400" cy="245" rx="180" ry="25" fill="url(#wafer)" opacity="0.9"/>
+  <rect x="220" y="245" width="360" height="25" fill="url(#wafer)"/>
+  <ellipse cx="400" cy="270" rx="180" ry="25" fill="#708090"/>
+  
+  <!-- Oxide layer on top wafer -->
+  <ellipse cx="400" cy="270" rx="180" ry="25" fill="#4fc3f7" opacity="0.6"/>
+  <rect x="220" y="270" width="360" height="3" fill="#4fc3f7" opacity="0.6"/>
+  
+  <!-- Bond interface - glowing green -->
+  <ellipse cx="400" cy="335" rx="180" ry="8" fill="#81c784" opacity="0.9">
+    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Bottom wafer (3D perspective) -->
+  <ellipse cx="400" cy="335" rx="180" ry="25" fill="#708090"/>
+  <rect x="220" y="335" width="360" height="25" fill="url(#wafer)"/>
+  <ellipse cx="400" cy="360" rx="180" ry="25" fill="url(#wafer)" opacity="0.9"/>
+  
+  <!-- Oxide layer on bottom wafer -->
+  <rect x="220" y="332" width="360" height="3" fill="#4fc3f7" opacity="0.6"/>
+  <ellipse cx="400" cy="332" rx="180" ry="25" fill="#4fc3f7" opacity="0.6"/>
+  
+  <!-- Heat waves during annealing -->
+  <ellipse cx="400" cy="335" rx="100" ry="15" fill="none" stroke="#ff9800" stroke-width="2" opacity="0.4">
+    <animate attributeName="rx" values="100;200;100" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="ry" values="15;30;15" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="400" cy="335" rx="140" ry="21" fill="none" stroke="#ff9800" stroke-width="2" opacity="0.3">
+    <animate attributeName="rx" values="140;240;140" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+    <animate attributeName="ry" values="21;36;21" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Plasma activation particles around top wafer -->
+  <circle cx="280" cy="200" r="4" fill="#9c27b0" opacity="0.7"/>
+  <circle cx="350" cy="210" r="4" fill="#9c27b0" opacity="0.7"/>
+  <circle cx="450" cy="205" r="4" fill="#9c27b0" opacity="0.7"/>
+  <circle cx="520" cy="215" r="4" fill="#9c27b0" opacity="0.7"/>
+  <circle cx="310" cy="230" r="4" fill="#9c27b0" opacity="0.7"/>
+  <circle cx="490" cy="225" r="4" fill="#9c27b0" opacity="0.7"/>
+  
+  <!-- Info panel -->
+  <rect x="20" y="450" width="380" height="130" rx="10" fill="#000000" opacity="0.85"/>
+  <text x="210" y="480" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4fc3f7" text-anchor="middle">
+    Step 6: Annealing
+  </text>
+  <text x="35" y="505" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    High temperature anneal (800-1100°C)
+  </text>
+  <text x="35" y="525" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    strengthens bonds. Hydroxyl groups form
+  </text>
+  <text x="35" y="545" font-family="Arial, sans-serif" font-size="13" fill="#ffffff">
+    covalent Si-O-Si bonds.
+  </text>
+  
+  <!-- Temperature gauge -->
+  <rect x="620" y="70" width="160" height="100" rx="10" fill="#000000" opacity="0.85"/>
+  <text x="700" y="95" font-family="Arial, sans-serif" font-size="12" fill="#aaaaaa" text-anchor="middle">
+    Temperature
+  </text>
+  <text x="700" y="125" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ff9800" text-anchor="middle">
+    1000°C
+  </text>
+  <text x="700" y="155" font-family="Arial, sans-serif" font-size="12" fill="#aaaaaa" text-anchor="middle">
+    Annealing
+  </text>
+  
+  <!-- Controls indicator -->
+  <rect x="250" y="560" width="300" height="35" rx="17.5" fill="#000000" opacity="0.85"/>
+  <text x="400" y="583" font-family="Arial, sans-serif" font-size="14" fill="#66bb6a" text-anchor="middle">
+    Interactive 3D Animation
+  </text>
+</svg>
