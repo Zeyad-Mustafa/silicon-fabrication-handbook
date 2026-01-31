@@ -92,10 +92,10 @@ silicon-fabrication-handbook/
 │
 ├── visualization/                    # 3D models and animations
 │   ├── animations/
-│   │   ├── lithography-process.mp4
-│   │   ├── drie-etch.mp4
-│   │   ├── wafer-bonding.mp4
-│   │   └── cmp-process.mp4
+│   │   ├── lithography-process.HTML
+│   │   ├── drie-etch.HTML
+│   │   ├── wafer-bonding.HTML
+│   │   └── cmp-process.HTML
 │   │
 │   └── CAD/
 │       ├── comb-drive-actuator.step      #Done 12/01/2026
