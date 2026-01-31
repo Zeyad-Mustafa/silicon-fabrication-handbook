@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lithography Process - 3D Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+        }
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 350px;
+            backdrop-filter: blur(10px);
+        }
+        #info-panel h1 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            color: #4fc3f7;
+        }
+        #info-panel h2 {
+            margin: 15px 0 5px 0;
+            font-size: 16px;
+            color: #81c784;
+        }
+        #info-panel p {
+            margin: 5px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: flex;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+        }
+        button {
+            background: #4fc3f7;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #29b6f6;
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        #progress {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4fc3f7, #81c784);
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div id="info-panel">
+        <h1>Photolithography Process</h1>
+        <h2 id="step-title">Step 1: Photoresist Coating</h2>
+        <p id="step-description">Spin coating photoresist material onto the silicon wafer surface.</p>
+        <p style="margin-top: 15px; font-size: 12px; color: #aaa;">
+            Use controls below to navigate through the process steps.
+        </p>
+    </div>
+
+    <div id="progress">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="controls">
+        <button id="prev-btn">← Previous</button>
+        <button id="play-btn">Play</button>
+        <button id="next-btn">Next →</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a2e);
+        scene.fog = new THREE.Fog(0x1a1a2e, 10, 50);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(5, 5, 8);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 10, 7);
+        directionalLight.castShadow = true;
+        directionalLight.shadow.camera.left = -10;
+        directionalLight.shadow.camera.right = 10;
+        directionalLight.shadow.camera.top = 10;
+        directionalLight.shadow.camera.bottom = -10;
+        scene.add(directionalLight);
+
+        const spotLight = new THREE.SpotLight(0x4fc3f7, 0.5);
+        spotLight.position.set(0, 10, 0);
+        spotLight.angle = Math.PI / 6;
+        scene.add(spotLight);
+
+        // Create wafer substrate
+        const waferGeometry = new THREE.CylinderGeometry(3, 3, 0.3, 64);
+        const waferMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x708090, 
+            shininess: 100,
+            specular: 0x444444
+        });
+        const wafer = new THREE.Mesh(waferGeometry, waferMaterial);
+        wafer.castShadow = true;
+        wafer.receiveShadow = true;
+        wafer.position.y = 0;
+        scene.add(wafer);
+
+        // Create photoresist layer
+        const photoresistGeometry = new THREE.CylinderGeometry(3, 3, 0.15, 64);
+        const photoresistMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0xffeb3b, 
+            transparent: true, 
+            opacity: 0.8,
+            shininess: 80
+        });
+        const photoresist = new THREE.Mesh(photoresistGeometry, photoresistMaterial);
+        photoresist.castShadow = true;
+        photoresist.position.y = 0.225;
+        photoresist.visible = false;
+        scene.add(photoresist);
+
+        // Create mask
+        const maskGeometry = new THREE.BoxGeometry(6, 0.1, 4);
+        const maskMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x333333,
+            transparent: true,
+            opacity: 0.7
+        });
+        const mask = new THREE.Mesh(maskGeometry, maskMaterial);
+        mask.position.y = 3;
+        mask.visible = false;
+        scene.add(mask);
+
+        // Create mask pattern (opaque areas)
+        const patternGeometry = new THREE.BoxGeometry(1, 0.12, 0.8);
+        const patternMaterial = new THREE.MeshPhongMaterial({ color: 0x000000 });
+        const patterns = [];
+        for (let i = 0; i < 3; i++) {
+            const pattern = new THREE.Mesh(patternGeometry, patternMaterial);
+            pattern.position.set(-2 + i * 2, 3, 0);
+            pattern.visible = false;
+            patterns.push(pattern);
+            scene.add(pattern);
+        }
+
+        // Create UV light rays
+        const rayMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x9c27b0, 
+            transparent: true, 
+            opacity: 0.6 
+        });
+        const rays = [];
+        for (let i = 0; i < 20; i++) {
+            const rayGeometry = new THREE.CylinderGeometry(0.05, 0.05, 2.5, 8);
+            const ray = new THREE.Mesh(rayGeometry, rayMaterial);
+            const x = (Math.random() - 0.5) * 5;
+            const z = (Math.random() - 0.5) * 3;
+            ray.position.set(x, 1.5, z);
+            ray.visible = false;
+            rays.push(ray);
+            scene.add(ray);
+        }
+
+        // Create exposed areas
+        const exposedAreas = [];
+        for (let i = 0; i < 3; i++) {
+            const exposedGeometry = new THREE.BoxGeometry(1, 0.15, 0.8);
+            const exposedMaterial = new THREE.MeshPhongMaterial({ 
+                color: 0xff9800, 
+                transparent: true, 
+                opacity: 0.9 
+            });
+            const exposed = new THREE.Mesh(exposedGeometry, exposedMaterial);
+            exposed.position.set(-2 + i * 2, 0.225, 0);
+            exposed.visible = false;
+            exposedAreas.push(exposed);
+            scene.add(exposed);
+        }
+
+        // Grid helper
+        const gridHelper = new THREE.GridHelper(20, 20, 0x444444, 0x222222);
+        gridHelper.position.y = -2;
+        scene.add(gridHelper);
+
+        // Animation state
+        let currentStep = 0;
+        let isPlaying = false;
+        let playInterval = null;
+
+        const steps = [
+            {
+                title: "Step 1: Photoresist Coating",
+                description: "Spin coating photoresist material onto the silicon wafer surface. The photoresist is a light-sensitive polymer.",
+                action: () => {
+                    photoresist.visible = true;
+                    photoresist.scale.y = 0;
+                    animateScale(photoresist, 1, 'y', 1000);
+                }
+            },
+            {
+                title: "Step 2: Soft Bake",
+                description: "Heating the wafer to evaporate solvents and improve photoresist adhesion. Temperature: 90-100°C.",
+                action: () => {
+                    photoresistMaterial.color.setHex(0xffa726);
+                    animateRotation(wafer, Math.PI * 2, 1500);
+                }
+            },
+            {
+                title: "Step 3: Mask Alignment",
+                description: "Positioning the photomask above the wafer. The mask contains the circuit pattern to be transferred.",
+                action: () => {
+                    mask.visible = true;
+                    patterns.forEach(p => p.visible = true);
+                    mask.position.y = 5;
+                    patterns.forEach(p => p.position.y = 5);
+                    animatePosition(mask, 1.5, 'y', 1500);
+                    patterns.forEach(p => animatePosition(p, 1.5, 'y', 1500));
+                }
+            },
+            {
+                title: "Step 4: UV Exposure",
+                description: "Exposing the photoresist through the mask using UV light. Exposed areas undergo chemical change.",
+                action: () => {
+                    rays.forEach(ray => {
+                        ray.visible = true;
+                        ray.material.opacity = 0;
+                    });
+                    rays.forEach(ray => animateOpacity(ray, 0.6, 1000));
+                    setTimeout(() => {
+                        exposedAreas.forEach(area => {
+                            area.visible = true;
+                            area.scale.y = 0;
+                            animateScale(area, 1, 'y', 1000);
+                        });
+                    }, 500);
+                }
+            },
+            {
+                title: "Step 5: Development",
+                description: "Removing exposed photoresist using developer solution, revealing the pattern on the wafer.",
+                action: () => {
+                    rays.forEach(ray => ray.visible = false);
+                    mask.visible = false;
+                    patterns.forEach(p => p.visible = false);
+                    exposedAreas.forEach(area => {
+                        animateScale(area, 0, 'y', 1000);
+                        setTimeout(() => area.visible = false, 1000);
+                    });
+                    photoresist.geometry = createPatternedGeometry();
+                }
+            },
+            {
+                title: "Step 6: Hard Bake",
+                description: "Final baking to harden the remaining photoresist pattern. The pattern is now ready for etching.",
+                action: () => {
+                    photoresistMaterial.color.setHex(0xff6f00);
+                    animateRotation(wafer, Math.PI * 2, 1500);
+                }
+            }
+        ];
+
+        function createPatternedGeometry() {
+            const shape = new THREE.Shape();
+            shape.absarc(0, 0, 3, 0, Math.PI * 2, false);
+            
+            // Create holes for exposed areas
+            for (let i = 0; i < 3; i++) {
+                const hole = new THREE.Path();
+                const x = -2 + i * 2;
+                hole.moveTo(x - 0.5, -0.4);
+                hole.lineTo(x + 0.5, -0.4);
+                hole.lineTo(x + 0.5, 0.4);
+                hole.lineTo(x - 0.5, 0.4);
+                hole.lineTo(x - 0.5, -0.4);
+                shape.holes.push(hole);
+            }
+            
+            const extrudeSettings = { depth: 0.15, bevelEnabled: false };
+            const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+            geometry.rotateX(Math.PI / 2);
+            return geometry;
+        }
+
+        function animateScale(object, targetScale, axis, duration) {
+            const startScale = object.scale[axis];
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                object.scale[axis] = startScale + (targetScale - startScale) * eased;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function animatePosition(object, targetPos, axis, duration) {
+            const startPos = object.position[axis];
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                object.position[axis] = startPos + (targetPos - startPos) * eased;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function animateOpacity(object, targetOpacity, duration) {
+            const startOpacity = object.material.opacity;
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                object.material.opacity = startOpacity + (targetOpacity - startOpacity) * eased;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function animateRotation(object, targetRotation, duration) {
+            const startRotation = object.rotation.y;
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                object.rotation.y = startRotation + targetRotation * eased;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function updateStep(stepIndex) {
+            if (stepIndex < 0 || stepIndex >= steps.length) return;
+            
+            currentStep = stepIndex;
+            const step = steps[stepIndex];
+            
+            document.getElementById('step-title').textContent = step.title;
+            document.getElementById('step-description').textContent = step.description;
+            document.getElementById('progress-bar').style.width = ((stepIndex + 1) / steps.length * 100) + '%';
+            
+            if (stepIndex === 0) {
+                resetScene();
+            }
+            
+            step.action();
+        }
+
+        function resetScene() {
+            photoresist.visible = false;
+            photoresist.scale.y = 1;
+            photoresist.geometry = photoresistGeometry;
+            photoresistMaterial.color.setHex(0xffeb3b);
+            mask.visible = false;
+            patterns.forEach(p => p.visible = false);
+            rays.forEach(ray => ray.visible = false);
+            exposedAreas.forEach(area => area.visible = false);
+            wafer.rotation.y = 0;
+        }
+
+        // Controls
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                updateStep(currentStep + 1);
+            }
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentStep > 0) {
+                resetScene();
+                setTimeout(() => {
+                    for (let i = 0; i <= currentStep - 1; i++) {
+                        steps[i].action();
+                    }
+                    currentStep--;
+                    document.getElementById('step-title').textContent = steps[currentStep].title;
+                    document.getElementById('step-description').textContent = steps[currentStep].description;
+                    document.getElementById('progress-bar').style.width = ((currentStep + 1) / steps.length * 100) + '%';
+                }, 100);
+            }
+        });
+
+        document.getElementById('play-btn').addEventListener('click', () => {
+            const playBtn = document.getElementById('play-btn');
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.textContent = 'Pause';
+                playInterval = setInterval(() => {
+                    if (currentStep < steps.length - 1) {
+                        updateStep(currentStep + 1);
+                    } else {
+                        isPlaying = false;
+                        playBtn.textContent = 'Play';
+                        clearInterval(playInterval);
+                    }
+                }, 3000);
+            } else {
+                isPlaying = false;
+                playBtn.textContent = 'Play';
+                clearInterval(playInterval);
+            }
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            isPlaying = false;
+            document.getElementById('play-btn').textContent = 'Play';
+            clearInterval(playInterval);
+            currentStep = 0;
+            resetScene();
+            updateStep(0);
+        });
+
+        // Camera rotation
+        let cameraAngle = 0;
+        function rotateCameraAround() {
+            cameraAngle += 0.002;
+            camera.position.x = Math.sin(cameraAngle) * 8;
+            camera.position.z = Math.cos(cameraAngle) * 8;
+            camera.lookAt(0, 0, 0);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            rotateCameraAround();
+            renderer.render(scene, camera);
+        }
+
+        // Window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Start
+        updateStep(0);
+        animate();
+    </script>
+</body>
+</html>
