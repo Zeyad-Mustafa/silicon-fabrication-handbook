@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMP Process - 3D Animation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+        }
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 380px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        #info-panel h1 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            color: #ffc107;
+        }
+        #info-panel h2 {
+            margin: 15px 0 5px 0;
+            font-size: 16px;
+            color: #4fc3f7;
+        }
+        #info-panel p {
+            margin: 5px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .param {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 12px;
+            color: #aaa;
+        }
+        .param-value {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: flex;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+        button {
+            background: linear-gradient(135deg, #ffb300 0%, #ff6f00 100%);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 179, 0, 0.4);
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 179, 0, 0.6);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        #progress {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ffb300, #ff6f00);
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+        #stats-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: white;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+        .stat-label {
+            color: #aaa;
+        }
+        .stat-value {
+            color: #4caf50;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+        .rotating-active {
+            animation: rotate-indicator 2s linear infinite;
+        }
+        @keyframes rotate-indicator {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div id="info-panel">
+        <h1>CMP Process</h1>
+        <h2 id="step-title">Step 1: Initial Surface</h2>
+        <p id="step-description">Wafer surface with non-uniform topography after metallization. CMP will planarize the surface.</p>
+        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
+            <div class="param"><span>Slurry Type:</span><span class="param-value" id="slurry-type">Silica-based</span></div>
+            <div class="param"><span>pH Level:</span><span class="param-value">10-11</span></div>
+            <div class="param"><span>Pad Speed:</span><span class="param-value" id="pad-speed">0 RPM</span></div>
+            <div class="param"><span>Down Force:</span><span class="param-value" id="down-force">0 psi</span></div>
+            <div class="param"><span>Removal Rate:</span><span class="param-value" id="removal-rate">0 Å/min</span></div>
+        </div>
+    </div>
+
+    <div id="stats-panel">
+        <div style="font-size: 14px; font-weight: bold; margin-bottom: 10px; color: #ffc107;">
+            Surface Profile
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Uniformity:</span>
+            <span class="stat-value" id="uniformity">45%</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Roughness:</span>
+            <span class="stat-value" id="roughness">250 Å</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Material Removed:</span>
+            <span class="stat-value" id="removed">0 Å</span>
+        </div>
+        <div id="rotation-indicator" style="margin-top: 15px; text-align: center; display: none;">
+            <div style="font-size: 24px;">⟳</div>
+            <div style="font-size: 11px; color: #4caf50;">Polishing Active</div>
+        </div>
+    </div>
+
+    <div id="progress">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="controls">
+        <button id="prev-btn">← Previous</button>
+        <button id="play-btn">Play</button>
+        <button id="next-btn">Next →</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0f1419);
+        scene.fog = new THREE.Fog(0x0f1419, 15, 40);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(8, 10, 12);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        mainLight.position.set(10, 15, 5);
+        mainLight.castShadow = true;
+        mainLight.shadow.camera.left = -15;
+        mainLight.shadow.camera.right = 15;
+        mainLight.shadow.camera.top = 15;
+        mainLight.shadow.camera.bottom = -15;
+        scene.add(mainLight);
+
+        const spotLight = new THREE.SpotLight(0xffc107, 0.5);
+        spotLight.position.set(0, 12, 0);
+        spotLight.angle = Math.PI / 6;
+        scene.add(spotLight);
+
+        // Create wafer base
+        const waferGeometry = new THREE.CylinderGeometry(5, 5, 0.4, 64);
+        const waferMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x505050,
+            shininess: 60
+        });
+        const wafer = new THREE.Mesh(waferGeometry, waferMaterial);
+        wafer.castShadow = true;
+        wafer.receiveShadow = true;
+        wafer.position.y = 0;
+        scene.add(wafer);
+
+        // Create uneven surface topography (bumps and valleys)
+        const surfaceFeatures = [];
+        const featureMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x2196f3,
+            shininess: 80,
+            transparent: true,
+            opacity: 0.9
+        });
+
+        const positions = [
+            { x: -2, z: -1.5, height: 0.6, width: 1.2 },
+            { x: 0, z: 0, height: 0.8, width: 1.5 },
+            { x: 2, z: 1, height: 0.5, width: 1 },
+            { x: -1.5, z: 1.8, height: 0.7, width: 1.3 },
+            { x: 1.8, z: -1.2, height: 0.4, width: 0.9 }
+        ];
+
+        positions.forEach(pos => {
+            const featureGeometry = new THREE.BoxGeometry(pos.width, pos.height, pos.width);
+            const feature = new THREE.Mesh(featureGeometry, featureMaterial);
+            feature.position.set(pos.x, 0.2 + pos.height / 2, pos.z);
+            feature.castShadow = true;
+            surfaceFeatures.push({ mesh: feature, initialHeight: pos.height });
+            scene.add(feature);
+        });
+
+        // Create polishing pad
+        const padGeometry = new THREE.CylinderGeometry(4, 4, 0.5, 64);
+        const padMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x8d6e63,
+            roughness: 0.9
+        });
+        const polishingPad = new THREE.Mesh(padGeometry, padMaterial);
+        polishingPad.castShadow = true;
+        polishingPad.position.y = 8;
+        scene.add(polishingPad);
+
+        // Create pad texture (porous structure)
+        const pores = [];
+        for (let i = 0; i < 30; i++) {
+            const poreGeometry = new THREE.CylinderGeometry(0.1, 0.1, 0.52, 8);
+            const poreMaterial = new THREE.MeshPhongMaterial({ color: 0x5d4037 });
+            const pore = new THREE.Mesh(poreGeometry, poreMaterial);
+            const angle = Math.random() * Math.PI * 2;
+            const radius = Math.random() * 3.5;
+            pore.position.set(
+                Math.cos(angle) * radius,
+                8,
+                Math.sin(angle) * radius
+            );
+            pores.push(pore);
+            scene.add(pore);
+        }
+
+        // Slurry particles
+        const slurryParticles = [];
+        const slurryGeometry = new THREE.SphereGeometry(0.04, 8, 8);
+        const slurryMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.7
+        });
+
+        for (let i = 0; i < 150; i++) {
+            const particle = new THREE.Mesh(slurryGeometry, slurryMaterial.clone());
+            particle.visible = false;
+            slurryParticles.push(particle);
+            scene.add(particle);
+        }
+
+        // Removed material particles
+        const debrisParticles = [];
+        const debrisMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x64b5f6,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        for (let i = 0; i < 80; i++) {
+            const particle = new THREE.Mesh(slurryGeometry, debrisMaterial.clone());
+            particle.visible = false;
+            debrisParticles.push(particle);
+            scene.add(particle);
+        }
+
+        // Grid
+        const gridHelper = new THREE.GridHelper(30, 30, 0x333333, 0x1a1a1a);
+        gridHelper.position.y = -2;
+        scene.add(gridHelper);
+
+        // Animation functions
+        function animateSlurryFlow(active) {
+            slurryParticles.forEach((particle, i) => {
+                if (active) {
+                    particle.visible = true;
+                    const angle = (i / slurryParticles.length) * Math.PI * 2;
+                    const baseRadius = 2;
+                    
+                    function update() {
+                        const time = Date.now() * 0.002 + i * 0.1;
+                        const radius = baseRadius + Math.sin(time) * 1.5;
+                        particle.position.x = Math.cos(angle + time * 0.5) * radius;
+                        particle.position.z = Math.sin(angle + time * 0.5) * radius;
+                        particle.position.y = 1.5 + Math.sin(time * 2) * 0.5;
+                        
+                        if (particle.visible) {
+                            requestAnimationFrame(update);
+                        }
+                    }
+                    update();
+                } else {
+                    particle.visible = false;
+                }
+            });
+        }
+
+        function animateDebris(active) {
+            debrisParticles.forEach((particle, i) => {
+                if (active) {
+                    particle.visible = true;
+                    const angle = Math.random() * Math.PI * 2;
+                    
+                    function update() {
+                        const time = Date.now() * 0.001 + i * 0.2;
+                        const radius = 3 + time * 0.5;
+                        particle.position.x = Math.cos(angle + time * 0.3) * radius;
+                        particle.position.z = Math.sin(angle + time * 0.3) * radius;
+                        particle.position.y = 1 + Math.sin(time) * 0.3;
+                        particle.material.opacity = Math.max(0.6 - time * 0.05, 0);
+                        
+                        if (particle.visible && particle.material.opacity > 0) {
+                            requestAnimationFrame(update);
+                        } else if (particle.material.opacity <= 0) {
+                            particle.visible = false;
+                            particle.material.opacity = 0.6;
+                        }
+                    }
+                    update();
+                } else {
+                    particle.visible = false;
+                }
+            });
+        }
+
+        function animatePadRotation(active, speed = 0.02) {
+            if (active) {
+                function rotate() {
+                    polishingPad.rotation.y += speed;
+                    pores.forEach(pore => {
+                        pore.rotation.y += speed;
+                    });
+                    if (padRotating) {
+                        requestAnimationFrame(rotate);
+                    }
+                }
+                padRotating = true;
+                rotate();
+            } else {
+                padRotating = false;
+            }
+        }
+
+        let padRotating = false;
+
+        function animatePosition(object, targetY, duration) {
+            const startY = object.position.y;
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = easeInOutCubic(progress);
+                object.position.y = startY + (targetY - startY) * eased;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function polishSurface(duration, targetReduction) {
+            const startTime = Date.now();
+            const startHeights = surfaceFeatures.map(f => f.mesh.scale.y);
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                surfaceFeatures.forEach((feature, i) => {
+                    const reduction = 1 - (targetReduction * progress);
+                    feature.mesh.scale.y = Math.max(reduction, 0.1);
+                    feature.mesh.position.y = 0.2 + (feature.initialHeight * feature.mesh.scale.y) / 2;
+                });
+                
+                const uniformity = Math.round(45 + progress * 50);
+                const roughness = Math.round(250 - progress * 230);
+                const removed = Math.round(progress * 5000);
+                
+                document.getElementById('uniformity').textContent = uniformity + '%';
+                document.getElementById('roughness').textContent = roughness + ' Å';
+                document.getElementById('removed').textContent = removed + ' Å';
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            update();
+        }
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function updateStats(padSpeed, downForce, removalRate) {
+            document.getElementById('pad-speed').textContent = padSpeed;
+            document.getElementById('down-force').textContent = downForce;
+            document.getElementById('removal-rate').textContent = removalRate;
+        }
+
+        // Animation state
+        let currentStep = 0;
+        let isPlaying = false;
+        let playInterval = null;
+
+        const steps = [
+            {
+                title: "Step 1: Initial Surface",
+                description: "Wafer surface with non-uniform topography after metallization. CMP will planarize the surface.",
+                action: () => {
+                    updateStats('0 RPM', '0 psi', '0 Å/min');
+                    document.getElementById('rotation-indicator').style.display = 'none';
+                }
+            },
+            {
+                title: "Step 2: Pad Positioning",
+                description: "Polishing pad lowered to contact wafer surface. Conditioner maintains pad roughness and porosity.",
+                action: () => {
+                    animatePosition(polishingPad, 2, 2000);
+                    pores.forEach(pore => {
+                        animatePosition(pore, 2, 2000);
+                    });
+                    updateStats('0 RPM', '3 psi', '0 Å/min');
+                }
+            },
+            {
+                title: "Step 3: Slurry Dispense",
+                description: "Chemical slurry dispensed between pad and wafer. Contains abrasive particles and reactive chemicals.",
+                action: () => {
+                    document.getElementById('slurry-type').textContent = 'Active Flow';
+                    animateSlurryFlow(true);
+                    updateStats('0 RPM', '3 psi', '0 Å/min');
+                }
+            },
+            {
+                title: "Step 4: Pad Rotation Starts",
+                description: "Polishing pad rotates while wafer counter-rotates. Creates relative motion for uniform polishing.",
+                action: () => {
+                    animatePadRotation(true);
+                    document.getElementById('rotation-indicator').style.display = 'block';
+                    document.querySelector('#rotation-indicator div:first-child').classList.add('rotating-active');
+                    updateStats('60 RPM', '3 psi', '0 Å/min');
+                }
+            },
+            {
+                title: "Step 5: Material Removal",
+                description: "Combined chemical and mechanical action removes material. Preston's equation governs removal rate.",
+                action: () => {
+                    updateStats('60 RPM', '4 psi', '3000 Å/min');
+                    polishSurface(3000, 0.4);
+                    setTimeout(() => animateDebris(true), 500);
+                }
+            },
+            {
+                title: "Step 6: Endpoint Detection",
+                description: "Optical or force sensors monitor process. Endpoints when target thickness/planarity achieved.",
+                action: () => {
+                    updateStats('60 RPM', '4 psi', '3000 Å/min');
+                    polishSurface(2500, 0.7);
+                }
+            },
+            {
+                title: "Step 7: Final Planarization",
+                description: "Surface planarized to within-die uniformity < 20 Å. Ready for next process layer.",
+                action: () => {
+                    updateStats('30 RPM', '2 psi', '500 Å/min');
+                    polishSurface(2000, 0.9);
+                    setTimeout(() => {
+                        featureMaterial.color.setHex(0x90caf9);
+                        featureMaterial.opacity = 0.5;
+                    }, 1500);
+                }
+            },
+            {
+                title: "Step 8: Post-CMP Clean",
+                description: "Wafer cleaned to remove slurry residue and particles. Brush scrubbing + megasonic cleaning.",
+                action: () => {
+                    animatePadRotation(false);
+                    document.getElementById('rotation-indicator').style.display = 'none';
+                    updateStats('0 RPM', '0 psi', '0 Å/min');
+                    animatePosition(polishingPad, 8, 2000);
+                    pores.forEach(pore => {
+                        animatePosition(pore, 8, 2000);
+                    });
+                    slurryParticles.forEach(p => p.visible = false);
+                    debrisParticles.forEach(p => p.visible = false);
+                    document.getElementById('slurry-type').textContent = 'DI Water Rinse';
+                }
+            }
+        ];
+
+        function updateStep(stepIndex) {
+            if (stepIndex < 0 || stepIndex >= steps.length) return;
+            
+            currentStep = stepIndex;
+            const step = steps[stepIndex];
+            
+            document.getElementById('step-title').textContent = step.title;
+            document.getElementById('step-description').textContent = step.description;
+            document.getElementById('progress-bar').style.width = ((stepIndex + 1) / steps.length * 100) + '%';
+            
+            if (stepIndex === 0) {
+                resetScene();
+            }
+            
+            step.action();
+        }
+
+        function resetScene() {
+            polishingPad.position.y = 8;
+            pores.forEach(pore => pore.position.y = 8);
+            polishingPad.rotation.y = 0;
+            slurryParticles.forEach(p => p.visible = false);
+            debrisParticles.forEach(p => p.visible = false);
+            animatePadRotation(false);
+            
+            surfaceFeatures.forEach(feature => {
+                feature.mesh.scale.y = 1;
+                feature.mesh.position.y = 0.2 + feature.initialHeight / 2;
+            });
+            
+            featureMaterial.color.setHex(0x2196f3);
+            featureMaterial.opacity = 0.9;
+            
+            document.getElementById('uniformity').textContent = '45%';
+            document.getElementById('roughness').textContent = '250 Å';
+            document.getElementById('removed').textContent = '0 Å';
+            document.getElementById('slurry-type').textContent = 'Silica-based';
+            document.getElementById('rotation-indicator').style.display = 'none';
+        }
+
+        // Controls
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                updateStep(currentStep + 1);
+            }
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentStep > 0) {
+                updateStep(currentStep - 1);
+            }
+        });
+
+        document.getElementById('play-btn').addEventListener('click', () => {
+            const playBtn = document.getElementById('play-btn');
+            if (!isPlaying) {
+                isPlaying = true;
+                playBtn.textContent = 'Pause';
+                playInterval = setInterval(() => {
+                    if (currentStep < steps.length - 1) {
+                        updateStep(currentStep + 1);
+                    } else {
+                        isPlaying = false;
+                        playBtn.textContent = 'Play';
+                        clearInterval(playInterval);
+                    }
+                }, 3500);
+            } else {
+                isPlaying = false;
+                playBtn.textContent = 'Play';
+                clearInterval(playInterval);
+            }
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            isPlaying = false;
+            document.getElementById('play-btn').textContent = 'Play';
+            clearInterval(playInterval);
+            currentStep = 0;
+            resetScene();
+            updateStep(0);
+        });
+
+        // Camera animation
+        let cameraAngle = Math.PI / 6;
+        function updateCamera() {
+            cameraAngle += 0.002;
+            camera.position.x = Math.sin(cameraAngle) * 12;
+            camera.position.z = Math.cos(cameraAngle) * 12;
+            camera.lookAt(0, 0, 0);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            updateCamera();
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        updateStep(0);
+        animate();
+    </script>
+</body>
+</html>
