@@ -66,6 +66,14 @@ Source: `simulation-examples/python/mems_spring_mass.py`
 ![Stiction risk assessment for released structures.](./stiction_analysis.png)
 Source: `docs/04-mems-surface-micromachining/mems_surface_micromachining_sim.py`
 
+## Thermal Actuator Geometry Sweep
+![Thermal actuator displacement vs beam length and width sweep.](./thermal_actuator_geometry_sweep.png)
+Source: `simulation-examples/comsol/thermal_actuator_analytical.py`
+
+## Thermal Actuator Voltage Sweep
+![Thermal actuator response vs applied voltage (displacement, temperature rise, power, stress).](./thermal_actuator_voltage_sweep.png)
+Source: `simulation-examples/comsol/thermal_actuator_analytical.py`
+
 ## 3D Chip Fabrication Process
 ![3D visualization of MOSFET fabrication steps.](./chip_fabrication_3d.png)
 Source: `simulation-examples/python/chip_fabrication_3d.py`
