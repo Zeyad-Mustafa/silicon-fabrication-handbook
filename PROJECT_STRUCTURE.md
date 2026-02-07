@@ -112,7 +112,7 @@ silicon-fabrication-handbook/
 │   │   ├── capacitive_sensor3d.py    #Done 25/01/2026
 │   │   ├── thermal_actuator_sim_3d.py    #Done 
 │   │   ├── comb_drive_analysis_3D.py     #Done 
-│   │   ├── resonator_response_3D.py
+│   │   ├── resonator_response_3D.py      #Done 
 │   │   ├── mosfet_iv_curves_3D.py
 │   │   ├── oxide_growth_model_3D.py
 │   │   └── README.md                 # Python setup instructions
