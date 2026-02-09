@@ -113,7 +113,7 @@ silicon-fabrication-handbook/
 │   │   ├── thermal_actuator_sim_3d.py    #Done 
 │   │   ├── comb_drive_analysis_3D.py     #Done 
 │   │   ├── resonator_response_3D.py      #Done 
-│   │   ├── mosfet_iv_curves_3D.py
+│   │   ├── mosfet_iv_curves_3D.py        #Done 
 │   │   ├── oxide_growth_model_3D.py
 │   │   └── README.md                 # Python setup instructions
 │   │
