@@ -115,7 +115,7 @@ silicon-fabrication-handbook/
 │   │   ├── resonator_response_3D.py      #Done 
 │   │   ├── mosfet_iv_curves_3D.py        #Done 
 │   │   ├── oxide_growth_model_3D.py      #Done 
-│   │   └── README.md                 # Python setup instructions
+│   │   └── README.md                 # Python setup instructions #done 
 │   │
 │   ├── matlab/
 │   │   ├── accelerometer_resonance.m
