@@ -128,9 +128,9 @@ silicon-fabrication-handbook/
 │   │   └── README.md                 # MATLAB setup instructions #Done 28.01.2026
 │   │
 │   └── comsol/                       # FEA simulation files
-│       ├── membrane_deflection.mph
-│       ├── thermal_actuator.mph
-│       └── README.md
+│       ├── membrane_deflection.mph    #Done
+│       ├── thermal_actuator.mph       #Done 
+│       └── README.md                  #Done 
 │
 ├── resources/                        # Reference materials
 │   ├── research-papers.md            # CREATED - Curated paper database (37 papers)
