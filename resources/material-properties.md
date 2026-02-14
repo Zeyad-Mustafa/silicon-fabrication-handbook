@@ -549,7 +549,7 @@ Diamond and DLC are emerging MEMS materials for extreme environments (high tempe
 | Al₂O₃ | 8.8 | 9 | >10¹⁴ | 8–10 |
 | GaAs | 1.42 (direct) | 12.9 | ~10⁷ (semi-ins.) | 0.4 |
 | 4H-SiC | 3.26 (indirect) | 9.7 | Varies | 2.5–3.5 |
-| Diamond | 5.47 (indirect) | 5.7 | 10¹³ (undoped) | 10 |
+| Diamond | 5.47 (indirect) | 5.7 | 10¹³ (undoped) | 10 | 
 
 ### 15.2 Mechanical Properties Comparison
 
