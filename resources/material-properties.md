@@ -398,7 +398,7 @@ Ta and TaN are the primary diffusion barriers for copper interconnects. They are
 | Resistivity (α-Ta) | 15–20 µΩ·cm | Good for barrier |
 | Resistivity (β-Ta) | 150–180 µΩ·cm | Metastable, high resistivity |
 | Melting point | 2996 °C | Very refractory |
-| CTE | 6.3 ppm/K | — |
+| CTE | 6.3 ppm/K | — |  
 
 **α vs. β Ta:** PVD tantalum deposits in the metastable β phase (high resistivity) unless the substrate is heated or a seed layer is used. The α phase (low resistivity) is preferred for barrier applications. Deposition conditions (temperature, Ar pressure, bias) must be carefully controlled to achieve the α phase.
 
