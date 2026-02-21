@@ -140,7 +140,7 @@ silicon-fabrication-handbook/
 │   ├── material-properties.md         #Done 16/02/2026
 │   ├── process-recipes.md             #Done 18/02/2026
 │   ├── foundry-comparison.md          #Done 19/02/2026
-│   ├── glossary.md
+│   ├── glossary.md.                   #Done 21/02/2026
 │   └── useful-links.md
 │
 ├── case-studies/                     # Real-world examples
