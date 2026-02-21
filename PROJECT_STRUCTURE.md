@@ -157,8 +157,8 @@ silicon-fabrication-handbook/
 │   └── README.md
 │
 ├── presentations/                    # Slide decks (optional)
-│   ├── intro-to-cmos.pdf
-│   ├── mems-overview.pdf
+│   ├── intro-to-cmos.pdf              #Done 21/02/2026
+│   ├── mems-overview.pdf              #Done 21/02/2026
 │   └── README.md
 │
 └── scripts/                          # Utility scripts
