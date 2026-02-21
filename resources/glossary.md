@@ -820,4 +820,4 @@ If production ramps to 2M units/year, NRE is recovered in ~4 months. If producti
 ---
 
 *Part of the Silicon Fabrication Handbook — [github.com/Zeyad-Mustafa/silicon-fabrication-handbook](https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook)*  
-*Last updated: February 2026*
+*Last updated: February 2026* 
