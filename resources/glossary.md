@@ -805,8 +805,8 @@ If production ramps to 2M units/year, NRE is recovered in ~4 months. If producti
 | MEMS (custom) | 14–20 weeks | 6–10 weeks | 6–12 months |
 | Compound (GaAs, SiC) | 10–16 weeks | 4–8 weeks | 4–8 months |
 
----
-
+--------
+ 
 ## Further Reading
 
 - *IC Insights* — quarterly foundry market share and pricing reports
