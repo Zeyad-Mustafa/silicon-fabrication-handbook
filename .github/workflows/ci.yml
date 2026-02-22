@@ -1,0 +1,52 @@
+name: CI Validation
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-links:
+    name: Validate Markdown Links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check links in Markdown files
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          args: >-
+            --verbose
+            --no-progress
+            --exclude-mail
+            --accept 200,206,301,302,403,429
+            --timeout 20
+            --glob
+            "**/*.md"
+
+  python-syntax:
+    name: Python Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile Python examples
+        run: |
+          export PYTHONPYCACHEPREFIX="${RUNNER_TEMP}/pycache"
+          find simulation-examples/python simulation-examples/comsol -name '*.py' \
+            ! -path 'simulation-examples/python/thermal_actuator_sim3d.py' \
+            -print0 | xargs -0 -n1 python -m py_compile
