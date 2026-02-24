@@ -72,7 +72,7 @@ All links verified as of February 2026. Many resources are freely accessible; so
 **Best for:** Current industry trends and technology updates.
 
 #### Cleanroom Training Videos
-**URL:** https://www.youtube.com/@SNFStanford  
+**URL:** https://www.youtube.com/results?search_query=Stanford+Nanofabrication+Facility  
 **Description:** Stanford Nanofabrication Facility's YouTube channel with equipment training videos, process demonstrations, and safety protocols.  
 **Best for:** Visual learners and hands-on fab users.
 
@@ -342,7 +342,7 @@ All links verified as of February 2026. Many resources are freely accessible; so
 **Best for:** Automated digital IC design without commercial EDA tools.
 
 ### MOSIS Multi-Project Wafer Service
-**URL:** https://www.mosis.com/  
+**URL:** https://mosis2.com/  
 **Description:** Academic and research IC fabrication service. Aggregates small designs onto shared wafer runs at commercial foundries (TSMC, GlobalFoundries, X-FAB).  
 **Cost:** $5k–$50k per project depending on node and quantity  
 **Best for:** University research and low-volume IC prototyping.
@@ -412,7 +412,7 @@ All links verified as of February 2026. Many resources are freely accessible; so
 **Best for:** Learning digital logic from first principles.
 
 ### Stanford Nanofabrication Facility
-**URL:** https://www.youtube.com/@SNFStanford  
+**URL:** https://www.youtube.com/results?search_query=Stanford+Nanofabrication+Facility  
 **Description:** Equipment training videos, cleanroom safety, and process demonstrations from SNF staff.  
 **Best for:** Visual equipment operation tutorials.
 
@@ -432,7 +432,7 @@ All links verified as of February 2026. Many resources are freely accessible; so
 **Best for:** Industry news and architectural analysis.
 
 ### High Yield (Semiconductor Podcaster + Video)
-**URL:** https://www.youtube.com/@HighYieldYT  
+**URL:** https://www.youtube.com/results?search_query=High+Yield+semiconductor+podcast  
 **Description:** Discussions on semiconductor economics, technology trends, and supply chain. Video versions of podcast episodes.  
 **Best for:** Business and industry perspective.
 

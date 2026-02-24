@@ -5,7 +5,7 @@ This directory contains interactive 3D animations demonstrating key silicon fabr
 ## Available Animations
 
 ### 1. Lithography Process
-**File:** [lithography-process.html](lithography-process.html)  
+**File:** `lithography-process.html`  
 **Duration:** 6 steps, ~18 seconds in auto-play mode
 
 ![Lithography Process Preview](preview-lithography.svg)
@@ -15,7 +15,7 @@ Photolithography pattern transfer using UV light through a photomask. Shows phot
 ---
 
 ### 2. DRIE Etch (Bosch Process)
-**File:** [drie-etch.html](drie-etch.html)  
+**File:** `drie-etch.html`  
 **Duration:** 6 steps, ~21 seconds in auto-play mode
 
 ![DRIE Etch Preview](preview-drie.svg)
@@ -25,7 +25,7 @@ Deep Reactive Ion Etching with alternating SF6 etch and C4F8 passivation cycles.
 ---
 
 ### 3. Wafer Bonding
-**File:** [wafer-bonding.html](wafer-bonding.html)  
+**File:** `wafer-bonding.html`  
 **Duration:** 7 steps, ~28 seconds in auto-play mode
 
 ![Wafer Bonding Preview](preview-bonding.svg)
@@ -35,7 +35,7 @@ Fusion bonding of silicon wafers including surface preparation, plasma activatio
 ---
 
 ### 4. CMP Process
-**File:** [cmp-process.html](cmp-process.html)  
+**File:** `cmp-process.html`  
 **Duration:** 8 steps, ~28 seconds in auto-play mode
 
 ![CMP Process Preview](preview-cmp.svg)
