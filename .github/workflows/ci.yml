@@ -28,7 +28,6 @@ jobs:
             --no-progress
             --accept 200,206,301,302,403,429
             --timeout 20
-            --glob
             "**/*.md"
 
   python-syntax:
