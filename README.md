@@ -4,8 +4,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Documentation: CC BY 4.0](https://img.shields.io/badge/Docs-CC%20BY%204.0-blue.svg)](LICENSE)
-[![Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-green.svg)]()
-[![Last Updated: January 31, 2026](https://img.shields.io/badge/Updated-Jan%2031%202026-brightgreen.svg)]()
+[![Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-green.svg)](https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook/actions)
+[![Last Updated: January 31, 2026](https://img.shields.io/badge/Updated-Jan%2031%202026-brightgreen.svg)](https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook/commits)
 
 ## What's This About?
 
