@@ -1,5 +1,47 @@
 # Silicon Oxidation
 
+## Table of Contents
+- [Introduction](#introduction)
+  - [Importance in Semiconductor Fabrication](#importance-in-semiconductor-fabrication)
+- [Oxidation Mechanisms](#oxidation-mechanisms)
+  - [Chemical Reactions](#chemical-reactions)
+  - [Growth Kinetics](#growth-kinetics)
+- [Oxidation Systems and Equipment](#oxidation-systems-and-equipment)
+  - [Furnace Systems](#furnace-systems)
+  - [Process Gases and Additives](#process-gases-and-additives)
+- [Process Parameters and Control](#process-parameters-and-control)
+  - [Temperature Effects](#temperature-effects)
+  - [Pressure Effects](#pressure-effects)
+- [Oxidation Process Flow](#oxidation-process-flow)
+  - [Pre-oxidation Cleaning](#pre-oxidation-cleaning)
+  - [Dry Oxidation Process](#dry-oxidation-process)
+  - [Wet Oxidation Process](#wet-oxidation-process)
+- [Oxide Quality and Characterization](#oxide-quality-and-characterization)
+  - [Electrical Properties](#electrical-properties)
+  - [Physical Characterization Methods](#physical-characterization-methods)
+- [Advanced Oxidation Techniques](#advanced-oxidation-techniques)
+  - [Rapid Thermal Oxidation (RTO)](#rapid-thermal-oxidation-rto)
+  - [Plasma Enhanced Oxidation](#plasma-enhanced-oxidation)
+  - [Selective Oxidation (LOCOS)](#selective-oxidation-locos)
+- [Process Integration Considerations](#process-integration-considerations)
+  - [Thermal Budget Management](#thermal-budget-management)
+  - [Thickness Uniformity Requirements](#thickness-uniformity-requirements)
+  - [Contamination Control](#contamination-control)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
+  - [Thickness Non-uniformity](#thickness-non-uniformity)
+  - [High Defect Density](#high-defect-density)
+  - [Poor Electrical Properties](#poor-electrical-properties)
+- [Safety Considerations](#safety-considerations)
+  - [Chemical Safety](#chemical-safety)
+  - [Thermal Safety](#thermal-safety)
+  - [Equipment Safety](#equipment-safety)
+- [Recent Developments and Future Trends](#recent-developments-and-future-trends)
+  - [High-k Dielectric Integration](#high-k-dielectric-integration)
+  - [Atomic Layer Deposition (ALD)](#atomic-layer-deposition-ald)
+  - [2D Material Oxidation](#2d-material-oxidation)
+- [References and Further Reading](#references-and-further-reading)
+
+
 ## Introduction
 
 Silicon oxidation is one of the most fundamental and critical processes in semiconductor manufacturing. It involves growing a thin layer of silicon dioxide (SiO₂) on the surface of silicon wafers through controlled thermal treatment in an oxygen-containing atmosphere.

@@ -2,14 +2,35 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
+  - [The Interconnect Challenge](#the-interconnect-challenge)
+  - [Why Low-k Matters](#why-low-k-matters)
+  - [Industry Requirements](#industry-requirements)
 - [Fundamental Concepts](#fundamental-concepts)
+  - [Dielectric Constant Basics](#dielectric-constant-basics)
+  - [Clausius-Mossotti Equation](#clausius-mossotti-equation)
+  - [Material Strategies for Low-k](#material-strategies-for-low-k)
 - [RC Delay and Interconnect Scaling](#rc-delay-and-interconnect-scaling)
+  - [The ITRS Interconnect Crisis](#the-itrs-interconnect-crisis)
+  - [Detailed RC Analysis](#detailed-rc-analysis)
+  - [Interconnect Delay Models](#interconnect-delay-models)
+  - [Design Rule Implications](#design-rule-implications)
 - [Low-k Material Classes](#low-k-material-classes)
+  - [Classification Overview](#classification-overview)
+  - [1. Fluorine-Doped Silicon Oxide (FSG)](#1-fluorine-doped-silicon-oxide-fsg)
+  - [2. Carbon-Doped Oxide (CDO) / SiCOH](#2-carbon-doped-oxide-cdo-sicoh)
+  - [3. Porous Low-k Materials](#3-porous-low-k-materials)
 - [Deposition Techniques](#deposition-techniques)
+  - [PECVD (Plasma Enhanced Chemical Vapor Deposition)](#pecvd-plasma-enhanced-chemical-vapor-deposition)
 - [Integration Challenges](#integration-challenges)
-
-
----
+  - [Overview of Integration Issues](#overview-of-integration-issues)
+  - [Chemical Mechanical Polishing (CMP)](#chemical-mechanical-polishing-cmp)
+  - [Plasma Damage and Mitigation](#plasma-damage-and-mitigation)
+  - [Barrier and Capping Layers](#barrier-and-capping-layers)
+  - [Pattern Transfer and Lithography](#pattern-transfer-and-lithography)
+- [Reliability Issues](#reliability-issues)
+  - [Time-Dependent Dielectric Breakdown (TDDB)](#time-dependent-dielectric-breakdown-tddb)
+  - [Moisture Absorption](#moisture-absorption)
+  - [Mechanical Reliability](#mechanical-reliability)
 
 ## Introduction
 
@@ -2556,4 +2577,3 @@ For low-cost chips: May stay with denser low-k (k~2.7)
 **Contributors**: Zeyad Mustafa
 **Chapter:** 3.3 - CMOS BEOL low k dielectrics
 ---
-

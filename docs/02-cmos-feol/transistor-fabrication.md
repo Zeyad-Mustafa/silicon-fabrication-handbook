@@ -1,5 +1,38 @@
 # CMOS Front-End-Of-Line (FEOL) Processes
 
+## Table of Contents
+- [Introduction](#introduction)
+- [MOSFET Fundamentals](#mosfet-fundamentals)
+  - [Device Structure](#device-structure)
+  - [Operating Principle](#operating-principle)
+  - [Key Electrical Parameters](#key-electrical-parameters)
+- [Complete FEOL Process Flow](#complete-feol-process-flow)
+  - [Step 1: Wafer Preparation and Cleaning](#step-1-wafer-preparation-and-cleaning)
+  - [Step 2: Shallow Trench Isolation (STI)](#step-2-shallow-trench-isolation-sti)
+  - [Step 3: Well Formation (N-Well and P-Well)](#step-3-well-formation-n-well-and-p-well)
+  - [Step 4: Threshold Voltage Adjustment](#step-4-threshold-voltage-adjustment)
+  - [Step 5: Gate Oxide Growth](#step-5-gate-oxide-growth)
+  - [Step 6: Poly-Silicon Gate Deposition](#step-6-poly-silicon-gate-deposition)
+  - [Step 7: Gate Patterning](#step-7-gate-patterning)
+  - [Step 8: Lightly Doped Drain (LDD) Formation](#step-8-lightly-doped-drain-ldd-formation)
+  - [Step 9: Spacer Formation](#step-9-spacer-formation)
+  - [Step 10: Source/Drain Implantation](#step-10-sourcedrain-implantation)
+  - [Step 11: Rapid Thermal Anneal (RTA)](#step-11-rapid-thermal-anneal-rta)
+  - [Step 12: Silicide Formation (Salicide Process)](#step-12-silicide-formation-salicide-process)
+  - [Step 13: Contact Oxide and Pre-Metal Dielectric (PMD)](#step-13-contact-oxide-and-pre-metal-dielectric-pmd)
+- [Advanced FEOL Technologies](#advanced-feol-technologies)
+  - [FinFET (14nm and below)](#finfet-14nm-and-below)
+  - [Strain Engineering](#strain-engineering)
+  - [High-κ Metal Gate (HKMG)](#high-κ-metal-gate-hkmg)
+- [FEOL Characterization and Metrology](#feol-characterization-and-metrology)
+  - [Electrical Testing](#electrical-testing)
+  - [Physical Characterization](#physical-characterization)
+- [Yield and Defect Control](#yield-and-defect-control)
+  - [Common FEOL Defects](#common-feol-defects)
+  - [Statistical Process Control (SPC)](#statistical-process-control-spc)
+- [Summary](#summary)
+
+
 ## Introduction
 
 FEOL encompasses all fabrication steps that create the active transistor devices on a silicon wafer, from the bare substrate to the completed transistors before metallization. This chapter covers the fundamental processes for creating CMOS (Complementary Metal-Oxide-Semiconductor) transistors.

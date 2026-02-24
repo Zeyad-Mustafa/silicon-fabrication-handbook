@@ -1,5 +1,32 @@
 # Lithography: Pattern Transfer in Semiconductor Manufacturing
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Fundamental Principles](#fundamental-principles)
+  - [The Lithography Process](#the-lithography-process)
+  - [Resolution and the Rayleigh Criterion](#resolution-and-the-rayleigh-criterion)
+  - [Historical Evolution of Lithography Wavelengths](#historical-evolution-of-lithography-wavelengths)
+- [Photoresist Chemistry](#photoresist-chemistry)
+  - [Types of Photoresists](#types-of-photoresists)
+  - [Photoresist Specifications](#photoresist-specifications)
+- [Lithography Process Steps](#lithography-process-steps)
+  - [Step 1: Surface Preparation](#step-1-surface-preparation)
+  - [Step 2: Photoresist Coating](#step-2-photoresist-coating)
+  - [Step 3: Soft Bake (Pre-Exposure Bake)](#step-3-soft-bake-pre-exposure-bake)
+  - [Step 4: Alignment](#step-4-alignment)
+  - [Step 5: Exposure](#step-5-exposure)
+  - [Step 6: Post-Exposure Bake (PEB)](#step-6-post-exposure-bake-peb)
+  - [Step 7: Development](#step-7-development)
+  - [Step 8: Hard Bake (Post-Develop Bake)](#step-8-hard-bake-post-develop-bake)
+- [Advanced Lithography Techniques](#advanced-lithography-techniques)
+  - [Immersion Lithography](#immersion-lithography)
+  - [Optical Proximity Correction (OPC)](#optical-proximity-correction-opc)
+  - [Phase-Shift Masks (PSM)](#phase-shift-masks-psm)
+  - [Multiple Patterning](#multiple-patterning)
+  - [Extreme Ultraviolet (EUV) Lithography](#extreme-ultraviolet-euv-lithography)
+  - [High-NA EUV (Future)](#high-na-euv-future)
+
+
 ## Introduction
 
 Lithography is the most critical and expensive process in semiconductor manufacturing. It determines the minimum feature size (technology node) and directly impacts device density, performance, and cost. This chapter covers photolithography from basic principles through advanced techniques including EUV lithography and multi-patterning.

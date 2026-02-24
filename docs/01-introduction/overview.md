@@ -1,5 +1,45 @@
 # Introduction to Silicon Fabrication
 
+## Table of Contents
+- [Overview](#overview)
+- [Why Silicon?](#why-silicon)
+  - [Material Properties](#material-properties)
+- [Silicon Wafer Basics](#silicon-wafer-basics)
+  - [Wafer Sizes](#wafer-sizes)
+  - [Crystal Structure](#crystal-structure)
+  - [Crystal Growth: Czochralski Process](#crystal-growth-czochralski-process)
+  - [Wafer Doping](#wafer-doping)
+- [The Cleanroom Environment](#the-cleanroom-environment)
+  - [Why Cleanrooms?](#why-cleanrooms)
+  - [ISO Cleanroom Classes](#iso-cleanroom-classes)
+  - [Cleanroom Protocols](#cleanroom-protocols)
+- [Fabrication Process Categories](#fabrication-process-categories)
+  - [Front-End-Of-Line (FEOL)](#front-end-of-line-feol)
+  - [Back-End-Of-Line (BEOL)](#back-end-of-line-beol)
+  - [MEMS-Specific Processes](#mems-specific-processes)
+- [Typical Process Flows](#typical-process-flows)
+  - [CMOS Transistor (Simplified)](#cmos-transistor-simplified)
+  - [MEMS Accelerometer (Surface Micromachining)](#mems-accelerometer-surface-micromachining)
+- [Key Fabrication Technologies](#key-fabrication-technologies)
+  - [Lithography](#lithography)
+  - [Etching](#etching)
+  - [Deposition](#deposition)
+  - [Doping](#doping)
+- [Process Integration Challenges](#process-integration-challenges)
+  - [Thermal Budget](#thermal-budget)
+  - [Film Stress](#film-stress)
+  - [Contamination Control](#contamination-control)
+- [Design Rules and Constraints](#design-rules-and-constraints)
+  - [Minimum Feature Sizes](#minimum-feature-sizes)
+  - [MEMS Design Considerations](#mems-design-considerations)
+- [Cost and Economics](#cost-and-economics)
+  - [Wafer Cost Breakdown](#wafer-cost-breakdown)
+  - [Moore's Law Economics](#moores-law-economics)
+- [Safety Considerations](#safety-considerations)
+- [Next Steps](#next-steps)
+- [Further Reading](#further-reading)
+
+
 ## Overview
 
 Silicon fabrication is the process of creating integrated circuits (ICs) and microelectromechanical systems (MEMS) on silicon wafers through a series of highly controlled chemical and physical processes. This handbook covers both **CMOS (Complementary Metal-Oxide-Semiconductor)** technology for electronics and **MEMS** devices for sensing and actuation.

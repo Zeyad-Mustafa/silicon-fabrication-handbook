@@ -2,16 +2,39 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
+  - [Why Polysilicon?](#why-polysilicon)
 - [Polysilicon Deposition](#polysilicon-deposition)
+  - [Low-Pressure Chemical Vapor Deposition (LPCVD)](#low-pressure-chemical-vapor-deposition-lpcvd)
 - [Doping Techniques](#doping-techniques)
+  - [In-Situ Doping](#in-situ-doping)
+  - [Implantation Doping](#implantation-doping)
 - [Annealing and Stress Control](#annealing-and-stress-control)
+  - [Stress Types](#stress-types)
+  - [Stress Measurement](#stress-measurement)
+  - [Annealing Strategies](#annealing-strategies)
 - [Film Properties](#film-properties)
+  - [Mechanical Properties](#mechanical-properties)
+  - [Electrical Properties](#electrical-properties)
+  - [Optical Properties](#optical-properties)
 - [Patterning Processes](#patterning-processes)
+  - [Lithography](#lithography)
+  - [Dry Etching](#dry-etching)
+  - [Wet Etching](#wet-etching)
 - [Multi-Layer Structures](#multi-layer-structures)
+  - [Poly0 - Poly1 - Poly2 Process](#poly0---poly1---poly2-process)
+  - [Design Considerations](#design-considerations)
 - [Common Challenges](#common-challenges)
+  - [Stress Gradients](#stress-gradients)
+  - [Grain Boundary Effects](#grain-boundary-effects)
+  - [Adhesion to Oxide](#adhesion-to-oxide)
 - [Applications](#applications)
-
----
+  - [Accelerometer (Analog Devices ADXL)](#accelerometer-analog-devices-adxl)
+  - [MEMS Resonator (SiTime)](#mems-resonator-sitime)
+  - [Micromirror (Texas Instruments DLP)](#micromirror-texas-instruments-dlp)
+- [Summary](#summary)
+- [Further Reading](#further-reading)
+  - [Essential Papers](#essential-papers)
+  - [Standards](#standards)
 
 ## Introduction
 
@@ -515,4 +538,4 @@ The technique continues to evolve with new applications in RF, timing, and sensi
 
 **Last Updated**: November 2025  
 **Contributors**: Zeyad Mustafa
-**Chapter:** 4.1 -mems-surface-micromachining  
+**Chapter:** 4.1 -mems-surface-micromachining

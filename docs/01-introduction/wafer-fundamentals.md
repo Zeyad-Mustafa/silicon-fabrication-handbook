@@ -1,5 +1,44 @@
 # Wafer Fundamentals
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Silicon: The Material](#silicon-the-material)
+  - [Why Silicon?](#why-silicon)
+  - [Fundamental Properties](#fundamental-properties)
+- [Crystal Orientation and Miller Indices](#crystal-orientation-and-miller-indices)
+  - [Miller Indices Notation](#miller-indices-notation)
+  - [Wafer Orientation Markers](#wafer-orientation-markers)
+- [Crystal Growth: Czochralski (CZ) Process](#crystal-growth-czochralski-cz-process)
+  - [Process Overview](#process-overview)
+  - [Detailed Process Steps](#detailed-process-steps)
+  - [Resulting Boule Characteristics](#resulting-boule-characteristics)
+  - [Oxygen and Carbon Contamination](#oxygen-and-carbon-contamination)
+  - [Dopant Distribution](#dopant-distribution)
+- [Wafer Fabrication from Boule](#wafer-fabrication-from-boule)
+  - [Process Flow](#process-flow)
+  - [Detailed Steps](#detailed-steps)
+- [Wafer Specifications](#wafer-specifications)
+  - [Standard Wafer Sizes](#standard-wafer-sizes)
+  - [Flatness Parameters](#flatness-parameters)
+  - [Surface Quality](#surface-quality)
+- [Resistivity and Doping](#resistivity-and-doping)
+  - [Resistivity Measurement](#resistivity-measurement)
+  - [Resistivity Ranges](#resistivity-ranges)
+  - [Radial Resistivity Uniformity](#radial-resistivity-uniformity)
+- [Alternative Substrates](#alternative-substrates)
+  - [SOI (Silicon-On-Insulator)](#soi-silicon-on-insulator)
+  - [Epitaxial Wafers](#epitaxial-wafers)
+  - [Compound Semiconductors](#compound-semiconductors)
+- [Wafer Handling Best Practices](#wafer-handling-best-practices)
+  - [Manual Handling](#manual-handling)
+  - [Automated Handling](#automated-handling)
+  - [Storage](#storage)
+- [Quality Specifications Summary](#quality-specifications-summary)
+  - [Prime Grade Wafer (300mm)](#prime-grade-wafer-300mm)
+- [Conclusion](#conclusion)
+- [Further Reading](#further-reading)
+
+
 ## Introduction
 
 Silicon wafers are the foundation of all semiconductor and MEMS devices. Understanding wafer properties, specifications, crystallography, and manufacturing processes is essential for any fabrication engineer. This chapter provides comprehensive coverage of wafer fundamentals from crystal growth to final specifications.

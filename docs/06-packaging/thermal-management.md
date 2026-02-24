@@ -2,12 +2,35 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
+  - [Why Thermal Management Matters](#why-thermal-management-matters)
+  - [Power Dissipation Ranges](#power-dissipation-ranges)
 - [Thermal Fundamentals](#thermal-fundamentals)
+  - [Heat Transfer Mechanisms](#heat-transfer-mechanisms)
+  - [Thermal Resistance Networks](#thermal-resistance-networks)
+  - [Material Thermal Properties](#material-thermal-properties)
 - [Heat Dissipation Paths](#heat-dissipation-paths)
+  - [Die to Package](#die-to-package)
+  - [Wire Bond Thermal Contribution](#wire-bond-thermal-contribution)
+  - [Package to Board](#package-to-board)
 - [Thermal Interface Materials](#thermal-interface-materials)
+  - [Die Attach Materials](#die-attach-materials)
+  - [Thermal Greases and Pads](#thermal-greases-and-pads)
 - [Heat Sinks and Spreaders](#heat-sinks-and-spreaders)
+  - [Heat Sink Basics](#heat-sink-basics)
+  - [Heat Sink Designs](#heat-sink-designs)
+  - [Thermal Spreaders](#thermal-spreaders)
 - [Advanced Cooling](#advanced-cooling)
+  - [Forced Air Cooling](#forced-air-cooling)
+  - [Liquid Cooling](#liquid-cooling)
+  - [Thermoelectric Coolers (TECs)](#thermoelectric-coolers-tecs)
+  - [Microfluidic Cooling](#microfluidic-cooling)
 - [Design Guidelines](#design-guidelines)
+  - [Thermal Design Process](#thermal-design-process)
+  - [Best Practices ✓](#best-practices)
+  - [Common Mistakes ✗](#common-mistakes)
+  - [Thermal Simulation](#thermal-simulation)
+- [Design Example](#design-example)
+  - [10W RF Power Amplifier](#10w-rf-power-amplifier)
 - [References](#references)
 
 ## Introduction
@@ -945,4 +968,3 @@ Result:
 https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook
 
 ** Congratulations! Chapter 6: Packaging is now COMPLETE! **
-

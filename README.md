@@ -115,7 +115,7 @@ All core documentation chapters are complete.
 - **[Research Papers Database](resources/research-papers.md)** - 37+ curated papers organized by topic
 - **[Equipment Reference](resources/fab-equipment-list.md)** - Comprehensive list of fab tools and specifications
 - **[Design Rules Examples](resources/design-rules-examples.md)** - Practical design constraints from foundries
-- **[Case Studies](case-studies)** - Real-world MEMS/CMOS applications
+- **[Case Studies](docs/08-integrated-mems-cmos/case-studies.md)** - Real-world MEMS/CMOS applications
 
 For a complete breakdown of repository structure, see [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
 

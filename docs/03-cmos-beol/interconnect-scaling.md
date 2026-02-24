@@ -15,10 +15,14 @@
   - [3D Integration](#3d-integration)
   - [Alternative Materials](#alternative-materials)
 - [Simulation Results](#simulation-results)
+  - [🖥️ Running the Simulation](#running-the-simulation)
+  - [Figure Analysis](#figure-analysis)
 - [Key Takeaways](#key-takeaways)
+  - [Critical Insights](#critical-insights)
+  - [Industry Impact](#industry-impact)
+  - [Future Outlook](#future-outlook)
 - [References](#references)
-
----
+  - [Key Papers](#key-papers)
 
 ## Introduction
 
