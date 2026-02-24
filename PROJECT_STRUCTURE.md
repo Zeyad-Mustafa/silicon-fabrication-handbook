@@ -160,7 +160,7 @@ silicon-fabrication-handbook/
 │   ├── intro-to-cmos.pdf              #Done 21/02/2026
 │   ├── mems-overview.pdf              #Done 21/02/2026
 │   └── README.md
-│
+│ 
 └── scripts/                          # Utility scripts
     ├── generate_toc.py               # Auto-generate table of contents
     ├── check_links.py                # Verify all hyperlinks
