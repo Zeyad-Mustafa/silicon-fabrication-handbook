@@ -59,16 +59,38 @@ run_step() {
   "$@"
 }
 
+run_step_capture() {
+  local label="$1"
+  shift
+  local rc=0
+  echo ""
+  echo "==> ${label}"
+  set +e
+  "$@"
+  rc=$?
+  set -e
+  return "${rc}"
+}
+
 cd "${REPO_ROOT}"
 
 if [[ "${MODE}" == "check" ]]; then
+  toc_rc=0
+  link_rc=0
   if [[ ${#USER_PATHS[@]} -gt 0 ]]; then
-    run_step "Checking TOCs" "${PYTHON_BIN}" "${TOC_SCRIPT}" --check "${USER_PATHS[@]}"
-    run_step "Checking links" "${PYTHON_BIN}" "${LINK_SCRIPT}" "${USER_PATHS[@]}"
+    run_step_capture "Checking TOCs" "${PYTHON_BIN}" "${TOC_SCRIPT}" --check "${USER_PATHS[@]}" || toc_rc=$?
+    run_step_capture "Checking links" "${PYTHON_BIN}" "${LINK_SCRIPT}" "${USER_PATHS[@]}" || link_rc=$?
   else
-    run_step "Checking TOCs" "${PYTHON_BIN}" "${TOC_SCRIPT}" --check "${DEFAULT_TOC_PATHS[@]}"
-    run_step "Checking links" "${PYTHON_BIN}" "${LINK_SCRIPT}" "${DEFAULT_LINK_PATHS[@]}"
+    run_step_capture "Checking TOCs" "${PYTHON_BIN}" "${TOC_SCRIPT}" --check "${DEFAULT_TOC_PATHS[@]}" || toc_rc=$?
+    run_step_capture "Checking links" "${PYTHON_BIN}" "${LINK_SCRIPT}" "${DEFAULT_LINK_PATHS[@]}" || link_rc=$?
   fi
+  echo ""
+  if [[ ${toc_rc} -eq 0 && ${link_rc} -eq 0 ]]; then
+    echo "Docs pipeline completed (check)."
+    exit 0
+  fi
+  echo "Docs pipeline failed (check): toc=${toc_rc}, links=${link_rc}" >&2
+  exit 1
 else
   if [[ ${#USER_PATHS[@]} -gt 0 ]]; then
     run_step "Updating TOCs" "${PYTHON_BIN}" "${TOC_SCRIPT}" "${USER_PATHS[@]}"
