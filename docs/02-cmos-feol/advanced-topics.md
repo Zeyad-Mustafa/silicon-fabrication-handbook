@@ -1,6 +1,10 @@
 # Advanced FEOL Topics
 
+**Last Updated**: November 2025  
+**Contributors**: Zeyad Mustafa
+
 ## Table of Contents
+- [Legacy Strain Notes](#legacy-strain-notes)
   - [Strain Characterization](#strain-characterization)
   - [Strain Optimization Strategies](#strain-optimization-strategies)
 - [Part 3: Advanced HKMG Integration](#part-3-advanced-hkmg-integration)
@@ -42,9 +46,7 @@
   - [Strain Basics](#strain-basics)
   - [Strain Techniques](#strain-techniques)
 
-
-**Last Updated**: November 2025  
-**Contributors**: Zeyad Mustafa
+## Legacy Strain Notes
 
 ##### C. Shallow Trench Isolation (STI) Stress
 
