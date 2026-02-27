@@ -38,7 +38,6 @@
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
 
-
 ## Introduction
 
 Silicon wafers are the foundation of all semiconductor and MEMS devices. Understanding wafer properties, specifications, crystallography, and manufacturing processes is essential for any fabrication engineer. This chapter provides comprehensive coverage of wafer fundamentals from crystal growth to final specifications.

@@ -47,7 +47,6 @@
 - [Emergency Contact Information](#emergency-contact-information)
 - [Further Resources](#further-resources)
 
-
 ## Introduction
 
 Semiconductor fabrication facilities use some of the most hazardous materials and processes in any industrial setting. Toxic gases, corrosive acids, high-voltage equipment, and cleanroom environments all require strict safety protocols. This chapter covers comprehensive safety guidelines to protect personnel, equipment, and the environment.

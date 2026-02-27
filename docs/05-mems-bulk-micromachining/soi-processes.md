@@ -51,7 +51,6 @@
 - [References](#references)
 - [Related Documentation](#related-documentation)
 
-
 ## Overview
 
 Silicon-on-Insulator (SOI) technology provides a crystalline silicon layer separated from the bulk substrate by an insulating layer (typically SiO₂). This structure offers unique advantages for MEMS fabrication, including precise thickness control, built-in etch stops, and electrical isolation.

@@ -54,7 +54,6 @@
   - [Standards](#standards)
   - [Software Tools](#software-tools)
 
-
 ## Introduction
 
 Ion implantation is the process of introducing dopant atoms into a semiconductor substrate by accelerating ionized atoms to high energies and directing them into the target material. Unlike thermal diffusion, ion implantation provides precise control over dopant concentration, depth, and lateral distribution, making it essential for modern CMOS fabrication.

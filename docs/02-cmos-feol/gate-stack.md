@@ -53,7 +53,6 @@
   - [Review Articles](#review-articles)
   - [Standards](#standards)
 
-
 ## Introduction
 
 The gate stack is the most critical structure in a MOSFET transistor, controlling the flow of current between source and drain. Modern gate stacks have evolved from simple SiO₂/polysilicon structures to complex high-κ metal gate (HKMG) systems that enable continued device scaling. This chapter covers gate dielectric formation, 

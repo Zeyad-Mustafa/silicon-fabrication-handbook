@@ -39,7 +39,6 @@
 - [Next Steps](#next-steps)
 - [Further Reading](#further-reading)
 
-
 ## Overview
 
 Silicon fabrication is the process of creating integrated circuits (ICs) and microelectromechanical systems (MEMS) on silicon wafers through a series of highly controlled chemical and physical processes. This handbook covers both **CMOS (Complementary Metal-Oxide-Semiconductor)** technology for electronics and **MEMS** devices for sensing and actuation.

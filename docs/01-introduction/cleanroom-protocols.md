@@ -44,7 +44,6 @@
 - [Conclusion](#conclusion)
 - [Further Reading](#further-reading)
 
-
 ## Introduction
 
 Cleanroom protocols are critical for maintaining the contamination-free environment necessary for semiconductor and MEMS fabrication. A single particle or contaminant can destroy an entire wafer batch worth millions of dollars. This chapter covers essential cleanroom procedures, gowning protocols, behavior guidelines, and contamination control strategies.

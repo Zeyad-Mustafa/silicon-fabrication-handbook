@@ -1,3 +1,51 @@
+# Advanced FEOL Topics
+
+## Table of Contents
+  - [Strain Characterization](#strain-characterization)
+  - [Strain Optimization Strategies](#strain-optimization-strategies)
+- [Part 3: Advanced HKMG Integration](#part-3-advanced-hkmg-integration)
+  - [Challenges at Sub-7nm Nodes](#challenges-at-sub-7nm-nodes)
+  - [Gate Stack for FinFETs and GAA](#gate-stack-for-finfets-and-gaa)
+  - [Reliability in Advanced HKMG](#reliability-in-advanced-hkmg)
+  - [Future Directions](#future-directions)
+- [Summary and Outlook](#summary-and-outlook)
+  - [Technology Evolution](#technology-evolution)
+  - [Current State (2024-2025)](#current-state-2024-2025)
+  - [Key Enablers Recap](#key-enablers-recap)
+  - [Open Questions](#open-questions)
+  - [The Path Forward](#the-path-forward)
+- [Conclusion](#conclusion)
+- [Further Reading](#further-reading)
+  - [Textbooks](#textbooks)
+  - [Seminal Papers](#seminal-papers)
+  - [Review Articles](#review-articles)
+  - [Standards and Roadmaps](#standards-and-roadmaps)
+  - [Online Resources](#online-resources)
+- [Practical Exercises](#practical-exercises)
+  - [Exercise 1: FinFET Effective Width Calculation](#exercise-1-finfet-effective-width-calculation)
+  - [Exercise 2: Strain-Enhanced Mobility](#exercise-2-strain-enhanced-mobility)
+  - [Exercise 3: EOT Calculation](#exercise-3-eot-calculation)
+  - [Exercise 4: Work Function Target](#exercise-4-work-function-target)
+  - [Exercise 5: TDDB Lifetime Extrapolation](#exercise-5-tddb-lifetime-extrapolation)
+- [Appendix: Technology Node Naming](#appendix-technology-node-naming)
+- [Glossary of Advanced Terms](#glossary-of-advanced-terms)
+- [Acknowledgments](#acknowledgments)
+- [Introduction](#introduction)
+- [Part 1: FinFET Technology](#part-1-finfet-technology)
+  - [The Scaling Crisis and Short-Channel Effects](#the-scaling-crisis-and-short-channel-effects)
+  - [FinFET Architecture](#finfet-architecture)
+  - [FinFET Fabrication Process](#finfet-fabrication-process)
+  - [FinFET Design Considerations](#finfet-design-considerations)
+  - [Advanced FinFET Nodes](#advanced-finfet-nodes)
+- [Part 2: Strain Engineering](#part-2-strain-engineering)
+  - [Motivation: Mobility Enhancement](#motivation-mobility-enhancement)
+  - [Strain Basics](#strain-basics)
+  - [Strain Techniques](#strain-techniques)
+
+
+**Last Updated**: November 2025  
+**Contributors**: Zeyad Mustafa
+
 ##### C. Shallow Trench Isolation (STI) Stress
 
 **Compressive Stress from STI Oxide**:

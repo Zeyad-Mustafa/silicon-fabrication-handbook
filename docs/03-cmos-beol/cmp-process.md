@@ -40,7 +40,6 @@
 - [References](#references)
 - [Related Documentation](#related-documentation)
 
-
 ## Overview
 
 Chemical-Mechanical Planarization (CMP) combines chemical reactions with mechanical abrasion to achieve nanometer-level surface flatness across semiconductor wafers. Originally developed by IBM in the 1980s for oxide polishing, CMP has become essential for modern BEOL processing, particularly for damascene copper metallization.

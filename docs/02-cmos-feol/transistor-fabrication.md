@@ -32,7 +32,6 @@
   - [Statistical Process Control (SPC)](#statistical-process-control-spc)
 - [Summary](#summary)
 
-
 ## Introduction
 
 FEOL encompasses all fabrication steps that create the active transistor devices on a silicon wafer, from the bare substrate to the completed transistors before metallization. This chapter covers the fundamental processes for creating CMOS (Complementary Metal-Oxide-Semiconductor) transistors.

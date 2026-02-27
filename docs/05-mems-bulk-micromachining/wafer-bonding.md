@@ -52,7 +52,6 @@
 - [References](#references)
 - [Related Documentation](#related-documentation)
 
-
 ## Overview
 
 Wafer bonding is the process of joining two or more wafers to create hermetically sealed cavities, multi-layer structures, and complex 3D MEMS devices. It enables fabrication of structures impossible with single-wafer processing and is essential for packaging, SOI fabrication, and advanced sensors.

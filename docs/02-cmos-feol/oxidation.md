@@ -41,7 +41,6 @@
   - [2D Material Oxidation](#2d-material-oxidation)
 - [References and Further Reading](#references-and-further-reading)
 
-
 ## Introduction
 
 Silicon oxidation is one of the most fundamental and critical processes in semiconductor manufacturing. It involves growing a thin layer of silicon dioxide (SiO₂) on the surface of silicon wafers through controlled thermal treatment in an oxygen-containing atmosphere.

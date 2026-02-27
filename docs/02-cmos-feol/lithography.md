@@ -26,7 +26,6 @@
   - [Extreme Ultraviolet (EUV) Lithography](#extreme-ultraviolet-euv-lithography)
   - [High-NA EUV (Future)](#high-na-euv-future)
 
-
 ## Introduction
 
 Lithography is the most critical and expensive process in semiconductor manufacturing. It determines the minimum feature size (technology node) and directly impacts device density, performance, and cost. This chapter covers photolithography from basic principles through advanced techniques including EUV lithography and multi-patterning.

@@ -47,7 +47,6 @@
 - [References and Further Reading](#references-and-further-reading)
 - [Related Documentation](#related-documentation)
 
-
 ## Overview
 
 Wet chemical etching is a fundamental process in MEMS bulk micromachining, enabling the creation of 3D structures through selective material removal. Unlike dry etching (RIE/DRIE), wet etching uses liquid chemical solutions to dissolve silicon and other materials. The anisotropic nature of silicon wet etching allows precise formation of cavities, membranes, and suspended structures.
