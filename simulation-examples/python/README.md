@@ -64,7 +64,7 @@ simulation-examples/python/images/
 | `mems_spring_mass.ipynb` | Interactive Jupyter notebook version | In-notebook |
 | `capacitive_sensor_3d.py` | 3D capacitive accelerometer visualization | `images/` (local) |
 | `chip_fabrication_3d.py` | Layer-by-layer CMOS fabrication process | `images/` (local) |
-| `thermal_actuaror_sim3d2.py` | Animated thermal actuator with UI controls | Runtime animation |
+| `thermal_actuator_sim3d2.py` | Animated thermal actuator with UI controls | Runtime animation |
 
 ---
 
