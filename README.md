@@ -33,7 +33,7 @@ These notes combine academic knowledge with real-world industry insights from bo
 
 ---
 
-##   What's Inside?
+##   What's Inside? 
 
 ### Main Documentation Chapters
 
