@@ -7,7 +7,7 @@
 [![Status: Active Development](https://img.shields.io/badge/Status-Active%20Development-green.svg)](https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook/actions)
 [![Last Updated: January 31, 2026](https://img.shields.io/badge/Updated-Jan%2031%202026-brightgreen.svg)](https://github.com/Zeyad-Mustafa/silicon-fabrication-handbook/commits)
 
-## What's This About?
+## What's This About?  
 
 This is a complete, open-source guide covering the entire journey of semiconductor fabrication - from raw silicon wafers to functioning computer chips (CMOS) and microscale sensors (MEMS). 
 
